@@ -1,0 +1,134 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card:hover{
+    /* transform: scale(1.02);*/
+    transform: translate(-5px);
+    transition: 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.custom-card{
+    border:none;
+    border-radius: 20px;
+    background:linear-gradient(135deg, #ffffff, #f0f0f0);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.myLinks:hover{
+    color: #007bff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(243, 241, 241, 0.15);
+    text-decoration: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.skill-card{
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3 ease, box-shadow 0.3s ease;
+    background: #fff;
+}
+
+.skill-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+ul.dash-list li::before{
+    content: "-";
+    color: #333;
+    margin-right: 6px;
+}
+
+.timeline{
+position: relative;
+padding-left: 20px;
+border-left: 3px solid #A9A9A9;
+}
+
+.timeline-item{
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    transition: all 0.3s ease;
+}
+
+.timeline-item::before{
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: #A9A9A9;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.timeline-item:hover{
+    transform: translateX(5px);
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.edu-card{
+    border: none;
+    border-left: 5px solid #A9A9A9;
+    border-radius: 10px;
+    padding-left: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edu-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.timeline-edu{
+    position: relative;
+    padding-left: 40px;
+    border-left: 3px solid #A9A9A9;
+}
+
+.timeline-item-edu{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-icon{
+    position: absolute;
+    left: -29px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 3px #fff;
+}
+
+.timeline-content{
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+.timeline-content:hover{
+    box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
+.text-brown{
+    color: #8B4513;
+}
