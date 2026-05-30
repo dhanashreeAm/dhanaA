@@ -1,322 +1,1163 @@
- <!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dhanashree Ambadkar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhanashree Ambadkar | Android Developer & Creative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════ */
+:root {
+  --cream:   #f4efe6;
+  --cream2:  #ede7dc;
+  --cream3:  #e5ddd0;
+  --white:   #fdfaf6;
+  --ink:     #1b2a24;
+  --ink2:    #2d4a3e;
+  --forest:  #2d6a4f;
+  --forest2: #40916c;
+  --mint:    #74c69d;
+  --terra:   #b5451b;
+  --terra2:  #d4623a;
+  --text:    #1b2a24;
+  --text2:   #4a6458;
+  --text3:   #859e94;
+  --border:  rgba(45,106,79,.14);
+  --shadow:  0 2px 40px rgba(27,42,36,.08);
+  --r:       12px;
+  --font-d:  'Fraunces', Georgia, serif;
+  --font-b:  'Plus Jakarta Sans', sans-serif;
+  --font-m:  'Fira Code', monospace;
+  --ease:    cubic-bezier(.22,.68,0,1.2);
+}
+
+/* ══════════════════════════════════
+   RESET + BASE
+══════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-b);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ══════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 2px; }
+
+/* ══════════════════════════════════
+   NOISE TEXTURE OVERLAY
+══════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 300px;
+  opacity: .5;
+}
+
+/* ══════════════════════════════════
+   LAYOUT
+══════════════════════════════════ */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
+section { padding: 108px 0; }
+.section-eyebrow {
+  font-family: var(--font-m); font-size: .68rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--forest2);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+}
+.section-eyebrow::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--forest2); }
+.section-title {
+  font-family: var(--font-d); font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 300; line-height: 1.08; color: var(--ink);
+  margin-bottom: 60px;
+}
+.section-title em { font-style: italic; color: var(--forest); }
+.section-title strong { font-weight: 700; }
+
+/* ══════════════════════════════════
+   MARQUEE TICKER
+══════════════════════════════════ */
+.marquee-wrap {
+  background: var(--forest);
+  overflow: hidden; padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 28s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-family: var(--font-m); font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,255,255,.65);
+  padding: 0 32px;
+}
+.marquee-track span.accent { color: var(--mint); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 22px 0;
+  transition: all .4s ease;
+}
+nav.scrolled {
+  background: rgba(244,239,230,.92);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  box-shadow: 0 4px 32px rgba(27,42,36,.06);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1140px; margin: 0 auto; padding: 0 40px;
+}
+.nav-logo {
+  font-family: var(--font-d); font-size: 1.15rem; font-weight: 400;
+  color: var(--ink); letter-spacing: .02em;
+}
+.nav-logo span { color: var(--forest); font-style: italic; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text2); transition: color .25s;
+}
+.nav-links a:hover { color: var(--forest); }
+.nav-cta {
+  font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: 9px 22px; background: var(--ink); color: var(--cream);
+  border-radius: 2px; transition: all .3s;
+}
+.nav-cta:hover { background: var(--forest); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: .3s; }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-rows: 1fr auto;
+  padding-top: 100px;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 40%, rgba(116,198,157,.12), transparent),
+    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(181,69,27,.07), transparent),
+    var(--cream);
+  overflow: hidden; position: relative;
+}
+.hero-body {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px; padding: 60px 0 40px;
+}
+.hero-left { flex: 1; max-width: 680px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(45,106,79,.1); border: 1px solid rgba(45,106,79,.25);
+  border-radius: 999px; padding: 6px 16px 6px 10px; margin-bottom: 32px;
+}
+.hero-badge-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--forest2);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+.hero-badge-text {
+  font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--forest);
+}
+.hero-name {
+  font-family: var(--font-d); font-size: clamp(3.4rem, 6.5vw, 6rem);
+  font-weight: 300; line-height: .97; letter-spacing: -.01em; color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero-name em { font-style: italic; color: var(--forest); display: block; }
+.hero-roles {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+}
+.hero-role-tag {
+  padding: 5px 14px; border-radius: 999px;
+  font-size: .75rem; letter-spacing: .06em; font-weight: 400;
+  border: 1px solid var(--border); color: var(--text2);
+  background: var(--white);
+}
+.hero-role-tag.featured {
+  background: var(--forest); color: #fff; border-color: var(--forest);
+}
+.hero-desc {
+  font-size: 1rem; color: var(--text2); max-width: 520px;
+  line-height: 1.85; margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-dark {
+  padding: 13px 32px; background: var(--ink); color: var(--cream);
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 2px; transition: all .3s var(--ease);
+}
+.btn-dark:hover { background: var(--forest); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,106,79,.25); }
+.btn-ghost {
+  padding: 12px 32px; border: 1px solid var(--ink);
+  color: var(--ink); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 2px; transition: all .3s;
+}
+.btn-ghost:hover { border-color: var(--forest); color: var(--forest); }
+
+/* Hero right - decorative card */
+.hero-right { flex-shrink: 0; }
+.hero-card {
+  width: 300px; background: var(--white);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 32px; position: relative;
+  box-shadow: var(--shadow);
+}
+.hero-card-img {
+  width: 88px; height: 88px; border-radius: 50%;
+  object-fit: cover; margin: 0 auto 20px;
+  border: 3px solid var(--cream2);
+  box-shadow: 0 0 0 6px rgba(45,106,79,.1);
+}
+.hero-card-name {
+  font-family: var(--font-d); font-size: 1.2rem; font-weight: 400;
+  text-align: center; color: var(--ink); margin-bottom: 4px;
+}
+.hero-card-title {
+  font-family: var(--font-m); font-size: .65rem; letter-spacing: .12em;
+  text-align: center; color: var(--forest2); text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-card-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.hcs {
+  background: var(--cream2); border-radius: 10px;
+  padding: 14px 12px; text-align: center;
+}
+.hcs-num {
+  font-family: var(--font-d); font-size: 1.4rem; font-weight: 700;
+  color: var(--forest); display: block; line-height: 1;
+}
+.hcs-label {
+  font-size: .65rem; color: var(--text3); margin-top: 4px;
+  letter-spacing: .06em; display: block;
+}
+.hero-card-tag {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--terra); color: #fff; padding: 4px 16px; border-radius: 999px;
+  font-family: var(--font-m); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Hero bottom strip */
+.hero-strip {
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4,1fr);
+  background: var(--white);
+}
+.hs-item {
+  padding: 24px 32px; border-right: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px;
+}
+.hs-item:last-child { border-right: none; }
+.hs-icon { font-size: 1.4rem; flex-shrink: 0; }
+.hs-text { font-size: .78rem; font-weight: 400; color: var(--text2); }
+.hs-text strong { display: block; color: var(--ink); font-size: .88rem; margin-bottom: 2px; }
+
+/* ══════════════════════════════════
+   ABOUT
+══════════════════════════════════ */
+#about { background: var(--white); }
+.about-wrap { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start; }
+.about-text { font-size: 1.05rem; color: var(--text2); line-height: 1.9; }
+.about-text p + p { margin-top: 20px; }
+.about-text strong { color: var(--forest); font-weight: 500; }
+.about-text em { font-family: var(--font-d); font-style: italic; color: var(--ink); font-size: 1.15rem; }
+.about-sidebar { display: flex; flex-direction: column; gap: 16px; }
+.about-pill {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px; background: var(--cream);
+  border: 1px solid var(--border); border-radius: var(--r);
+  transition: all .3s var(--ease);
+}
+.about-pill:hover { background: var(--forest); border-color: var(--forest); transform: translateX(5px); }
+.about-pill:hover .ap-label { color: #fff; }
+.about-pill:hover .ap-val { color: rgba(255,255,255,.7); }
+.ap-icon { font-size: 1.3rem; flex-shrink: 0; }
+.ap-label { font-weight: 500; font-size: .88rem; color: var(--ink); transition: color .3s; }
+.ap-val { font-family: var(--font-m); font-size: .72rem; color: var(--text3); transition: color .3s; }
+
+/* ══════════════════════════════════
+   SKILLS
+══════════════════════════════════ */
+#skills { background: var(--cream); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 32px;
+  transition: all .35s var(--ease); position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--forest), var(--mint));
+  transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease);
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(27,42,36,.1); }
+.skill-card-img {
+  width: 48px; height: 48px; object-fit: contain; margin-bottom: 18px;
+  filter: saturate(.9) opacity(.85);
+}
+.skill-card-emoji { font-size: 2rem; margin-bottom: 18px; display: block; }
+.skill-card h3 {
+  font-family: var(--font-d); font-size: 1.15rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 14px;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.stag {
+  padding: 4px 12px; border-radius: 999px;
+  font-family: var(--font-m); font-size: .65rem; letter-spacing: .06em;
+  background: rgba(45,106,79,.08); border: 1px solid rgba(45,106,79,.15);
+  color: var(--forest);
+}
+
+/* Wide card */
+.skill-card.wide { grid-column: span 2; }
+.skill-card.wide .skill-tags { max-width: 100%; }
+
+/* ══════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════ */
+#experience { background: var(--white); }
+.exp-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 0; }
+.exp-nav {
+  border-right: 1px solid var(--border);
+  padding-right: 32px; position: sticky; top: 100px;
+  align-self: start;
+}
+.exp-nav-item {
+  display: block; padding: 14px 16px; border-radius: var(--r);
+  margin-bottom: 6px; cursor: pointer; transition: all .25s;
+  font-size: .82rem; color: var(--text2); font-weight: 400;
+}
+.exp-nav-item:hover { background: var(--cream); color: var(--ink); }
+.exp-nav-item.active { background: var(--forest); color: #fff; }
+.exp-nav-item .en-company {
+  font-family: var(--font-m); font-size: .65rem; letter-spacing: .08em;
+  opacity: .7; display: block; margin-top: 2px;
+}
+.exp-panels { padding-left: 56px; }
+.exp-panel { display: none; animation: fadeUp .4s var(--ease) both; }
+.exp-panel.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+.exp-panel-header { margin-bottom: 28px; }
+.ep-role {
+  font-family: var(--font-d); font-size: 1.8rem; font-weight: 300;
+  color: var(--ink); margin-bottom: 8px;
+}
+.ep-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.ep-company {
+  font-family: var(--font-m); font-size: .72rem; letter-spacing: .1em;
+  color: var(--forest2); background: rgba(45,106,79,.1);
+  padding: 4px 14px; border-radius: 999px; text-transform: uppercase;
+}
+.ep-date {
+  font-family: var(--font-m); font-size: .72rem;
+  color: var(--text3); letter-spacing: .06em;
+}
+.ep-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ep-bullets li {
+  display: flex; gap: 14px; font-size: .9rem; color: var(--text2);
+  line-height: 1.6;
+}
+.ep-bullets li::before {
+  content: '▸'; color: var(--forest2); flex-shrink: 0; margin-top: 1px; font-size: .8rem;
+}
+
+/* ══════════════════════════════════
+   EDUCATION
+══════════════════════════════════ */
+#education { background: var(--cream); }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.edu-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 32px; position: relative;
+  overflow: hidden; transition: all .35s var(--ease);
+}
+.edu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,36,.09); }
+.edu-card.featured { border-color: var(--forest); }
+.edu-card.featured::after {
+  content: 'Top Performer';
+  position: absolute; top: 16px; right: 16px;
+  background: var(--terra); color: #fff;
+  font-family: var(--font-m); font-size: .6rem; letter-spacing: .12em;
+  padding: 3px 10px; border-radius: 999px; text-transform: uppercase;
+}
+.edu-icon { font-size: 2rem; margin-bottom: 16px; }
+.edu-year {
+  font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em;
+  color: var(--text3); text-transform: uppercase; margin-bottom: 8px; display: block;
+}
+.edu-degree {
+  font-family: var(--font-d); font-size: 1.1rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+}
+.edu-inst {
+  font-size: .82rem; color: var(--text2); margin-bottom: 20px;
+}
+.edu-scores { display: flex; flex-wrap: wrap; gap: 8px; }
+.edu-score {
+  padding: 4px 12px; border-radius: 6px;
+  font-family: var(--font-m); font-size: .72rem;
+  background: rgba(45,106,79,.08); border: 1px solid rgba(45,106,79,.15);
+  color: var(--forest);
+}
+
+/* ══════════════════════════════════
+   PROJECTS
+══════════════════════════════════ */
+#projects { background: var(--white); }
+.projects-masonry {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.proj-card {
+  background: var(--cream); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden;
+  transition: all .4s var(--ease); display: flex; flex-direction: column;
+}
+.proj-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(27,42,36,.12); border-color: rgba(45,106,79,.3); }
+.proj-card.featured { grid-column: span 2; flex-direction: row; }
+.proj-img {
+  height: 200px; overflow: hidden; flex-shrink: 0;
+  background: var(--cream2);
+}
+.proj-card.featured .proj-img { width: 260px; height: auto; }
+.proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.proj-card:hover .proj-img img { transform: scale(1.05); }
+.proj-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; background: var(--cream3);
+}
+.proj-body { padding: 26px; flex: 1; display: flex; flex-direction: column; }
+.proj-cat {
+  font-family: var(--font-m); font-size: .65rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--forest2); margin-bottom: 8px; display: block;
+}
+.proj-card h3 {
+  font-family: var(--font-d); font-size: 1.3rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 10px;
+}
+.proj-card p { font-size: .85rem; color: var(--text2); flex: 1; line-height: 1.7; }
+.proj-footer {
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.proj-tag {
+  padding: 3px 10px; border-radius: 4px;
+  font-family: var(--font-m); font-size: .62rem;
+  background: var(--white); border: 1px solid var(--border);
+  color: var(--text3);
+}
+
+/* Creative projects grid */
+.creative-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+  margin-top: 48px;
+}
+.creative-grid-label {
+  grid-column: 1 / -1;
+  font-family: var(--font-m); font-size: .72rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--text3);
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.creative-card {
+  aspect-ratio: 1; background: var(--cream2); border-radius: var(--r);
+  overflow: hidden; position: relative; cursor: pointer;
+  transition: all .3s var(--ease);
+}
+.creative-card:hover { transform: scale(1.03); box-shadow: 0 12px 32px rgba(27,42,36,.1); }
+.creative-card-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(0deg, rgba(27,42,36,.75), transparent);
+  font-size: .72rem; color: #fff; font-weight: 400;
+  transform: translateY(100%); transition: transform .3s ease;
+}
+.creative-card:hover .creative-card-label { transform: none; }
+.creative-card-icon {
+  width: 100%; height: 100%; display: flex; align-items: center;
+  justify-content: center; font-size: 2.5rem; background: var(--cream3);
+}
+
+/* ══════════════════════════════════
+   CONTACT
+══════════════════════════════════ */
+#contact {
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+#contact::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(116,198,157,.12), transparent),
+    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(181,69,27,.1), transparent);
+}
+.contact-inner { text-align: center; max-width: 600px; margin: 0 auto; position: relative; }
+.contact-inner .section-eyebrow { justify-content: center; color: var(--mint); }
+.contact-inner .section-eyebrow::after { background: var(--mint); }
+.contact-inner .section-title { color: var(--cream); }
+.contact-inner .section-title em { color: var(--mint); }
+.contact-sub { font-size: 1rem; color: rgba(244,239,230,.6); margin-bottom: 48px; line-height: 1.8; }
+.contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.clink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 28px; border: 1px solid rgba(255,255,255,.15);
+  border-radius: 2px; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(244,239,230,.7); transition: all .3s;
+}
+.clink:hover { border-color: var(--mint); color: var(--mint); }
+.clink svg { width: 15px; height: 15px; }
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: var(--ink2); padding: 24px 0; text-align: center;
+  font-family: var(--font-m); font-size: .68rem; letter-spacing: .1em;
+  color: rgba(244,239,230,.3);
+}
+
+/* ══════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s var(--ease); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ══════════════════════════════════
+   MOBILE
+══════════════════════════════════ */
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--white); flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--ink2); }
+.mobile-menu a:hover { color: var(--forest); }
+
+@media (max-width: 1000px) {
+  .hero-body { flex-direction: column; }
+  .hero-right { display: none; }
+  .hero-strip { grid-template-columns: 1fr 1fr; }
+  .hs-item:nth-child(2) { border-right: none; }
+  .hs-item:nth-child(3) { border-top: 1px solid var(--border); }
+  .about-wrap { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .skill-card.wide { grid-column: span 1; }
+  .exp-wrap { grid-template-columns: 1fr; }
+  .exp-nav { display: none; }
+  .exp-panels { padding-left: 0; }
+  .exp-panel { display: block; margin-bottom: 48px; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .projects-masonry { grid-template-columns: 1fr; }
+  .proj-card.featured { flex-direction: column; }
+  .proj-card.featured .proj-img { width: 100%; height: 200px; }
+  .creative-grid { grid-template-columns: repeat(2,1fr); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  section { padding: 72px 0; }
+  .hero-strip { grid-template-columns: 1fr; }
+  .hs-item { border-right: none !important; border-top: 1px solid var(--border); }
+  .hs-item:first-child { border-top: none; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .marquee-wrap { display: none; }
+}
+</style>
 </head>
+<body>
 
-  <body style="background-color: #f3f4f6;">
+<!-- ══════ MOBILE MENU ══════ -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about"      onclick="closeMobile()">About</a>
+  <a href="#skills"     onclick="closeMobile()">Skills</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#education"  onclick="closeMobile()">Education</a>
+  <a href="#projects"   onclick="closeMobile()">Projects</a>
+  <a href="#contact"    onclick="closeMobile()">Contact</a>
+</div>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">MyPortfolio</a>
+<!-- ══════ MARQUEE ══════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span>Android Developer</span><span class="accent">✦</span>
+    <span>Security Enthusiast</span><span class="accent">✦</span>
+    <span>Kotlin & Java</span><span class="accent">✦</span>
+    <span>Coder</span><span class="accent">✦</span>
+    <span>Artist</span><span class="accent">✦</span>
+    <span>Privacy Manager</span><span class="accent">✦</span>
+    <span>DevSecOps</span><span class="accent">✦</span>
+    <span>OWASP</span><span class="accent">✦</span>
+    <span>Jetpack Compose</span><span class="accent">✦</span>
+    <span>Firebase</span><span class="accent">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Android Developer</span><span class="accent">✦</span>
+    <span>Security Enthusiast</span><span class="accent">✦</span>
+    <span>Kotlin & Java</span><span class="accent">✦</span>
+    <span>Coder</span><span class="accent">✦</span>
+    <span>Artist</span><span class="accent">✦</span>
+    <span>Privacy Manager</span><span class="accent">✦</span>
+    <span>DevSecOps</span><span class="accent">✦</span>
+    <span>OWASP</span><span class="accent">✦</span>
+    <span>Jetpack Compose</span><span class="accent">✦</span>
+    <span>Firebase</span><span class="accent">✦</span>
+  </div>
+</div>
 
-          <!-- Toggler (Hamburger Icon)-->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<!-- ══════ NAVBAR ══════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Dhanashree<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+    <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" class="nav-cta" target="_blank">Résumé ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-           
-          <!-- Collapsible Content-->
-           <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto">
-            <li class="navbar-item active"><a href="#about" class="nav-link text-white myLinks">About</a></li>
-            <li class="navbar-item"><a href="#skills" class="nav-link text-white myLinks">Skills</a></li>
-            <li class="navbar-item"><a href="#experience" class="nav-link text-white myLinks">Experience</a></li>
-            <li class="navbar-item"><a href="#education" class="nav-link text-white myLinks">Education</a></li>
-            <li class="navbar-item"><a href="#projects" class="nav-link text-white myLinks">Projects</a></li>
-        </ul>
+<!-- ══════ HERO ══════ -->
+<section id="hero" style="padding:0">
+  <div class="container">
+    <div class="hero-body">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span class="hero-badge-text">Open to new opportunities</span>
         </div>
+        <h1 class="hero-name">
+          Dhanashree
+          <em>Ambadkar</em>
+        </h1>
+        <div class="hero-roles">
+          <span class="hero-role-tag featured">Android Developer</span>
+          <span class="hero-role-tag">Security Enthusiast</span>
+          <span class="hero-role-tag">Coder</span>
+          <span class="hero-role-tag">Artist</span>
+        </div>
+        <p class="hero-desc">
+          Building efficient, secure and beautiful Android applications with 4+ years of experience
+          across mobile development, cybersecurity and privacy compliance at Tata Consultancy Services.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-dark">View My Work</a>
+          <a href="#contact" class="btn-ghost">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-card">
+          <span class="hero-card-tag">CGPA 9.59 / 10</span>
+          <img class="hero-card-img" src="https://dhanashreeam.github.io/dhanaA/profile.jpg" alt="Dhanashree" onerror="this.style.display='none'"/>
+          <div class="hero-card-name">Dhanashree Ambadkar</div>
+          <div class="hero-card-title">Android Dev · Security · Privacy</div>
+          <div class="hero-card-stats">
+            <div class="hcs"><span class="hcs-num">4+</span><span class="hcs-label">Years Exp</span></div>
+            <div class="hcs"><span class="hcs-num">500K</span><span class="hcs-label">Users Served</span></div>
+            <div class="hcs"><span class="hcs-num">80%</span><span class="hcs-label">Test Saved</span></div>
+            <div class="hcs"><span class="hcs-num">3</span><span class="hcs-label">Roles at TCS</span></div>
           </div>
-          </nav>
-          
-          <!-- Main Section -->
-           <section class="bg-light text-center p-5">
-            <div class="container">
-                <h1>Hi, I'm <span style="font-family: 'Alex Brush',cursive;">Dhanashree Ambadkar</span></h1>
-                <p class="lead"> Android App Developer | Security Enthusiast | Coder | Artist </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-item">
+      <div class="hs-icon">📱</div>
+      <div class="hs-text"><strong>Android Native</strong>Java, Kotlin, Jetpack</div>
+    </div>
+    <div class="hs-item">
+      <div class="hs-icon">🔐</div>
+      <div class="hs-text"><strong>Security & Privacy</strong>OWASP, GDPR, DPDP</div>
+    </div>
+    <div class="hs-item">
+      <div class="hs-icon">⚙️</div>
+      <div class="hs-text"><strong>DevSecOps</strong>SAST, DAST, Sonar</div>
+    </div>
+    <div class="hs-item">
+      <div class="hs-icon">🎨</div>
+      <div class="hs-text"><strong>Creative</strong>Design, Art, IoT</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-eyebrow reveal">About Me</div>
+    <h2 class="section-title reveal">Developer. Protector. <em>Creator.</em></h2>
+    <div class="about-wrap">
+      <div class="about-text reveal">
+        <p>
+          Experienced <strong>Android Developer</strong> with strong expertise in Java and Kotlin,
+          specialising in designing and delivering efficient, user-centric mobile applications.
+          Adept at managing the end-to-end mobile app development lifecycle, leveraging
+          Android SDK, modern architecture patterns (MVVM & Jetpack), and performance optimisation techniques.
+        </p>
+        <p>
+          Skilled at building <strong>intuitive, secure, and high-performance Android apps</strong>
+          that deliver seamless user experiences. With additional familiarity in iOS development,
+          I bring a cross-platform and full-ecosystem perspective to every project.
+        </p>
+        <p>
+          <em>"Driven by passion for staying at the frontier of Android technologies"</em> —
+          I am equally excited by security research, privacy compliance, and the creative arts.
+          Whether writing Kotlin, threat modelling a data flow, or designing a smart mirror,
+          I bring the same intensity and curiosity to every challenge.
+        </p>
+      </div>
+      <div class="about-sidebar reveal">
+        <div class="about-pill">
+          <span class="ap-icon">🏢</span>
+          <div><div class="ap-label">Tata Consultancy Services</div><div class="ap-val">2021 – 2025</div></div>
+        </div>
+        <div class="about-pill">
+          <span class="ap-icon">📍</span>
+          <div><div class="ap-label">India</div><div class="ap-val">Open to relocation</div></div>
+        </div>
+        <div class="about-pill">
+          <span class="ap-icon">🎓</span>
+          <div><div class="ap-label">B.E. Computer Science</div><div class="ap-val">Sipna COET · CGPA 9.59</div></div>
+        </div>
+        <div class="about-pill">
+          <span class="ap-icon">🌐</span>
+          <div><div class="ap-label">Languages</div><div class="ap-val">English · Hindi · Marathi</div></div>
+        </div>
+        <div class="about-pill">
+          <span class="ap-icon">🎨</span>
+          <div><div class="ap-label">Interests</div><div class="ap-val">Art · IoT · Writing · Ancient Cosmetics</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SKILLS ══════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-eyebrow reveal">Technical Skills</div>
+    <h2 class="section-title reveal">What I <em>Bring</em></h2>
+    <div class="skills-grid">
+
+      <div class="skill-card wide reveal">
+        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/android_logo.svg" alt="Android"/>
+        <h3>Android Development</h3>
+        <div class="skill-tags">
+          <span class="stag">Java</span><span class="stag">Kotlin</span>
+          <span class="stag">Jetpack Compose</span><span class="stag">MVVM</span>
+          <span class="stag">Firebase</span><span class="stag">Android SDK</span>
+          <span class="stag">Katalon Automation</span><span class="stag">iOS Familiarity</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/security.svg" alt="Security"/>
+        <h3>Security</h3>
+        <div class="skill-tags">
+          <span class="stag">Mobile App Security</span>
+          <span class="stag">Web App Security</span>
+          <span class="stag">OWASP Top 10</span>
+          <span class="stag">SAST / DAST</span>
+          <span class="stag">SonarQube</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/privacy.svg" alt="Privacy"/>
+        <h3>Privacy Compliance</h3>
+        <div class="skill-tags">
+          <span class="stag">GDPR</span><span class="stag">DPDP</span>
+          <span class="stag">DPIA</span><span class="stag">Data Consent</span>
+          <span class="stag">PI / SPI Handling</span>
+          <span class="stag">Privacy Laws</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/git.svg" alt="Git"/>
+        <h3>Version Control</h3>
+        <div class="skill-tags">
+          <span class="stag">Git</span><span class="stag">GitHub</span>
+          <span class="stag">Branching Strategies</span>
+          <span class="stag">Code Reviews</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-card-emoji">🌐</span>
+        <h3>Web Development</h3>
+        <div class="skill-tags">
+          <span class="stag">HTML5</span><span class="stag">CSS3</span>
+          <span class="stag">JavaScript</span><span class="stag">Bootstrap</span>
+          <span class="stag">PHP</span><span class="stag">Responsive Design</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ EXPERIENCE ══════ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-eyebrow reveal">Career</div>
+    <h2 class="section-title reveal">Work <em>Experience</em></h2>
+    <div class="exp-wrap">
+      <!-- Tab Nav -->
+      <div class="exp-nav">
+        <div class="exp-nav-item active" onclick="showExp('e1',this)">
+          Engineer
+          <span class="en-company">TCS · 2024–2025</span>
+        </div>
+        <div class="exp-nav-item" onclick="showExp('e2',this)">
+          Privacy Manager
+          <span class="en-company">TCS · 2023–2025</span>
+        </div>
+        <div class="exp-nav-item" onclick="showExp('e3',this)">
+          Developer
+          <span class="en-company">TCS · 2021–2024</span>
+        </div>
+        <div class="exp-nav-item" onclick="showExp('e4',this)">
+          Intern
+          <span class="en-company">Obdurate · 2019</span>
+        </div>
+      </div>
+
+      <!-- Panels -->
+      <div class="exp-panels">
+        <div class="exp-panel active" id="e1">
+          <div class="exp-panel-header">
+            <div class="ep-role">Engineer</div>
+            <div class="ep-meta">
+              <span class="ep-company">Tata Consultancy Services</span>
+              <span class="ep-date">Jun 2024 – Sept 2025</span>
             </div>
-           </section>
+          </div>
+          <ul class="ep-bullets">
+            <li>Implemented new functionality for Android mobile application using Kotlin, delivering features on time and within scope.</li>
+            <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per business requirements.</li>
+            <li>Managed full product lifecycle and resolved security issues identified in Sonar, SAST and DAST scans.</li>
+            <li>Upgraded the application to the latest Android versions, ensuring compatibility with the newest platform features.</li>
+            <li>Facilitated knowledge transfer to new joiners for smooth transition and continuity of team expertise.</li>
+            <li>Troubleshot multiple production issues to identify root causes and deliver timely resolutions.</li>
+          </ul>
+        </div>
 
-           <!-- About -->
-            <section class="container my-5" id="about">
-                <h2 class="text-center mb-4 fw-bold"> About</h2>
-                <p>Experienced Android Developer with strong expertise in Java and Kotlin, specializing in designing and delivering efficient, user-centric mobile applications. Adept at managing the end-to-end mobile app development lifecycle, leveraging Android SDK, modern architecture patterns (MVVM & Jetpack), and performance optimization techniques. <br><br>
-                Skilled at building intuitive, secure, and high-performance Android apps that deliver seamless user experiences, with additional familiarity in iOS development to enhance cross-platform and ecosystem perspective.<br><br>
-                Driven by passion for staying up-to-date with the latest Android technologies and security best practices, and committed to continuous learning, team collaboration, and delivering impactful mobile solutions.
-            </p>
-            </section>
+        <div class="exp-panel" id="e2">
+          <div class="exp-panel-header">
+            <div class="ep-role">Functional Privacy Manager</div>
+            <div class="ep-meta">
+              <span class="ep-company">Tata Consultancy Services</span>
+              <span class="ep-date">Apr 2023 – Jun 2025 · Concurrent Role</span>
+            </div>
+          </div>
+          <ul class="ep-bullets">
+            <li>Collaborated with Privacy experts to ensure applications are fully privacy-compliant at Tower level.</li>
+            <li>Deepened expertise across GDPR, DPDP, DPIA, and data consent frameworks to drive compliance programs.</li>
+            <li>Worked closely with cross-functional teams to implement privacy measures effectively across the product lifecycle.</li>
+          </ul>
+        </div>
 
-            <!-- Skills-->
-             <section id="skills" class="py-5 bg-light">
-                <div class="container">
-                    <h2 class="text-center mb-4 fw-bold"> <i class="bi bi-lightbulb fs-1 text-warning"></i> Skills</h2>
-                    <div class="row g-4">
-                        <!--- Skill 1 -->
-                        <div class="col-md-4">
-                            <div class="card skill-card text-center p-4">
-								<img src="android_logo.svg" style="height:50px" alt="android logo">
-                                <h5 class="mt-3">Android Development</h5>
-                                <p class="text-muted">Java, Kotlin, Jetpack Compose, Firebase</p>
-                            </div>
-                        </div>
+        <div class="exp-panel" id="e3">
+          <div class="exp-panel-header">
+            <div class="ep-role">Developer</div>
+            <div class="ep-meta">
+              <span class="ep-company">Tata Consultancy Services</span>
+              <span class="ep-date">Aug 2021 – May 2024</span>
+            </div>
+          </div>
+          <ul class="ep-bullets">
+            <li>Contributed to development of an Android authenticator application (Java) used by <strong>500,000+ TCS employees</strong> — similar in scope to Google/Microsoft Authenticator.</li>
+            <li>Implemented multiple login mechanisms for enhanced security and improved user experience.</li>
+            <li>Provided technical support and troubleshooting during live incident calls, ensuring resolution within SLA.</li>
+            <li>Automated functional test cases using Katalon, achieving an <strong>80% reduction in manual testing effort</strong>.</li>
+            <li>Tested the application in backup environments to ensure disaster recovery readiness.</li>
+            <li>Collaborated seamlessly with cross-functional teams to resolve technical challenges and deliver quality outcomes.</li>
+          </ul>
+        </div>
 
-                        <!--- Skill 2 -->
-                        <div class="col-md-4">
-                            <div class="card skill-card text-center p-4">
-                                <img src="security.svg" style="height:50px" alt="security logo">
-                                <h5 class="mt-3">Security</h5>
-                                <p class="text-muted">Mobile application security, web application security, OWASP Top 10</p>
-                            </div>
-                        </div>
+        <div class="exp-panel" id="e4">
+          <div class="exp-panel-header">
+            <div class="ep-role">Intern — Web Developer</div>
+            <div class="ep-meta">
+              <span class="ep-company">Obdurate Technologies</span>
+              <span class="ep-date">Jun 2019 – Jul 2019</span>
+            </div>
+          </div>
+          <ul class="ep-bullets">
+            <li>Designed and developed static and dynamic responsive websites using HTML, CSS, JavaScript and Bootstrap.</li>
+            <li>Ensured user-friendly interfaces with full cross-browser compatibility in frontend development.</li>
+            <li>Expanded knowledge of backend technologies during the internship, laying the foundation for full-stack awareness.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        <!--- Skill 3 -->
-                        <div class="col-md-4">
-                            <div class="card skill-card text-center p-4">
-                                <img src="privacy.svg" style="height:50px" alt="security logo">
-                                <h5 class="mt-3">Privacy</h5>
-                                <p class="text-muted">Personal Data(PI, SPI,etc), Data privacy, user consent, basic tools & practices, knowledge about various privacy laws</p>
-                            </div>
-                        </div>
+<!-- ══════ EDUCATION ══════ -->
+<section id="education">
+  <div class="container">
+    <div class="section-eyebrow reveal">Academic Record</div>
+    <h2 class="section-title reveal">Education & <em>Achievements</em></h2>
+    <div class="edu-grid">
 
-                        <!--- Skill 4 -->
-                        <div class="col-md-4">
-                            <div class="card skill-card text-center p-4">
-                                <img src="git.svg" style="height:50px" alt="security logo">
-                                <h5 class="mt-3">Version Control System</h5>
-                                <p class="text-muted">Git</p>
-                            </div>
-                        </div>
+      <div class="edu-card featured reveal">
+        <div class="edu-icon">🎓</div>
+        <span class="edu-year">2017 – 2021</span>
+        <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
+        <div class="edu-inst">Sipna College of Engineering &amp; Technology</div>
+        <div class="edu-scores">
+          <span class="edu-score">CGPA 9.59 / 10</span>
+          <span class="edu-score">84.89%</span>
+        </div>
+      </div>
 
-                        <!--- Skill 5 -->
-                        <div class="col-md-4">
-                            <div class="card skill-card text-center p-4">
-                                <i class="bi bi-code-slash fs-1 text-primary"></i>
-                                <h5 class="mt-3">Web Development</h5>
-                                <p class="text-muted">HTML, CSS, JS, Bootstrap</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-             </section>
+      <div class="edu-card reveal">
+        <div class="edu-icon">📗</div>
+        <span class="edu-year">2015 – 2017</span>
+        <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+        <div class="edu-inst">Brijlal Biyani Science College</div>
+        <div class="edu-scores"><span class="edu-score">88.77%</span></div>
+      </div>
 
-             <!-- Experience -->
-             <section id="experience" class="py-5">
-                <div class="container">
-                    <h2 class="text-center mb-5 fw-bold"><i class="bi bi-briefcase-fill me-2 text-brown"></i> Experience</h2>
-                    <div class="timeline">
+      <div class="edu-card reveal">
+        <div class="edu-icon">📘</div>
+        <span class="edu-year">Passed 2015</span>
+        <div class="edu-degree">Secondary School Certificate (SSC)</div>
+        <div class="edu-inst">Takhatmal English High School</div>
+        <div class="edu-scores"><span class="edu-score">94.20%</span></div>
+      </div>
 
-                        <!-- Experience 1-->
-                        <div class="timeline-item">
-                            <h5>Engineer</h5>
-                            <span class="text-muted"> Tata Consultancy Services | Jun 2024 - Sept 2025</span>
-                            <p><ul class="list-unstyled dash-list">
-                                <li>Implemented new functionality for Android mobile application using Kotlin language.</li>
-                                <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per the business requirements.</li>
-                                <li>Managed full product lifecycle and resolved security issues identified in sonar, SAST & DAST scans.</li>
-                                <li>Upgraded the application to the latest versions, ensuring compatibility with the newest features of Android.</li>
-                                <li>Facilitated knowledge transfer to the new joiners in the team for smooth transition and continuity of expertise.</li>
-                                <li>Troubleshooted multiple issues to find the root cause and worked on its resolution.</li>
-                            </ul></p>
-                        </div>
+    </div>
+  </div>
+</section>
 
-                        <!-- Experience 2-->
-                        <div class="timeline-item">
-                            <h5>Functional Privacy Manager</h5>
-                            <span class="text-muted"> Tata Consultancy Services | Apr 2023 - Jun 2025</span>
-                            <p><ul class="list-unstyled dash-list">
-                                <li>Collaborated with Privacy experts to ensure applications are privacy compliant at Tower level.</li>
-                                <li>Learned various privacy concepts to enhance privacy compliance efforts.</li>
-                                <li>Worked closely with cross-functional teams to implement privacy measures effectively.</li>
-                            </ul></p>
-                        </div>
+<!-- ══════ PROJECTS ══════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-eyebrow reveal">Portfolio</div>
+    <h2 class="section-title reveal">Featured <em>Projects</em></h2>
 
-                         <!-- Experience 3-->
-                         <div class="timeline-item">
-                            <h5>Developer</h5>
-                            <span class="text-muted"> Tata Consultancy Services | Aug 2021 - May 2024</span>
-                            <p><ul class="list-unstyled dash-list">
-                               <li>Contributed to development of Android application using Java for authentication, similar to Google/Microsoft Authenticator, utilized by 500,000 TCS employees.</li>
-                               <li>Contributed to implementation of multiple login mechanisms for enhanced security and user experience.</li>
-                               <li>Provided technical support & troubleshooting during incident calls to resolve issues within SLA.</li>
-                               <li>Maintained good user experience by addressing and resolving technical issues promptly.</li>
-                               <li>Tested the application in backup environment to ensure proper functioning during disasters.</li>
-                               <li>Automated functional test cases of Android application using Katalon, reducing manual efforts by 80%.</li>
-                               <li>Collaborated with team members to ensure successful implementation of automation processes.</li>
-                               <li>Analyzed test results to identify and address any issues, ensuring high-quality deliverables.</li>
-                               <li>Collaborated with cross-functional teams at Tata Consultancy Services to resolve technical challenges seamlessly.</li>
-                               <li>Ensured seamless integration and functionality with team members for successful project outcomes.</li>
-                            </ul></p>
-                        </div>
+    <div class="projects-masonry">
 
-                        <!-- Experience 4-->
-                        <div class="timeline-item">
-                            <h5>Intern</h5>
-                            <span class="text-muted"> Obdurate Technologies | Jun 2019 - Jul 2019</span>
-                            <p><ul class="list-unstyled dash-list">
-                               <li>Designed and developed static and dynamic responsive websites using HTML, CSS, JavaScript, and Bootstrap.</li>
-                               <li>Ensured user-friendly interfaces and cross-browser compatibility in frontend development.</li>
-                               <li>Expanded knowledge of backend technologies during internship at Obdurate Technologies.</li>
-                            </ul></p>
-                        </div>
+      <div class="proj-card featured reveal">
+        <div class="proj-img">
+          <img src="https://dhanashreeam.github.io/dhanaA/quiz.png" alt="Quiz App" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>📱</div>'"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-cat">Android Development</span>
+          <h3>Quiz App</h3>
+          <p>A dynamic Android Quiz App allowing users to select from multiple answer options, providing real-time feedback and a score summary. Designed for intuitive, engaging interaction with a clean native Android UI.</p>
+          <div class="proj-footer">
+            <span class="proj-tag">Kotlin/Java</span>
+            <span class="proj-tag">Android SDK</span>
+            <span class="proj-tag">Mobile UX</span>
+          </div>
+        </div>
+      </div>
 
-                    </div>
-                </div>
-             </section>
+      <div class="proj-card reveal">
+        <div class="proj-img">
+          <img src="https://dhanashreeam.github.io/dhanaA/mirror.jpg" alt="Smart Mirror" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>🪞</div>'"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-cat">AI · IoT</span>
+          <h3>Smart Mirror</h3>
+          <p>An innovative IoT device functioning as an interactive display, showing real-time weather, time and essential information, with voice command support powered by Python and ML modules.</p>
+          <div class="proj-footer">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">AI / ML</span>
+            <span class="proj-tag">IoT</span>
+          </div>
+        </div>
+      </div>
 
-             <!-- Education -->
-              <section id="education" class="py-5 bg-light">
-                <div class="container">
-                    <h2 class="text-center fw-bold mb-5">
-                        <i class="bi bi-mortarboard-fill text-primary me-2"></i>Education 
-                    </h2>
+      <div class="proj-card reveal">
+        <div class="proj-img">
+          <img src="https://dhanashreeam.github.io/dhanaA/passport.png" alt="Travel Website" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>✈️</div>'"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-cat">Web Development</span>
+          <h3>Travel &amp; Booking Website</h3>
+          <p>A user-friendly platform for searching top travel destinations, booking journeys and accessing personalized tourist guides — built with a responsive, dynamic interface.</p>
+          <div class="proj-footer">
+            <span class="proj-tag">HTML</span>
+            <span class="proj-tag">CSS</span>
+            <span class="proj-tag">JavaScript</span>
+            <span class="proj-tag">PHP</span>
+          </div>
+        </div>
+      </div>
 
-                    <div class="timeline-edu">
+      <div class="proj-card reveal">
+        <div class="proj-img">
+          <img src="https://dhanashreeam.github.io/dhanaA/unitConverterIcon.png" alt="Unit Converter" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>🔢</div>'"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-cat">Android Development</span>
+          <h3>Unit Converter App</h3>
+          <p>An Android-based Unit Converter App that efficiently converts values across various units, with robust error handling to manage null inputs and ensure a seamless, frustration-free user experience.</p>
+          <div class="proj-footer">
+            <span class="proj-tag">Android</span>
+            <span class="proj-tag">Kotlin</span>
+            <span class="proj-tag">Error Handling</span>
+          </div>
+        </div>
+      </div>
 
-                        <!--- Education 1-->
-                        <div class="timeline-item-edu myClass">
-                            <div class="timeline-icon bg-secondary text-white">
-                                <i class="bi bi-building"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5 class="fw-semibol mb-1">B.E. in Computer Science & Engineering</h5>
-                                <span class="text-muted">Sipna College of Engineering & Technology</span>
-                                <p class="mt-2 mb-0">2017 - 2021</p>
-                                <p class="mt-2 mb-0">CGPA: 9.59/10</p>
-                                <p class="mt-2 mb-0">Percentage: 84.89%</p>
-                            </div>
-                        </div>
+      <div class="proj-card reveal">
+        <div class="proj-img">
+          <img src="https://dhanashreeam.github.io/dhanaA/make-up-bag.png" alt="Cosmetics" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>💄</div>'"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-cat">Science · Heritage</span>
+          <h3>Cosmetics with Ancient Technique</h3>
+          <p>Created face powder and lip color using traditional ancient techniques for a science exhibition at the Yuvanand event, Sipna COET — bridging historical methods with modern cosmetic science.</p>
+          <div class="proj-footer">
+            <span class="proj-tag">Ancient History</span>
+            <span class="proj-tag">Research</span>
+            <span class="proj-tag">Science Exhibition</span>
+          </div>
+        </div>
+      </div>
 
-                            <!--- Education 2-->
-                        <div class="timeline-item-edu myClass">
-                            <div class="timeline-icon bg-secondary text-white">
-                                <i class="bi bi-building"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5 class="fw-semibol mb-1">Higher Secondary Certificate(HSC)</h5>
-                                <span class="text-muted">Brijlal Biyani Science College</span>
-                                <p class="mt-2 mb-0">2015 - 2017</p>
-                                <p class="mt-2 mb-0">Percentage: 88.77%</p>
-                            </div>
-                        </div>
+    </div>
 
-                            <!--- Education 3-->
-                        <div class="timeline-item-edu myClass">
-                            <div class="timeline-icon bg-secondary text-white">
-                                <i class="bi bi-building"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5 class="fw-semibol mb-1">Secondary School Certificate (SSC)</h5>
-                                <span class="text-muted">Takhatmal English High School</span>
-                                <p class="mt-2 mb-0">Passed out in 2015</p>
-                                <p class="mt-2 mb-0">Percentage: 94.20%</p>
-                            </div>
-                         </div>
+    <!-- Creative / Design Projects -->
+    <div class="creative-grid reveal">
+      <div class="creative-grid-label">✦ Creative & Design Projects</div>
+      <div class="creative-card">
+        <div class="creative-card-icon">🎮</div>
+        <div class="creative-card-label">YouTube Gaming Page Poster</div>
+      </div>
+      <div class="creative-card">
+        <div class="creative-card-icon">🎬</div>
+        <div class="creative-card-label">Gaming Video Cover Art</div>
+      </div>
+      <div class="creative-card">
+        <div class="creative-card-icon">📺</div>
+        <div class="creative-card-label">Gaming Channel Cover</div>
+      </div>
+      <div class="creative-card">
+        <div class="creative-card-icon">🏆</div>
+        <div class="creative-card-label">Poster Competition Entry</div>
+      </div>
+    </div>
 
-                    </div>
-                </div>
-              </section>
+  </div>
+</section>
 
-            <!-- Projects -->
-             <section class="container my-5" id="projects">
-                <h2 class="mb-4">Projects</h2>
-                <div class="row">
-                    <!-- Project 1-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <img src="quiz.png" class="card-img-top img-fluid mb-3" style="width:50px;height:50px;position: relative;align-self:center;" alt="Project 1">
-                            <h5 class="text-center card-title text-muted">Quiz App</h5>
-                            <div class="card-body  d-flex flex-column justify-content-center">
-                                <p class="card-text">Developed a dynamic Android Quiz App that allows users to select from multiple options to answer questions, providing real-time feedback. At the end of the quiz, users can view their score, enhancing user engagement with an intuitive and interactive experience.<br><br>
-                                    <strong>Skills:</strong> Android Development, Mobile Application development</p>
-                            </div>
-                        </div>
-                    </div>
+<!-- ══════ CONTACT ══════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <div class="section-eyebrow">Let's Connect</div>
+      <h2 class="section-title">Ready to Build <em>Something Great?</em></h2>
+      <p class="contact-sub">
+        Open to roles in Android Development, Application Security, DevSecOps and Privacy Engineering.
+        Let's create something impactful together.
+      </p>
+      <div class="contact-links">
+        <a class="clink" href="mailto:dhanashree.ambadkar.5@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Email Me
+        </a>
+        <a class="clink" href="https://dhanashreeam.github.io/dhanaA/" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          My Portfolio
+        </a>
+        <a class="clink" href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                    <!-- Project 2-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <img src="mirror.jpg" class="card-img-top img-fluid mb-3" style="width:50px;height:50px;position: relative;align-self:center;" alt="Project 1">
-                            <h5 class="text-center card-title text-muted">Smart Mirror</h5>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                <p class="card-text">Developed an innovative smart mirror device that functions as an interactive display, showcasing real-time weather updates, time and other essential information. The device also features voice command functionality for seamless user interaction. Technologies utilized include Python and Smart Mirror module, ensuring a smooth and intuitive experince<br><br>
-                                    <strong>Skills:</strong> Python, Artificial Intelligence(AI), Machine Learning(ML), Internet of Things(IoT)</p>
-                            </div>
-                        </div>
-                    </div>
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="container">
+    © 2025 Dhanashree Ambadkar &nbsp;·&nbsp; Android Developer &amp; Security Enthusiast &nbsp;·&nbsp; Built with ♥
+  </div>
+</footer>
 
-                    <!-- Project 3-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <img src="passport.png" class="card-img-top img-fluid mb-3" style="width:50px;height:50px;position: relative;align-self:center;" alt="Project 1">
-                            <h5 class="text-center card-title text-muted">Travel & Booking website</h5>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                
-                                <p class="card-text">Developed a user-friendly website that allows users to search for top travel destinations, book journeys, and access personalized tourist guides. The platform seamlessly integrates booking functionalities with detailed information on attractions, offering an intuitive experience. Built using HTML, CSS, Javascript, Bootstrap and PHP for a responsive and dynamic user interface.<br><br>
-                                    <strong>Skills:</strong> HTML, CSS, Bootstrap, JavaScript, PHP</p>
-                            </div>
-                        </div>
-                    </div>
+<!-- ══════ SCRIPTS ══════ -->
+<script>
+/* NAV SCROLL */
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
 
-                    <!-- Project 4-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <img src="make-up-bag.png" class="card-img-top img-fluid mb-3" style="width:50px;height:50px;position: relative;align-self:center;" alt="Project 1">
-                            <h5 class="text-center card-title text-muted">Cosmetics using Ancient Technique</h5>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                
-                                <p class="card-text">Created face powder and lip color using traditional ancient techniques for a science exhibition at the Yuvanand event, hosted by Sipna COET. The project highlighted the application of historical methods in modern cosmetics, bridging science and cultural heritage.<br><br>
-                                    <strong>Skills:</strong> Ancient History
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+/* HAMBURGER */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
 
-                    <!-- Project 5-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <img src="unitConverterIcon.png" class="card-img-top img-fluid mb-3" style="width:50px;height:50px;position: relative;align-self:center;" alt="Project 1">
-                            <h5 class="text-center card-title text-muted">Unit Converter App</h5>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                <p class="card-text">Developed an Android-based Unit Converter App that efficiently converts entered value across vaious units, with robust error handling to manage null inputs and ensure seamless user experience.<br><br>
-                                    <strong>Skills:</strong> Android Development, Mobile application development, Error Handling
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+/* SCROLL REVEAL */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-                    <!-- Project 6-->
-                    <div class="col-md-4" style="margin-bottom: 25px;">
-                        <div class="card custom-card" style="padding: 7px;">
-                            <h5 class="text-center card-title text-muted mt-4">Other Projects</h5>
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                
-                                <ul class="list-unstyled text-center">
-                                <li><a href="Project-1i.jpg">Poster for YouTube Gaming Page</a></li>
-                                <li><a href="Project-4.jpg">Cover Page for Gaming YouTube Video</a></li>
-                                <li><a href="Project-5b.jpg">Cover Page for Gaming Channel</a></li>
-                                <li><a href="PosterCompetition.jpg">Project for a Poster Competition</a></li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat project cards-->
-                </div>
-             </section>
+/* EXPERIENCE TABS */
+function showExp(id, navEl) {
+  document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.exp-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  navEl.classList.add('active');
+}
 
-             <!-- Contact-->
-              <footer class="bg-dark text-white text=center py-3">
-                 @2025 Dhanashree Ambadkar
-              </footer>
-          
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+/* STAGGERED REVEAL DELAYS */
+document.querySelectorAll('.skills-grid .skill-card').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.08}s`;
+});
+document.querySelectorAll('.projects-masonry .proj-card').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.07}s`;
+});
 
+/* SUBTLE PARALLAX ON HERO */
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) heroName.style.transform = `translateY(${y * 0.06}px)`;
+});
+</script>
 </body>
 </html>
-
