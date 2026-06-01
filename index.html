@@ -2,1162 +2,1487 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dhanashree Ambadkar | Android Developer & Creative</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dhanashree Ambadkar | Multi-Role Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════
-   DESIGN TOKENS
-══════════════════════════════════ */
-:root {
-  --cream:   #f4efe6;
-  --cream2:  #ede7dc;
-  --cream3:  #e5ddd0;
-  --white:   #fdfaf6;
-  --ink:     #1b2a24;
-  --ink2:    #2d4a3e;
-  --forest:  #2d6a4f;
-  --forest2: #40916c;
-  --mint:    #74c69d;
-  --terra:   #b5451b;
-  --terra2:  #d4623a;
-  --text:    #1b2a24;
-  --text2:   #4a6458;
-  --text3:   #859e94;
-  --border:  rgba(45,106,79,.14);
-  --shadow:  0 2px 40px rgba(27,42,36,.08);
-  --r:       12px;
-  --font-d:  'Fraunces', Georgia, serif;
-  --font-b:  'Plus Jakarta Sans', sans-serif;
-  --font-m:  'Fira Code', monospace;
-  --ease:    cubic-bezier(.22,.68,0,1.2);
-}
+  :root {
+    --bg: #07080D;
+    --surface: #0F1018;
+    --surface2: #161820;
+    --text: #E4E6F0;
+    --muted: #7A7D90;
+    --border: #1E2030;
 
-/* ══════════════════════════════════
-   RESET + BASE
-══════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--cream);
-  color: var(--text);
-  font-family: var(--font-b);
-  font-weight: 300;
-  line-height: 1.75;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
+    --android: #3DDC84;
+    --android-dim: rgba(61,220,132,0.12);
+    --android-glow: rgba(61,220,132,0.25);
 
-/* ══════════════════════════════════
-   SCROLLBAR
-══════════════════════════════════ */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--cream2); }
-::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 2px; }
+    --security: #FF5757;
+    --security-dim: rgba(255,87,87,0.12);
+    --security-glow: rgba(255,87,87,0.25);
 
-/* ══════════════════════════════════
-   NOISE TEXTURE OVERLAY
-══════════════════════════════════ */
-body::after {
-  content: '';
-  position: fixed; inset: 0; pointer-events: none; z-index: 999;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  background-size: 300px;
-  opacity: .5;
-}
+    --privacy: #9B7FFF;
+    --privacy-dim: rgba(155,127,255,0.12);
+    --privacy-glow: rgba(155,127,255,0.25);
 
-/* ══════════════════════════════════
-   LAYOUT
-══════════════════════════════════ */
-.container { max-width: 1140px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
-section { padding: 108px 0; }
-.section-eyebrow {
-  font-family: var(--font-m); font-size: .68rem; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--forest2);
-  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
-}
-.section-eyebrow::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--forest2); }
-.section-title {
-  font-family: var(--font-d); font-size: clamp(2.4rem, 4vw, 3.8rem);
-  font-weight: 300; line-height: 1.08; color: var(--ink);
-  margin-bottom: 60px;
-}
-.section-title em { font-style: italic; color: var(--forest); }
-.section-title strong { font-weight: 700; }
+    --creative: #FFAB40;
+    --creative-dim: rgba(255,171,64,0.12);
+    --creative-glow: rgba(255,171,64,0.25);
 
-/* ══════════════════════════════════
-   MARQUEE TICKER
-══════════════════════════════════ */
-.marquee-wrap {
-  background: var(--forest);
-  overflow: hidden; padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-}
-.marquee-track {
-  display: flex; gap: 0;
-  animation: marquee 28s linear infinite;
-  white-space: nowrap;
-}
-.marquee-track span {
-  font-family: var(--font-m); font-size: .72rem; letter-spacing: .18em;
-  text-transform: uppercase; color: rgba(255,255,255,.65);
-  padding: 0 32px;
-}
-.marquee-track span.accent { color: var(--mint); }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    --active-color: var(--android);
+    --active-dim: var(--android-dim);
+    --active-glow: var(--android-glow);
+    --radius: 14px;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+  html { scroll-behavior: smooth; }
 
-/* ══════════════════════════════════
-   NAVBAR
-══════════════════════════════════ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 22px 0;
-  transition: all .4s ease;
-}
-nav.scrolled {
-  background: rgba(244,239,230,.92);
-  backdrop-filter: blur(16px) saturate(1.4);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  box-shadow: 0 4px 32px rgba(27,42,36,.06);
-}
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  max-width: 1140px; margin: 0 auto; padding: 0 40px;
-}
-.nav-logo {
-  font-family: var(--font-d); font-size: 1.15rem; font-weight: 400;
-  color: var(--ink); letter-spacing: .02em;
-}
-.nav-logo span { color: var(--forest); font-style: italic; }
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
-  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--text2); transition: color .25s;
-}
-.nav-links a:hover { color: var(--forest); }
-.nav-cta {
-  font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
-  padding: 9px 22px; background: var(--ink); color: var(--cream);
-  border-radius: 2px; transition: all .3s;
-}
-.nav-cta:hover { background: var(--forest); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: .3s; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* ══════════════════════════════════
-   HERO
-══════════════════════════════════ */
-#hero {
-  min-height: 100vh;
-  display: grid; grid-template-rows: 1fr auto;
-  padding-top: 100px;
-  background:
-    radial-gradient(ellipse 70% 50% at 80% 40%, rgba(116,198,157,.12), transparent),
-    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(181,69,27,.07), transparent),
-    var(--cream);
-  overflow: hidden; position: relative;
-}
-.hero-body {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 48px; padding: 60px 0 40px;
-}
-.hero-left { flex: 1; max-width: 680px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(45,106,79,.1); border: 1px solid rgba(45,106,79,.25);
-  border-radius: 999px; padding: 6px 16px 6px 10px; margin-bottom: 32px;
-}
-.hero-badge-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: var(--forest2);
-  animation: blink 2s ease infinite;
-}
-@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-.hero-badge-text {
-  font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--forest);
-}
-.hero-name {
-  font-family: var(--font-d); font-size: clamp(3.4rem, 6.5vw, 6rem);
-  font-weight: 300; line-height: .97; letter-spacing: -.01em; color: var(--ink);
-  margin-bottom: 20px;
-}
-.hero-name em { font-style: italic; color: var(--forest); display: block; }
-.hero-roles {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
-}
-.hero-role-tag {
-  padding: 5px 14px; border-radius: 999px;
-  font-size: .75rem; letter-spacing: .06em; font-weight: 400;
-  border: 1px solid var(--border); color: var(--text2);
-  background: var(--white);
-}
-.hero-role-tag.featured {
-  background: var(--forest); color: #fff; border-color: var(--forest);
-}
-.hero-desc {
-  font-size: 1rem; color: var(--text2); max-width: 520px;
-  line-height: 1.85; margin-bottom: 40px;
-}
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.btn-dark {
-  padding: 13px 32px; background: var(--ink); color: var(--cream);
-  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
-  border-radius: 2px; transition: all .3s var(--ease);
-}
-.btn-dark:hover { background: var(--forest); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,106,79,.25); }
-.btn-ghost {
-  padding: 12px 32px; border: 1px solid var(--ink);
-  color: var(--ink); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
-  border-radius: 2px; transition: all .3s;
-}
-.btn-ghost:hover { border-color: var(--forest); color: var(--forest); }
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marqueeScroll 28s linear infinite;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .marquee-inner span { color: var(--android); margin: 0 18px; }
+  @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* Hero right - decorative card */
-.hero-right { flex-shrink: 0; }
-.hero-card {
-  width: 300px; background: var(--white);
-  border: 1px solid var(--border); border-radius: 20px;
-  padding: 32px; position: relative;
-  box-shadow: var(--shadow);
-}
-.hero-card-img {
-  width: 88px; height: 88px; border-radius: 50%;
-  object-fit: cover; margin: 0 auto 20px;
-  border: 3px solid var(--cream2);
-  box-shadow: 0 0 0 6px rgba(45,106,79,.1);
-}
-.hero-card-name {
-  font-family: var(--font-d); font-size: 1.2rem; font-weight: 400;
-  text-align: center; color: var(--ink); margin-bottom: 4px;
-}
-.hero-card-title {
-  font-family: var(--font-m); font-size: .65rem; letter-spacing: .12em;
-  text-align: center; color: var(--forest2); text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.hero-card-stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-}
-.hcs {
-  background: var(--cream2); border-radius: 10px;
-  padding: 14px 12px; text-align: center;
-}
-.hcs-num {
-  font-family: var(--font-d); font-size: 1.4rem; font-weight: 700;
-  color: var(--forest); display: block; line-height: 1;
-}
-.hcs-label {
-  font-size: .65rem; color: var(--text3); margin-top: 4px;
-  letter-spacing: .06em; display: block;
-}
-.hero-card-tag {
-  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-  background: var(--terra); color: #fff; padding: 4px 16px; border-radius: 999px;
-  font-family: var(--font-m); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
-  white-space: nowrap;
-}
+  /* ── HEADER ── */
+  header {
+    padding: 60px 5vw 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--android);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: #fff;
+  }
+  .header-name em {
+    font-style: italic;
+    color: var(--android);
+    transition: color var(--transition);
+  }
+  .header-sub {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+  .header-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--surface);
+  }
+  .badge.active-badge {
+    background: var(--active-dim);
+    border-color: var(--active-color);
+    color: var(--active-color);
+  }
 
-/* Hero bottom strip */
-.hero-strip {
-  border-top: 1px solid var(--border);
-  display: grid; grid-template-columns: repeat(4,1fr);
-  background: var(--white);
-}
-.hs-item {
-  padding: 24px 32px; border-right: 1px solid var(--border);
-  display: flex; align-items: center; gap: 14px;
-}
-.hs-item:last-child { border-right: none; }
-.hs-icon { font-size: 1.4rem; flex-shrink: 0; }
-.hs-text { font-size: .78rem; font-weight: 400; color: var(--text2); }
-.hs-text strong { display: block; color: var(--ink); font-size: .88rem; margin-bottom: 2px; }
+  /* ── TAB NAVIGATION ── */
+  .tab-nav-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 6px;
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn .tab-icon { font-size: 1rem; }
+  .tab-btn.active { color: #fff; }
 
-/* ══════════════════════════════════
-   ABOUT
-══════════════════════════════════ */
-#about { background: var(--white); }
-.about-wrap { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start; }
-.about-text { font-size: 1.05rem; color: var(--text2); line-height: 1.9; }
-.about-text p + p { margin-top: 20px; }
-.about-text strong { color: var(--forest); font-weight: 500; }
-.about-text em { font-family: var(--font-d); font-style: italic; color: var(--ink); font-size: 1.15rem; }
-.about-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.about-pill {
-  display: flex; align-items: center; gap: 14px;
-  padding: 18px 20px; background: var(--cream);
-  border: 1px solid var(--border); border-radius: var(--r);
-  transition: all .3s var(--ease);
-}
-.about-pill:hover { background: var(--forest); border-color: var(--forest); transform: translateX(5px); }
-.about-pill:hover .ap-label { color: #fff; }
-.about-pill:hover .ap-val { color: rgba(255,255,255,.7); }
-.ap-icon { font-size: 1.3rem; flex-shrink: 0; }
-.ap-label { font-weight: 500; font-size: .88rem; color: var(--ink); transition: color .3s; }
-.ap-val { font-family: var(--font-m); font-size: .72rem; color: var(--text3); transition: color .3s; }
+  .tab-btn[data-tab="android"].active  { background: var(--android-dim);  color: var(--android);  }
+  .tab-btn[data-tab="security"].active { background: var(--security-dim); color: var(--security); }
+  .tab-btn[data-tab="privacy"].active  { background: var(--privacy-dim);  color: var(--privacy);  }
+  .tab-btn[data-tab="creative"].active { background: var(--creative-dim); color: var(--creative); }
 
-/* ══════════════════════════════════
-   SKILLS
-══════════════════════════════════ */
-#skills { background: var(--cream); }
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.skill-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 32px;
-  transition: all .35s var(--ease); position: relative; overflow: hidden;
-}
-.skill-card::before {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--forest), var(--mint));
-  transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease);
-}
-.skill-card:hover::before { transform: scaleX(1); }
-.skill-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(27,42,36,.1); }
-.skill-card-img {
-  width: 48px; height: 48px; object-fit: contain; margin-bottom: 18px;
-  filter: saturate(.9) opacity(.85);
-}
-.skill-card-emoji { font-size: 2rem; margin-bottom: 18px; display: block; }
-.skill-card h3 {
-  font-family: var(--font-d); font-size: 1.15rem; font-weight: 400;
-  color: var(--ink); margin-bottom: 14px;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.stag {
-  padding: 4px 12px; border-radius: 999px;
-  font-family: var(--font-m); font-size: .65rem; letter-spacing: .06em;
-  background: rgba(45,106,79,.08); border: 1px solid rgba(45,106,79,.15);
-  color: var(--forest);
-}
+  /* ── TAB PANELS ── */
+  .tab-panels {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 5vw 0;
+  }
+  .tab-panel {
+    display: none;
+    animation: fadeSlide 0.4s ease both;
+  }
+  .tab-panel.active { display: block; }
+  @keyframes fadeSlide {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
 
-/* Wide card */
-.skill-card.wide { grid-column: span 2; }
-.skill-card.wide .skill-tags { max-width: 100%; }
+  /* ── ROLE HERO ── */
+  .role-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .role-card {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .role-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--active-color);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .role-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--active-color);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .role-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .role-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .role-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .stat-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--active-color);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+  .highlights-card {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .highlight-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--active-color);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
 
-/* ══════════════════════════════════
-   EXPERIENCE
-══════════════════════════════════ */
-#experience { background: var(--white); }
-.exp-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 0; }
-.exp-nav {
-  border-right: 1px solid var(--border);
-  padding-right: 32px; position: sticky; top: 100px;
-  align-self: start;
-}
-.exp-nav-item {
-  display: block; padding: 14px 16px; border-radius: var(--r);
-  margin-bottom: 6px; cursor: pointer; transition: all .25s;
-  font-size: .82rem; color: var(--text2); font-weight: 400;
-}
-.exp-nav-item:hover { background: var(--cream); color: var(--ink); }
-.exp-nav-item.active { background: var(--forest); color: #fff; }
-.exp-nav-item .en-company {
-  font-family: var(--font-m); font-size: .65rem; letter-spacing: .08em;
-  opacity: .7; display: block; margin-top: 2px;
-}
-.exp-panels { padding-left: 56px; }
-.exp-panel { display: none; animation: fadeUp .4s var(--ease) both; }
-.exp-panel.active { display: block; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
-.exp-panel-header { margin-bottom: 28px; }
-.ep-role {
-  font-family: var(--font-d); font-size: 1.8rem; font-weight: 300;
-  color: var(--ink); margin-bottom: 8px;
-}
-.ep-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-.ep-company {
-  font-family: var(--font-m); font-size: .72rem; letter-spacing: .1em;
-  color: var(--forest2); background: rgba(45,106,79,.1);
-  padding: 4px 14px; border-radius: 999px; text-transform: uppercase;
-}
-.ep-date {
-  font-family: var(--font-m); font-size: .72rem;
-  color: var(--text3); letter-spacing: .06em;
-}
-.ep-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.ep-bullets li {
-  display: flex; gap: 14px; font-size: .9rem; color: var(--text2);
-  line-height: 1.6;
-}
-.ep-bullets li::before {
-  content: '▸'; color: var(--forest2); flex-shrink: 0; margin-top: 1px; font-size: .8rem;
-}
+  /* ── SKILLS SECTION ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: italic; color: var(--active-color); }
 
-/* ══════════════════════════════════
-   EDUCATION
-══════════════════════════════════ */
-#education { background: var(--cream); }
-.edu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-.edu-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 32px; position: relative;
-  overflow: hidden; transition: all .35s var(--ease);
-}
-.edu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,36,.09); }
-.edu-card.featured { border-color: var(--forest); }
-.edu-card.featured::after {
-  content: 'Top Performer';
-  position: absolute; top: 16px; right: 16px;
-  background: var(--terra); color: #fff;
-  font-family: var(--font-m); font-size: .6rem; letter-spacing: .12em;
-  padding: 3px 10px; border-radius: 999px; text-transform: uppercase;
-}
-.edu-icon { font-size: 2rem; margin-bottom: 16px; }
-.edu-year {
-  font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em;
-  color: var(--text3); text-transform: uppercase; margin-bottom: 8px; display: block;
-}
-.edu-degree {
-  font-family: var(--font-d); font-size: 1.1rem; font-weight: 400;
-  color: var(--ink); margin-bottom: 6px; line-height: 1.3;
-}
-.edu-inst {
-  font-size: .82rem; color: var(--text2); margin-bottom: 20px;
-}
-.edu-scores { display: flex; flex-wrap: wrap; gap: 8px; }
-.edu-score {
-  padding: 4px 12px; border-radius: 6px;
-  font-family: var(--font-m); font-size: .72rem;
-  background: rgba(45,106,79,.08); border: 1px solid rgba(45,106,79,.15);
-  color: var(--forest);
-}
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .skill-group:hover {
+    border-color: var(--active-color);
+    box-shadow: 0 0 0 1px var(--active-color), 0 8px 32px var(--active-glow);
+  }
+  .skill-group-icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
+  .skill-group-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .skill-tag.primary {
+    background: var(--active-dim);
+    border-color: var(--active-color);
+    color: var(--active-color);
+  }
 
-/* ══════════════════════════════════
-   PROJECTS
-══════════════════════════════════ */
-#projects { background: var(--white); }
-.projects-masonry {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-}
-.proj-card {
-  background: var(--cream); border: 1px solid var(--border);
-  border-radius: var(--r); overflow: hidden;
-  transition: all .4s var(--ease); display: flex; flex-direction: column;
-}
-.proj-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(27,42,36,.12); border-color: rgba(45,106,79,.3); }
-.proj-card.featured { grid-column: span 2; flex-direction: row; }
-.proj-img {
-  height: 200px; overflow: hidden; flex-shrink: 0;
-  background: var(--cream2);
-}
-.proj-card.featured .proj-img { width: 260px; height: auto; }
-.proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-.proj-card:hover .proj-img img { transform: scale(1.05); }
-.proj-img-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 3.5rem; background: var(--cream3);
-}
-.proj-body { padding: 26px; flex: 1; display: flex; flex-direction: column; }
-.proj-cat {
-  font-family: var(--font-m); font-size: .65rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--forest2); margin-bottom: 8px; display: block;
-}
-.proj-card h3 {
-  font-family: var(--font-d); font-size: 1.3rem; font-weight: 400;
-  color: var(--ink); margin-bottom: 10px;
-}
-.proj-card p { font-size: .85rem; color: var(--text2); flex: 1; line-height: 1.7; }
-.proj-footer {
-  margin-top: 20px; padding-top: 16px;
-  border-top: 1px solid var(--border);
-  display: flex; flex-wrap: wrap; gap: 6px;
-}
-.proj-tag {
-  padding: 3px 10px; border-radius: 4px;
-  font-family: var(--font-m); font-size: .62rem;
-  background: var(--white); border: 1px solid var(--border);
-  color: var(--text3);
-}
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+  }
+  .project-card:hover {
+    border-color: var(--active-color);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px var(--active-glow);
+  }
+  .project-img {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    background: var(--surface2);
+    display: block;
+  }
+  .project-img-placeholder {
+    width: 100%; height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    background: var(--surface2);
+  }
+  .project-body { padding: 20px; }
+  .project-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--active-color);
+    margin-bottom: 6px;
+  }
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .project-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+  .stack-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: var(--active-dim);
+    border: 1px solid transparent;
+    color: var(--active-color);
+  }
 
-/* Creative projects grid */
-.creative-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
-  margin-top: 48px;
-}
-.creative-grid-label {
-  grid-column: 1 / -1;
-  font-family: var(--font-m); font-size: .72rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--text3);
-  padding-bottom: 14px; border-bottom: 1px solid var(--border);
-  margin-bottom: 4px;
-}
-.creative-card {
-  aspect-ratio: 1; background: var(--cream2); border-radius: var(--r);
-  overflow: hidden; position: relative; cursor: pointer;
-  transition: all .3s var(--ease);
-}
-.creative-card:hover { transform: scale(1.03); box-shadow: 0 12px 32px rgba(27,42,36,.1); }
-.creative-card-label {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 10px 14px;
-  background: linear-gradient(0deg, rgba(27,42,36,.75), transparent);
-  font-size: .72rem; color: #fff; font-weight: 400;
-  transform: translateY(100%); transition: transform .3s ease;
-}
-.creative-card:hover .creative-card-label { transform: none; }
-.creative-card-icon {
-  width: 100%; height: 100%; display: flex; align-items: center;
-  justify-content: center; font-size: 2.5rem; background: var(--cream3);
-}
+  /* ── SHARED SECTIONS ── */
+  .shared-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5vw;
+  }
+  .shared-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin: 0 5vw;
+  }
 
-/* ══════════════════════════════════
-   CONTACT
-══════════════════════════════════ */
-#contact {
-  background: var(--ink);
-  position: relative; overflow: hidden;
-}
-#contact::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(116,198,157,.12), transparent),
-    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(181,69,27,.1), transparent);
-}
-.contact-inner { text-align: center; max-width: 600px; margin: 0 auto; position: relative; }
-.contact-inner .section-eyebrow { justify-content: center; color: var(--mint); }
-.contact-inner .section-eyebrow::after { background: var(--mint); }
-.contact-inner .section-title { color: var(--cream); }
-.contact-inner .section-title em { color: var(--mint); }
-.contact-sub { font-size: 1rem; color: rgba(244,239,230,.6); margin-bottom: 48px; line-height: 1.8; }
-.contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.clink {
-  display: flex; align-items: center; gap: 10px;
-  padding: 13px 28px; border: 1px solid rgba(255,255,255,.15);
-  border-radius: 2px; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-  color: rgba(244,239,230,.7); transition: all .3s;
-}
-.clink:hover { border-color: var(--mint); color: var(--mint); }
-.clink svg { width: 15px; height: 15px; }
+  /* Experience */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .tl-left { text-align: right; padding-top: 4px; }
+  .tl-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .tl-org {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .tl-role-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .badge-android  { background: var(--android-dim);  color: var(--android);  border:1px solid var(--android); }
+  .badge-privacy  { background: var(--privacy-dim);  color: var(--privacy);  border:1px solid var(--privacy); }
+  .badge-developer { background: var(--security-dim); color: var(--security); border:1px solid var(--security); }
+  .badge-web      { background: var(--creative-dim); color: var(--creative); border:1px solid var(--creative); }
 
-/* ══════════════════════════════════
-   FOOTER
-══════════════════════════════════ */
-footer {
-  background: var(--ink2); padding: 24px 0; text-align: center;
-  font-family: var(--font-m); font-size: .68rem; letter-spacing: .1em;
-  color: rgba(244,239,230,.3);
-}
+  .tl-right {}
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .tl-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-family: 'DM Mono', monospace;
+  }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .tl-bullets li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+  }
+  .tl-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.65rem;
+    top: 4px;
+  }
+  .tl-bullets li strong { color: var(--text); }
 
-/* ══════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════ */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s var(--ease); }
-.reveal.visible { opacity: 1; transform: none; }
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .contact-heading em { font-style: italic; color: var(--android); }
+  .contact-text {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all var(--transition);
+  }
+  .contact-link:hover {
+    border-color: var(--android);
+    background: var(--android-dim);
+    color: var(--android);
+    transform: translateX(4px);
+  }
+  .contact-link-icon { font-size: 1rem; }
+  .open-roles {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .or-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .role-chip {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .chip-android  { background: var(--android-dim);  color: var(--android);  border-color: var(--android); }
+  .chip-security { background: var(--security-dim); color: var(--security); border-color: var(--security); }
+  .chip-privacy  { background: var(--privacy-dim);  color: var(--privacy);  border-color: var(--privacy); }
+  .chip-creative { background: var(--creative-dim); color: var(--creative); border-color: var(--creative); }
 
-/* ══════════════════════════════════
-   MOBILE
-══════════════════════════════════ */
-.mobile-menu {
-  display: none; position: fixed; inset: 0; z-index: 99;
-  background: var(--white); flex-direction: column;
-  align-items: center; justify-content: center; gap: 28px;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--ink2); }
-.mobile-menu a:hover { color: var(--forest); }
+  /* Education */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .edu-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .edu-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .edu-inst { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
+  .edu-grade {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--android);
+  }
 
-@media (max-width: 1000px) {
-  .hero-body { flex-direction: column; }
-  .hero-right { display: none; }
-  .hero-strip { grid-template-columns: 1fr 1fr; }
-  .hs-item:nth-child(2) { border-right: none; }
-  .hs-item:nth-child(3) { border-top: 1px solid var(--border); }
-  .about-wrap { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr 1fr; }
-  .skill-card.wide { grid-column: span 1; }
-  .exp-wrap { grid-template-columns: 1fr; }
-  .exp-nav { display: none; }
-  .exp-panels { padding-left: 0; }
-  .exp-panel { display: block; margin-bottom: 48px; }
-  .edu-grid { grid-template-columns: 1fr; }
-  .projects-masonry { grid-template-columns: 1fr; }
-  .proj-card.featured { flex-direction: column; }
-  .proj-card.featured .proj-img { width: 100%; height: 200px; }
-  .creative-grid { grid-template-columns: repeat(2,1fr); }
-  .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
-}
-@media (max-width: 600px) {
-  .container { padding: 0 20px; }
-  section { padding: 72px 0; }
-  .hero-strip { grid-template-columns: 1fr; }
-  .hs-item { border-right: none !important; border-top: 1px solid var(--border); }
-  .hs-item:first-child { border-top: none; }
-  .skills-grid { grid-template-columns: 1fr; }
-  .marquee-wrap { display: none; }
-}
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 32px 5vw;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* Color overrides per active tab */
+  body.tab-android  { --active-color: var(--android);  --active-dim: var(--android-dim);  --active-glow: var(--android-glow);  }
+  body.tab-security { --active-color: var(--security); --active-dim: var(--security-dim); --active-glow: var(--security-glow); }
+  body.tab-privacy  { --active-color: var(--privacy);  --active-dim: var(--privacy-dim);  --active-glow: var(--privacy-glow);  }
+  body.tab-creative { --active-color: var(--creative); --active-dim: var(--creative-dim); --active-glow: var(--creative-glow); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header { grid-template-columns: 1fr; }
+    .header-badges { text-align: left; flex-direction: row; flex-wrap: wrap; }
+    .role-hero { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .tl-left { text-align: left; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .tab-btn { min-width: unset; }
+  }
 </style>
 </head>
-<body>
+<body class="tab-android">
 
-<!-- ══════ MOBILE MENU ══════ -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#about"      onclick="closeMobile()">About</a>
-  <a href="#skills"     onclick="closeMobile()">Skills</a>
-  <a href="#experience" onclick="closeMobile()">Experience</a>
-  <a href="#education"  onclick="closeMobile()">Education</a>
-  <a href="#projects"   onclick="closeMobile()">Projects</a>
-  <a href="#contact"    onclick="closeMobile()">Contact</a>
-</div>
-
-<!-- ══════ MARQUEE ══════ -->
-<div class="marquee-wrap">
-  <div class="marquee-track" id="marquee">
-    <span>Android Developer</span><span class="accent">✦</span>
-    <span>Security Enthusiast</span><span class="accent">✦</span>
-    <span>Kotlin & Java</span><span class="accent">✦</span>
-    <span>Coder</span><span class="accent">✦</span>
-    <span>Artist</span><span class="accent">✦</span>
-    <span>Privacy Manager</span><span class="accent">✦</span>
-    <span>DevSecOps</span><span class="accent">✦</span>
-    <span>OWASP</span><span class="accent">✦</span>
-    <span>Jetpack Compose</span><span class="accent">✦</span>
-    <span>Firebase</span><span class="accent">✦</span>
-    <!-- duplicate for seamless loop -->
-    <span>Android Developer</span><span class="accent">✦</span>
-    <span>Security Enthusiast</span><span class="accent">✦</span>
-    <span>Kotlin & Java</span><span class="accent">✦</span>
-    <span>Coder</span><span class="accent">✦</span>
-    <span>Artist</span><span class="accent">✦</span>
-    <span>Privacy Manager</span><span class="accent">✦</span>
-    <span>DevSecOps</span><span class="accent">✦</span>
-    <span>OWASP</span><span class="accent">✦</span>
-    <span>Jetpack Compose</span><span class="accent">✦</span>
-    <span>Firebase</span><span class="accent">✦</span>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    Android Developer✦ Security Analyst✦ Privacy Manager✦ Creative✦ Kotlin✦ Java✦ OWASP✦ GDPR✦ DPDP✦ Jetpack Compose✦ Firebase✦ SAST✦ DAST✦ DevSecOps✦ TCS 2021–2025✦ 500K+ Users Served✦ CGPA 9.59✦
+    Android Developer✦ Security Analyst✦ Privacy Manager✦ Creative✦ Kotlin✦ Java✦ OWASP✦ GDPR✦ DPDP✦ Jetpack Compose✦ Firebase✦ SAST✦ DAST✦ DevSecOps✦ TCS 2021–2025✦ 500K+ Users Served✦ CGPA 9.59✦
   </div>
 </div>
 
-<!-- ══════ NAVBAR ══════ -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" href="#hero">Dhanashree<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#projects">Projects</a></li>
-    </ul>
-    <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" class="nav-cta" target="_blank">Résumé ↗</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="header-eyebrow">Portfolio · Open to Opportunities</div>
+    <h1 class="header-name">Dhanashree <em id="name-em">Ambadkar</em></h1>
+    <p class="header-sub">4+ years at Tata Consultancy Services · Android Development · Application Security · Privacy Compliance · Creative Direction</p>
+  </div>
+  <div class="header-badges">
+    <span class="badge active-badge" id="status-badge">📱 Android Engineer</span>
+    <span class="badge">🏢 TCS 2021–2025</span>
+    <span class="badge">🎓 CGPA 9.59 / 10</span>
+    <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" class="badge" style="text-decoration:none;cursor:pointer;">↗ Résumé</a>
+  </div>
+</header>
+
+<!-- TAB NAVIGATION -->
+<div class="tab-nav-wrapper">
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="android" onclick="switchTab('android')">
+      <span class="tab-icon">📱</span> Android Developer
+    </button>
+    <button class="tab-btn" data-tab="security" onclick="switchTab('security')">
+      <span class="tab-icon">🔐</span> Security Analyst
+    </button>
+    <button class="tab-btn" data-tab="privacy" onclick="switchTab('privacy')">
+      <span class="tab-icon">🛡️</span> Privacy Manager
+    </button>
+    <button class="tab-btn" data-tab="creative" onclick="switchTab('creative')">
+      <span class="tab-icon">🎨</span> Creative & Web
     </button>
   </div>
-</nav>
+</div>
 
-<!-- ══════ HERO ══════ -->
-<section id="hero" style="padding:0">
-  <div class="container">
-    <div class="hero-body">
-      <div class="hero-left">
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          <span class="hero-badge-text">Open to new opportunities</span>
-        </div>
-        <h1 class="hero-name">
-          Dhanashree
-          <em>Ambadkar</em>
-        </h1>
-        <div class="hero-roles">
-          <span class="hero-role-tag featured">Android Developer</span>
-          <span class="hero-role-tag">Security Enthusiast</span>
-          <span class="hero-role-tag">Coder</span>
-          <span class="hero-role-tag">Artist</span>
-        </div>
-        <p class="hero-desc">
-          Building efficient, secure and beautiful Android applications with 4+ years of experience
-          across mobile development, cybersecurity and privacy compliance at Tata Consultancy Services.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn-dark">View My Work</a>
-          <a href="#contact" class="btn-ghost">Get In Touch</a>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="hero-card">
-          <span class="hero-card-tag">CGPA 9.59 / 10</span>
-          <img class="hero-card-img" src="https://dhanashreeam.github.io/dhanaA/profile.jpg" alt="Dhanashree" onerror="this.style.display='none'"/>
-          <div class="hero-card-name">Dhanashree Ambadkar</div>
-          <div class="hero-card-title">Android Dev · Security · Privacy</div>
-          <div class="hero-card-stats">
-            <div class="hcs"><span class="hcs-num">4+</span><span class="hcs-label">Years Exp</span></div>
-            <div class="hcs"><span class="hcs-num">500K</span><span class="hcs-label">Users Served</span></div>
-            <div class="hcs"><span class="hcs-num">80%</span><span class="hcs-label">Test Saved</span></div>
-            <div class="hcs"><span class="hcs-num">3</span><span class="hcs-label">Roles at TCS</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-strip">
-    <div class="hs-item">
-      <div class="hs-icon">📱</div>
-      <div class="hs-text"><strong>Android Native</strong>Java, Kotlin, Jetpack</div>
-    </div>
-    <div class="hs-item">
-      <div class="hs-icon">🔐</div>
-      <div class="hs-text"><strong>Security & Privacy</strong>OWASP, GDPR, DPDP</div>
-    </div>
-    <div class="hs-item">
-      <div class="hs-icon">⚙️</div>
-      <div class="hs-text"><strong>DevSecOps</strong>SAST, DAST, Sonar</div>
-    </div>
-    <div class="hs-item">
-      <div class="hs-icon">🎨</div>
-      <div class="hs-text"><strong>Creative</strong>Design, Art, IoT</div>
-    </div>
-  </div>
-</section>
+<!-- TAB PANELS -->
+<div class="tab-panels">
 
-<!-- ══════ ABOUT ══════ -->
-<section id="about">
-  <div class="container">
-    <div class="section-eyebrow reveal">About Me</div>
-    <h2 class="section-title reveal">Developer. Protector. <em>Creator.</em></h2>
-    <div class="about-wrap">
-      <div class="about-text reveal">
-        <p>
-          Experienced <strong>Android Developer</strong> with strong expertise in Java and Kotlin,
-          specialising in designing and delivering efficient, user-centric mobile applications.
-          Adept at managing the end-to-end mobile app development lifecycle, leveraging
-          Android SDK, modern architecture patterns (MVVM & Jetpack), and performance optimisation techniques.
-        </p>
-        <p>
-          Skilled at building <strong>intuitive, secure, and high-performance Android apps</strong>
-          that deliver seamless user experiences. With additional familiarity in iOS development,
-          I bring a cross-platform and full-ecosystem perspective to every project.
-        </p>
-        <p>
-          <em>"Driven by passion for staying at the frontier of Android technologies"</em> —
-          I am equally excited by security research, privacy compliance, and the creative arts.
-          Whether writing Kotlin, threat modelling a data flow, or designing a smart mirror,
-          I bring the same intensity and curiosity to every challenge.
-        </p>
+  <!-- ══ ANDROID DEVELOPER ══ -->
+  <div class="tab-panel active" id="panel-android">
+    <div class="role-hero">
+      <div class="role-card">
+        <span class="role-tag">Primary Role · TCS 2021–2025</span>
+        <h2 class="role-title">Android<br/>Developer</h2>
+        <p class="role-desc">Specialising in end-to-end mobile application development using Java and Kotlin. Delivered secure, high-performance apps for 500,000+ enterprise users, leveraging modern Android architecture and automated testing pipelines.</p>
+        <div class="role-stats">
+          <div class="stat-item"><div class="stat-num">500K+</div><div class="stat-label">Users Served</div></div>
+          <div class="stat-item"><div class="stat-num">80%</div><div class="stat-label">Test Reduction</div></div>
+          <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Years Exp</div></div>
+          <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Apps Shipped</div></div>
+        </div>
       </div>
-      <div class="about-sidebar reveal">
-        <div class="about-pill">
-          <span class="ap-icon">🏢</span>
-          <div><div class="ap-label">Tata Consultancy Services</div><div class="ap-val">2021 – 2025</div></div>
-        </div>
-        <div class="about-pill">
-          <span class="ap-icon">📍</span>
-          <div><div class="ap-label">India</div><div class="ap-val">Open to relocation</div></div>
-        </div>
-        <div class="about-pill">
-          <span class="ap-icon">🎓</span>
-          <div><div class="ap-label">B.E. Computer Science</div><div class="ap-val">Sipna COET · CGPA 9.59</div></div>
-        </div>
-        <div class="about-pill">
-          <span class="ap-icon">🌐</span>
-          <div><div class="ap-label">Languages</div><div class="ap-val">English · Hindi · Marathi</div></div>
-        </div>
-        <div class="about-pill">
-          <span class="ap-icon">🎨</span>
-          <div><div class="ap-label">Interests</div><div class="ap-val">Art · IoT · Writing · Ancient Cosmetics</div></div>
-        </div>
+      <div class="highlights-card">
+        <div class="section-label">Key Highlights</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Built TCS Authenticator App (Java) used by 500K+ employees — on par with Google/Microsoft Authenticator in scope</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Automated 80% of manual functional testing using Katalon Studio</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Maintained full product lifecycle from design to production, including Android version upgrades</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Implemented multiple secure login mechanisms for enterprise authentication</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Resolved SAST/DAST/SonarQube security issues in production applications</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Familiarity with iOS development for cross-platform ecosystem awareness</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ══════ SKILLS ══════ -->
-<section id="skills">
-  <div class="container">
-    <div class="section-eyebrow reveal">Technical Skills</div>
-    <h2 class="section-title reveal">What I <em>Bring</em></h2>
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Android <em>Toolkit</em></h2>
     <div class="skills-grid">
-
-      <div class="skill-card wide reveal">
-        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/android_logo.svg" alt="Android"/>
-        <h3>Android Development</h3>
+      <div class="skill-group">
+        <span class="skill-group-icon">☕</span>
+        <div class="skill-group-name">Core Languages</div>
         <div class="skill-tags">
-          <span class="stag">Java</span><span class="stag">Kotlin</span>
-          <span class="stag">Jetpack Compose</span><span class="stag">MVVM</span>
-          <span class="stag">Firebase</span><span class="stag">Android SDK</span>
-          <span class="stag">Katalon Automation</span><span class="stag">iOS Familiarity</span>
+          <span class="skill-tag primary">Java</span>
+          <span class="skill-tag primary">Kotlin</span>
         </div>
       </div>
-
-      <div class="skill-card reveal">
-        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/security.svg" alt="Security"/>
-        <h3>Security</h3>
+      <div class="skill-group">
+        <span class="skill-group-icon">🏗️</span>
+        <div class="skill-group-name">Architecture</div>
         <div class="skill-tags">
-          <span class="stag">Mobile App Security</span>
-          <span class="stag">Web App Security</span>
-          <span class="stag">OWASP Top 10</span>
-          <span class="stag">SAST / DAST</span>
-          <span class="stag">SonarQube</span>
+          <span class="skill-tag primary">MVVM</span>
+          <span class="skill-tag">MVC</span>
+          <span class="skill-tag">Clean Architecture</span>
         </div>
       </div>
-
-      <div class="skill-card reveal">
-        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/privacy.svg" alt="Privacy"/>
-        <h3>Privacy Compliance</h3>
+      <div class="skill-group">
+        <span class="skill-group-icon">🧩</span>
+        <div class="skill-group-name">Jetpack</div>
         <div class="skill-tags">
-          <span class="stag">GDPR</span><span class="stag">DPDP</span>
-          <span class="stag">DPIA</span><span class="stag">Data Consent</span>
-          <span class="stag">PI / SPI Handling</span>
-          <span class="stag">Privacy Laws</span>
+          <span class="skill-tag primary">Jetpack Compose</span>
+          <span class="skill-tag">ViewModel</span>
+          <span class="skill-tag">LiveData</span>
+          <span class="skill-tag">Navigation</span>
         </div>
       </div>
-
-      <div class="skill-card reveal">
-        <img class="skill-card-img" src="https://dhanashreeam.github.io/dhanaA/git.svg" alt="Git"/>
-        <h3>Version Control</h3>
+      <div class="skill-group">
+        <span class="skill-group-icon">🔥</span>
+        <div class="skill-group-name">Backend & DB</div>
         <div class="skill-tags">
-          <span class="stag">Git</span><span class="stag">GitHub</span>
-          <span class="stag">Branching Strategies</span>
-          <span class="stag">Code Reviews</span>
+          <span class="skill-tag primary">Firebase</span>
+          <span class="skill-tag">Room</span>
+          <span class="skill-tag">SQLite</span>
         </div>
       </div>
-
-      <div class="skill-card reveal">
-        <span class="skill-card-emoji">🌐</span>
-        <h3>Web Development</h3>
+      <div class="skill-group">
+        <span class="skill-group-icon">🧪</span>
+        <div class="skill-group-name">Testing</div>
         <div class="skill-tags">
-          <span class="stag">HTML5</span><span class="stag">CSS3</span>
-          <span class="stag">JavaScript</span><span class="stag">Bootstrap</span>
-          <span class="stag">PHP</span><span class="stag">Responsive Design</span>
+          <span class="skill-tag primary">Katalon Automation</span>
+          <span class="skill-tag">Unit Testing</span>
+          <span class="skill-tag">JUnit</span>
         </div>
       </div>
-
+      <div class="skill-group">
+        <span class="skill-group-icon">📦</span>
+        <div class="skill-group-name">SDK & Platform</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Android SDK</span>
+          <span class="skill-tag">Material Design</span>
+          <span class="skill-tag">iOS Familiarity</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🔧</span>
+        <div class="skill-group-name">Version Control</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Branching</span>
+          <span class="skill-tag">Code Reviews</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🚀</span>
+        <div class="skill-group-name">DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">SonarQube</span>
+          <span class="skill-tag">SAST</span>
+          <span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ══════ EXPERIENCE ══════ -->
-<section id="experience">
-  <div class="container">
-    <div class="section-eyebrow reveal">Career</div>
-    <h2 class="section-title reveal">Work <em>Experience</em></h2>
-    <div class="exp-wrap">
-      <!-- Tab Nav -->
-      <div class="exp-nav">
-        <div class="exp-nav-item active" onclick="showExp('e1',this)">
-          Engineer
-          <span class="en-company">TCS · 2024–2025</span>
-        </div>
-        <div class="exp-nav-item" onclick="showExp('e2',this)">
-          Privacy Manager
-          <span class="en-company">TCS · 2023–2025</span>
-        </div>
-        <div class="exp-nav-item" onclick="showExp('e3',this)">
-          Developer
-          <span class="en-company">TCS · 2021–2024</span>
-        </div>
-        <div class="exp-nav-item" onclick="showExp('e4',this)">
-          Intern
-          <span class="en-company">Obdurate · 2019</span>
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Android <em>Projects</em></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://dhanashreeam.github.io/dhanaA/quiz.png" class="project-img" alt="Quiz App" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"style="object-fit:contain;padding:20px;background:#0f1018"/>
+        <div class="project-img-placeholder" style="display:none">🧠</div>
+        <div class="project-body">
+          <div class="project-cat">Android Development</div>
+          <div class="project-name">Quiz App</div>
+          <div class="project-desc">Dynamic Android quiz application with multiple answer options, real-time feedback and score summary. Clean native Android UI designed for intuitive, engaging interaction.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Kotlin</span>
+            <span class="stack-tag">Java</span>
+            <span class="stack-tag">Android SDK</span>
+            <span class="stack-tag">Mobile UX</span>
+          </div>
         </div>
       </div>
-
-      <!-- Panels -->
-      <div class="exp-panels">
-        <div class="exp-panel active" id="e1">
-          <div class="exp-panel-header">
-            <div class="ep-role">Engineer</div>
-            <div class="ep-meta">
-              <span class="ep-company">Tata Consultancy Services</span>
-              <span class="ep-date">Jun 2024 – Sept 2025</span>
-            </div>
+      <div class="project-card">
+        <img src="https://dhanashreeam.github.io/dhanaA/unitConverterIcon.png" class="project-img" alt="Unit Converter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
+        <div class="project-img-placeholder" style="display:none">📐</div>
+        <div class="project-body">
+          <div class="project-cat">Android Development</div>
+          <div class="project-name">Unit Converter App</div>
+          <div class="project-desc">Android-based Unit Converter efficiently converting values across multiple units with robust null-input error handling for a seamless, frustration-free user experience.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Android</span>
+            <span class="stack-tag">Kotlin</span>
+            <span class="stack-tag">Error Handling</span>
           </div>
-          <ul class="ep-bullets">
-            <li>Implemented new functionality for Android mobile application using Kotlin, delivering features on time and within scope.</li>
-            <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per business requirements.</li>
-            <li>Managed full product lifecycle and resolved security issues identified in Sonar, SAST and DAST scans.</li>
-            <li>Upgraded the application to the latest Android versions, ensuring compatibility with the newest platform features.</li>
-            <li>Facilitated knowledge transfer to new joiners for smooth transition and continuity of team expertise.</li>
-            <li>Troubleshot multiple production issues to identify root causes and deliver timely resolutions.</li>
-          </ul>
         </div>
-
-        <div class="exp-panel" id="e2">
-          <div class="exp-panel-header">
-            <div class="ep-role">Functional Privacy Manager</div>
-            <div class="ep-meta">
-              <span class="ep-company">Tata Consultancy Services</span>
-              <span class="ep-date">Apr 2023 – Jun 2025 · Concurrent Role</span>
-            </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">🔐</div>
+        <div class="project-body">
+          <div class="project-cat">Enterprise · TCS</div>
+          <div class="project-name">TCS Authenticator App</div>
+          <div class="project-desc">Enterprise authenticator application (Java) for 500,000+ TCS employees — comparable in scope to Google/Microsoft Authenticator, with multiple secure login mechanisms.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Java</span>
+            <span class="stack-tag">Android SDK</span>
+            <span class="stack-tag">Security</span>
+            <span class="stack-tag">Katalon</span>
           </div>
-          <ul class="ep-bullets">
-            <li>Collaborated with Privacy experts to ensure applications are fully privacy-compliant at Tower level.</li>
-            <li>Deepened expertise across GDPR, DPDP, DPIA, and data consent frameworks to drive compliance programs.</li>
-            <li>Worked closely with cross-functional teams to implement privacy measures effectively across the product lifecycle.</li>
-          </ul>
-        </div>
-
-        <div class="exp-panel" id="e3">
-          <div class="exp-panel-header">
-            <div class="ep-role">Developer</div>
-            <div class="ep-meta">
-              <span class="ep-company">Tata Consultancy Services</span>
-              <span class="ep-date">Aug 2021 – May 2024</span>
-            </div>
-          </div>
-          <ul class="ep-bullets">
-            <li>Contributed to development of an Android authenticator application (Java) used by <strong>500,000+ TCS employees</strong> — similar in scope to Google/Microsoft Authenticator.</li>
-            <li>Implemented multiple login mechanisms for enhanced security and improved user experience.</li>
-            <li>Provided technical support and troubleshooting during live incident calls, ensuring resolution within SLA.</li>
-            <li>Automated functional test cases using Katalon, achieving an <strong>80% reduction in manual testing effort</strong>.</li>
-            <li>Tested the application in backup environments to ensure disaster recovery readiness.</li>
-            <li>Collaborated seamlessly with cross-functional teams to resolve technical challenges and deliver quality outcomes.</li>
-          </ul>
-        </div>
-
-        <div class="exp-panel" id="e4">
-          <div class="exp-panel-header">
-            <div class="ep-role">Intern — Web Developer</div>
-            <div class="ep-meta">
-              <span class="ep-company">Obdurate Technologies</span>
-              <span class="ep-date">Jun 2019 – Jul 2019</span>
-            </div>
-          </div>
-          <ul class="ep-bullets">
-            <li>Designed and developed static and dynamic responsive websites using HTML, CSS, JavaScript and Bootstrap.</li>
-            <li>Ensured user-friendly interfaces with full cross-browser compatibility in frontend development.</li>
-            <li>Expanded knowledge of backend technologies during the internship, laying the foundation for full-stack awareness.</li>
-          </ul>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ══════ EDUCATION ══════ -->
-<section id="education">
-  <div class="container">
-    <div class="section-eyebrow reveal">Academic Record</div>
-    <h2 class="section-title reveal">Education & <em>Achievements</em></h2>
-    <div class="edu-grid">
-
-      <div class="edu-card featured reveal">
-        <div class="edu-icon">🎓</div>
-        <span class="edu-year">2017 – 2021</span>
-        <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
-        <div class="edu-inst">Sipna College of Engineering &amp; Technology</div>
-        <div class="edu-scores">
-          <span class="edu-score">CGPA 9.59 / 10</span>
-          <span class="edu-score">84.89%</span>
+  <!-- ══ SECURITY ANALYST ══ -->
+  <div class="tab-panel" id="panel-security">
+    <div class="role-hero">
+      <div class="role-card">
+        <span class="role-tag">Concurrent Role · TCS 2021–2025</span>
+        <h2 class="role-title">Security<br/>Analyst</h2>
+        <p class="role-desc">Focused on mobile and web application security, conducting SAST/DAST scans, resolving vulnerabilities, and embedding DevSecOps practices into the development lifecycle. Hands-on expertise with OWASP Top 10 and SonarQube remediation.</p>
+        <div class="role-stats">
+          <div class="stat-item"><div class="stat-num">OWASP</div><div class="stat-label">Top 10 Expertise</div></div>
+          <div class="stat-item"><div class="stat-num">SAST+DAST</div><div class="stat-label">Scan Ownership</div></div>
+          <div class="stat-item"><div class="stat-num">DevSec</div><div class="stat-label">Ops Embedded</div></div>
+          <div class="stat-item"><div class="stat-num">Sonar</div><div class="stat-label">Qube Remediation</div></div>
         </div>
       </div>
-
-      <div class="edu-card reveal">
-        <div class="edu-icon">📗</div>
-        <span class="edu-year">2015 – 2017</span>
-        <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
-        <div class="edu-inst">Brijlal Biyani Science College</div>
-        <div class="edu-scores"><span class="edu-score">88.77%</span></div>
+      <div class="highlights-card">
+        <div class="section-label">Security Highlights</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Managed full product lifecycle security — resolved issues identified in Sonar, SAST and DAST scans</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Applied OWASP Top 10 standards to mobile and web application security assessments</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Implemented multiple secure login mechanisms to harden enterprise authentication app</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Conducted disaster recovery testing by validating app functionality in backup environments</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Embedded DevSecOps practices into development workflows to shift security left</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Provided live incident support during production security events, resolving within SLA</div>
       </div>
+    </div>
 
-      <div class="edu-card reveal">
-        <div class="edu-icon">📘</div>
-        <span class="edu-year">Passed 2015</span>
-        <div class="edu-degree">Secondary School Certificate (SSC)</div>
-        <div class="edu-inst">Takhatmal English High School</div>
-        <div class="edu-scores"><span class="edu-score">94.20%</span></div>
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Security <em>Toolkit</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <span class="skill-group-icon">📱</span>
+        <div class="skill-group-name">Mobile App Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Android Security</span>
+          <span class="skill-tag">Secure Coding</span>
+          <span class="skill-tag">Auth Mechanisms</span>
+        </div>
       </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🌐</span>
+        <div class="skill-group-name">Web App Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Web App Security</span>
+          <span class="skill-tag">Threat Modelling</span>
+          <span class="skill-tag">Vulnerability Assessment</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🎯</span>
+        <div class="skill-group-name">Standards</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">OWASP Top 10</span>
+          <span class="skill-tag">CWE</span>
+          <span class="skill-tag">CVE Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🔍</span>
+        <div class="skill-group-name">Static Analysis</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">SAST</span>
+          <span class="skill-tag primary">SonarQube</span>
+          <span class="skill-tag">Code Review</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">⚡</span>
+        <div class="skill-group-name">Dynamic Analysis</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">DAST</span>
+          <span class="skill-tag">Runtime Testing</span>
+          <span class="skill-tag">Pen Testing Fundamentals</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">⚙️</span>
+        <div class="skill-group-name">DevSecOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">DevSecOps</span>
+          <span class="skill-tag">Shift-Left Security</span>
+          <span class="skill-tag">CI/CD Security</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🛡️</span>
+        <div class="skill-group-name">Compliance Overlap</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GDPR</span>
+          <span class="skill-tag">DPDP</span>
+          <span class="skill-tag">Privacy by Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🔄</span>
+        <div class="skill-group-name">Incident Response</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Live Incident Support</span>
+          <span class="skill-tag">SLA Management</span>
+          <span class="skill-tag">DR Testing</span>
+        </div>
+      </div>
+    </div>
 
+    <div class="section-label">Security-Focused Projects</div>
+    <h2 class="section-title">Security <em>Work</em></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-img-placeholder">🔐</div>
+        <div class="project-body">
+          <div class="project-cat">Enterprise Security · TCS</div>
+          <div class="project-name">Authenticator App Security</div>
+          <div class="project-desc">Implemented and hardened multiple authentication mechanisms for a 500K-user enterprise app. Conducted SAST/DAST scans and resolved all critical vulnerabilities using SonarQube.</div>
+          <div class="project-stack">
+            <span class="stack-tag">SAST</span>
+            <span class="stack-tag">DAST</span>
+            <span class="stack-tag">SonarQube</span>
+            <span class="stack-tag">Auth</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">🎯</div>
+        <div class="project-body">
+          <div class="project-cat">DevSecOps · TCS</div>
+          <div class="project-name">Security Pipeline Integration</div>
+          <div class="project-desc">Embedded security scanning (SAST/DAST/SonarQube) into the development pipeline, shifting security left and ensuring continuous compliance across the product lifecycle.</div>
+          <div class="project-stack">
+            <span class="stack-tag">DevSecOps</span>
+            <span class="stack-tag">OWASP</span>
+            <span class="stack-tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">🛡️</div>
+        <div class="project-body">
+          <div class="project-cat">Disaster Recovery</div>
+          <div class="project-name">Backup Environment Validation</div>
+          <div class="project-desc">Validated application security and functionality in backup/DR environments, ensuring resilience and continuity during disaster recovery scenarios.</div>
+          <div class="project-stack">
+            <span class="stack-tag">DR Testing</span>
+            <span class="stack-tag">Security Validation</span>
+            <span class="stack-tag">SLA</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ══════ PROJECTS ══════ -->
-<section id="projects">
-  <div class="container">
-    <div class="section-eyebrow reveal">Portfolio</div>
-    <h2 class="section-title reveal">Featured <em>Projects</em></h2>
-
-    <div class="projects-masonry">
-
-      <div class="proj-card featured reveal">
-        <div class="proj-img">
-          <img src="https://dhanashreeam.github.io/dhanaA/quiz.png" alt="Quiz App" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>📱</div>'"/>
-        </div>
-        <div class="proj-body">
-          <span class="proj-cat">Android Development</span>
-          <h3>Quiz App</h3>
-          <p>A dynamic Android Quiz App allowing users to select from multiple answer options, providing real-time feedback and a score summary. Designed for intuitive, engaging interaction with a clean native Android UI.</p>
-          <div class="proj-footer">
-            <span class="proj-tag">Kotlin/Java</span>
-            <span class="proj-tag">Android SDK</span>
-            <span class="proj-tag">Mobile UX</span>
-          </div>
+  <!-- ══ PRIVACY MANAGER ══ -->
+  <div class="tab-panel" id="panel-privacy">
+    <div class="role-hero">
+      <div class="role-card">
+        <span class="role-tag">Concurrent Role · TCS 2023–2025</span>
+        <h2 class="role-title">Functional<br/>Privacy Manager</h2>
+        <p class="role-desc">Drove privacy compliance programs at Tower level for TCS. Collaborated with Privacy experts and cross-functional teams to embed GDPR, DPDP and DPIA frameworks across the complete product lifecycle.</p>
+        <div class="role-stats">
+          <div class="stat-item"><div class="stat-num">GDPR</div><div class="stat-label">Compliance</div></div>
+          <div class="stat-item"><div class="stat-num">DPDP</div><div class="stat-label">India Privacy Law</div></div>
+          <div class="stat-item"><div class="stat-num">DPIA</div><div class="stat-label">Assessments</div></div>
+          <div class="stat-item"><div class="stat-num">Tower</div><div class="stat-label">Level Ownership</div></div>
         </div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-img">
-          <img src="https://dhanashreeam.github.io/dhanaA/mirror.jpg" alt="Smart Mirror" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>🪞</div>'"/>
-        </div>
-        <div class="proj-body">
-          <span class="proj-cat">AI · IoT</span>
-          <h3>Smart Mirror</h3>
-          <p>An innovative IoT device functioning as an interactive display, showing real-time weather, time and essential information, with voice command support powered by Python and ML modules.</p>
-          <div class="proj-footer">
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">AI / ML</span>
-            <span class="proj-tag">IoT</span>
-          </div>
-        </div>
+      <div class="highlights-card">
+        <div class="section-label">Privacy Highlights</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Ensured full Tower-level privacy compliance, collaborating directly with Privacy experts at TCS</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Deep expertise in GDPR, DPDP (India), DPIA frameworks and data consent management</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Worked with cross-functional teams to implement privacy measures across the product lifecycle</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Managed PI (Personal Information) and SPI (Sensitive Personal Information) data handling practices</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Applied Privacy by Design principles to mobile application architecture</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Stayed current with evolving global privacy laws and regulatory requirements</div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-img">
-          <img src="https://dhanashreeam.github.io/dhanaA/passport.png" alt="Travel Website" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>✈️</div>'"/>
-        </div>
-        <div class="proj-body">
-          <span class="proj-cat">Web Development</span>
-          <h3>Travel &amp; Booking Website</h3>
-          <p>A user-friendly platform for searching top travel destinations, booking journeys and accessing personalized tourist guides — built with a responsive, dynamic interface.</p>
-          <div class="proj-footer">
-            <span class="proj-tag">HTML</span>
-            <span class="proj-tag">CSS</span>
-            <span class="proj-tag">JavaScript</span>
-            <span class="proj-tag">PHP</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-img">
-          <img src="https://dhanashreeam.github.io/dhanaA/unitConverterIcon.png" alt="Unit Converter" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>🔢</div>'"/>
-        </div>
-        <div class="proj-body">
-          <span class="proj-cat">Android Development</span>
-          <h3>Unit Converter App</h3>
-          <p>An Android-based Unit Converter App that efficiently converts values across various units, with robust error handling to manage null inputs and ensure a seamless, frustration-free user experience.</p>
-          <div class="proj-footer">
-            <span class="proj-tag">Android</span>
-            <span class="proj-tag">Kotlin</span>
-            <span class="proj-tag">Error Handling</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-img">
-          <img src="https://dhanashreeam.github.io/dhanaA/make-up-bag.png" alt="Cosmetics" onerror="this.parentElement.innerHTML='<div class=\'proj-img-placeholder\'>💄</div>'"/>
-        </div>
-        <div class="proj-body">
-          <span class="proj-cat">Science · Heritage</span>
-          <h3>Cosmetics with Ancient Technique</h3>
-          <p>Created face powder and lip color using traditional ancient techniques for a science exhibition at the Yuvanand event, Sipna COET — bridging historical methods with modern cosmetic science.</p>
-          <div class="proj-footer">
-            <span class="proj-tag">Ancient History</span>
-            <span class="proj-tag">Research</span>
-            <span class="proj-tag">Science Exhibition</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- Creative / Design Projects -->
-    <div class="creative-grid reveal">
-      <div class="creative-grid-label">✦ Creative & Design Projects</div>
-      <div class="creative-card">
-        <div class="creative-card-icon">🎮</div>
-        <div class="creative-card-label">YouTube Gaming Page Poster</div>
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Privacy <em>Toolkit</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <span class="skill-group-icon">🇪🇺</span>
+        <div class="skill-group-name">GDPR</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">GDPR</span>
+          <span class="skill-tag">Data Subject Rights</span>
+          <span class="skill-tag">Consent Management</span>
+          <span class="skill-tag">Right to Erasure</span>
+        </div>
       </div>
-      <div class="creative-card">
-        <div class="creative-card-icon">🎬</div>
-        <div class="creative-card-label">Gaming Video Cover Art</div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🇮🇳</span>
+        <div class="skill-group-name">India Privacy Law</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">DPDP Act 2023</span>
+          <span class="skill-tag">Data Fiduciary</span>
+          <span class="skill-tag">Consent Artifacts</span>
+        </div>
       </div>
-      <div class="creative-card">
-        <div class="creative-card-icon">📺</div>
-        <div class="creative-card-label">Gaming Channel Cover</div>
+      <div class="skill-group">
+        <span class="skill-group-icon">📋</span>
+        <div class="skill-group-name">Assessments</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">DPIA</span>
+          <span class="skill-tag">Privacy Risk Assessment</span>
+          <span class="skill-tag">Impact Analysis</span>
+        </div>
       </div>
-      <div class="creative-card">
-        <div class="creative-card-icon">🏆</div>
-        <div class="creative-card-label">Poster Competition Entry</div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🔒</span>
+        <div class="skill-group-name">Data Classification</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">PI Handling</span>
+          <span class="skill-tag primary">SPI Handling</span>
+          <span class="skill-tag">Data Mapping</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">✅</span>
+        <div class="skill-group-name">Consent Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Data Consent</span>
+          <span class="skill-tag">Consent Records</span>
+          <span class="skill-tag">Opt-in / Opt-out</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🌍</span>
+        <div class="skill-group-name">Global Privacy Laws</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Privacy Laws</span>
+          <span class="skill-tag">Cross-border Transfers</span>
+          <span class="skill-tag">SCCs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🏗️</span>
+        <div class="skill-group-name">Privacy by Design</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Privacy by Design</span>
+          <span class="skill-tag">Data Minimisation</span>
+          <span class="skill-tag">Purpose Limitation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🤝</span>
+        <div class="skill-group-name">Collaboration</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Privacy Experts</span>
+          <span class="skill-tag">Cross-functional Teams</span>
+          <span class="skill-tag">Tower Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Compliance Work</div>
+    <h2 class="section-title">Privacy <em>Initiatives</em></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-img-placeholder">📋</div>
+        <div class="project-body">
+          <div class="project-cat">Compliance · TCS Tower</div>
+          <div class="project-name">Tower Privacy Programme</div>
+          <div class="project-desc">Led privacy compliance at Tower level in TCS, working with Privacy experts to ensure all applications meet GDPR and DPDP requirements. Coordinated cross-functional privacy reviews.</div>
+          <div class="project-stack">
+            <span class="stack-tag">GDPR</span>
+            <span class="stack-tag">DPDP</span>
+            <span class="stack-tag">Tower Level</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">🔍</div>
+        <div class="project-body">
+          <div class="project-cat">Assessment · TCS</div>
+          <div class="project-name">DPIA Execution</div>
+          <div class="project-desc">Conducted and coordinated Data Protection Impact Assessments (DPIAs) for high-risk data processing activities, identifying and mitigating privacy risks before product launch.</div>
+          <div class="project-stack">
+            <span class="stack-tag">DPIA</span>
+            <span class="stack-tag">Risk Assessment</span>
+            <span class="stack-tag">Privacy</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">✅</div>
+        <div class="project-body">
+          <div class="project-cat">Governance · TCS</div>
+          <div class="project-name">Consent & Data Lifecycle</div>
+          <div class="project-desc">Implemented data consent frameworks and PI/SPI handling protocols to ensure lawful data processing, data minimisation, and purpose limitation across product lines.</div>
+          <div class="project-stack">
+            <span class="stack-tag">PI / SPI</span>
+            <span class="stack-tag">Consent</span>
+            <span class="stack-tag">Data Lifecycle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CREATIVE & WEB ══ -->
+  <div class="tab-panel" id="panel-creative">
+    <div class="role-hero">
+      <div class="role-card">
+        <span class="role-tag">Creative Direction · Internship · Side Projects</span>
+        <h2 class="role-title">Creative &<br/>Web Developer</h2>
+        <p class="role-desc">A multi-disciplinary creative combining web development, IoT/AI engineering, traditional art, and innovative science. From building responsive websites to crafting ancient cosmetics for science exhibitions — curiosity is the constant.</p>
+        <div class="role-stats">
+          <div class="stat-item"><div class="stat-num">IoT</div><div class="stat-label">Smart Mirror · AI/ML</div></div>
+          <div class="stat-item"><div class="stat-num">Web</div><div class="stat-label">HTML · CSS · JS · PHP</div></div>
+          <div class="stat-item"><div class="stat-num">Art</div><div class="stat-label">Design & Illustration</div></div>
+          <div class="stat-item"><div class="stat-num">✦</div><div class="stat-label">Heritage Science</div></div>
+        </div>
+      </div>
+      <div class="highlights-card">
+        <div class="section-label">Creative Highlights</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Built Smart Mirror — an IoT device with voice commands, real-time weather, Python and ML modules</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Developed full-stack Travel & Booking Website with PHP, HTML, CSS, JS and responsive design</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Created ancient cosmetics (face powder & lip color) using traditional techniques for Yuvanand event, Sipna COET</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Designed YouTube gaming channel art, posters, video cover art and competition entries</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Internship as Web Developer at Obdurate Technologies — frontend and backend foundations</div>
+        <div class="highlight-item"><div class="highlight-dot"></div>Interests span art, IoT, writing, and ancient cosmetics — bridging heritage with modern tech</div>
+      </div>
+    </div>
+
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Creative <em>Toolkit</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <span class="skill-group-icon">🌐</span>
+        <div class="skill-group-name">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">HTML5</span>
+          <span class="skill-tag primary">CSS3</span>
+          <span class="skill-tag primary">JavaScript</span>
+          <span class="skill-tag">Bootstrap</span>
+          <span class="skill-tag">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">⚙️</span>
+        <div class="skill-group-name">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">PHP</span>
+          <span class="skill-tag">Full-Stack Awareness</span>
+          <span class="skill-tag">Cross-browser Compatibility</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🤖</span>
+        <div class="skill-group-name">AI & IoT</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Python</span>
+          <span class="skill-tag primary">IoT</span>
+          <span class="skill-tag">ML Modules</span>
+          <span class="skill-tag">Voice Commands</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🎨</span>
+        <div class="skill-group-name">Design & Art</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Digital Design</span>
+          <span class="skill-tag">Poster Design</span>
+          <span class="skill-tag">Cover Art</span>
+          <span class="skill-tag">Illustration</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">✍️</span>
+        <div class="skill-group-name">Writing</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Technical Writing</span>
+          <span class="skill-tag">Creative Writing</span>
+          <span class="skill-tag">Documentation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-group-icon">🏛️</span>
+        <div class="skill-group-name">Heritage Science</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Ancient Techniques</span>
+          <span class="skill-tag">Science Exhibition</span>
+          <span class="skill-tag">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Creative <em>Projects</em></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://dhanashreeam.github.io/dhanaA/mirror.jpg" class="project-img" alt="Smart Mirror" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="project-img-placeholder" style="display:none">🪞</div>
+        <div class="project-body">
+          <div class="project-cat">AI · IoT</div>
+          <div class="project-name">Smart Mirror</div>
+          <div class="project-desc">Innovative IoT interactive display showing real-time weather, time, and essential info with voice command support powered by Python and ML modules.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">AI / ML</span>
+            <span class="stack-tag">IoT</span>
+            <span class="stack-tag">Voice</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://dhanashreeam.github.io/dhanaA/passport.png" class="project-img" alt="Travel Website" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
+        <div class="project-img-placeholder" style="display:none">✈️</div>
+        <div class="project-body">
+          <div class="project-cat">Web Development</div>
+          <div class="project-name">Travel & Booking Website</div>
+          <div class="project-desc">User-friendly platform for searching top travel destinations, booking journeys and accessing personalized tourist guides — built with responsive, dynamic frontend.</div>
+          <div class="project-stack">
+            <span class="stack-tag">HTML</span>
+            <span class="stack-tag">CSS</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">PHP</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://dhanashreeam.github.io/dhanaA/make-up-bag.png" class="project-img" alt="Cosmetics" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
+        <div class="project-img-placeholder" style="display:none">💄</div>
+        <div class="project-body">
+          <div class="project-cat">Science · Heritage · Yuvanand</div>
+          <div class="project-name">Cosmetics with Ancient Technique</div>
+          <div class="project-desc">Created face powder and lip color using traditional ancient techniques for a science exhibition at Yuvanand event, Sipna COET — bridging historical methods with modern science.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Ancient History</span>
+            <span class="stack-tag">Research</span>
+            <span class="stack-tag">Science Exhibition</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img-placeholder">🎮</div>
+        <div class="project-body">
+          <div class="project-cat">Design · Creative</div>
+          <div class="project-name">Gaming Channel Creative Suite</div>
+          <div class="project-desc">Designed a full suite of gaming creative assets — YouTube channel poster, gaming video cover art, channel banner, and competition entry posters.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Digital Design</span>
+            <span class="stack-tag">Cover Art</span>
+            <span class="stack-tag">Poster Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-panels -->
+
+<!-- ══ SHARED: EXPERIENCE ══ -->
+<div class="shared-divider" style="margin-top:40px"></div>
+<div class="shared-section" id="experience">
+  <div class="section-label">Work History · Shared Across All Roles</div>
+  <h2 class="section-title">Work <em>Experience</em></h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="tl-left">
+        <div class="tl-period">Jun 2024 – Sept 2025</div>
+        <div class="tl-org">Tata Consultancy Services</div>
+        <div><span class="tl-role-badge badge-android">📱 Android</span></div>
+        <div style="margin-top:4px"><span class="tl-role-badge badge-developer">🔐 Security</span></div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">Android Security Engineer</div>
+        <div class="tl-sub">Tata Consultancy Services · Full Time</div>
+        <ul class="tl-bullets">
+          <li>Implemented new functionality for Android mobile application using <strong>Kotlin</strong>, delivering features on time and within scope.</li>
+          <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per business requirements.</li>
+          <li>Managed full product lifecycle and resolved security issues identified in <strong>Sonar, SAST and DAST</strong> scans.</li>
+          <li>Upgraded the application to the latest Android versions, ensuring compatibility with the newest platform features.</li>
+          <li>Facilitated knowledge transfer to new joiners for smooth transition and continuity of team expertise.</li>
+          <li>Troubleshot multiple production issues to identify root causes and deliver timely resolutions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-left">
+        <div class="tl-period">Apr 2023 – Jun 2025</div>
+        <div class="tl-org">Tata Consultancy Services</div>
+        <div><span class="tl-role-badge badge-privacy">🛡️ Privacy</span></div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">Functional Privacy Manager</div>
+        <div class="tl-sub">Tata Consultancy Services · Concurrent Role</div>
+        <ul class="tl-bullets">
+          <li>Collaborated with Privacy experts to ensure applications are fully <strong>privacy-compliant at Tower level</strong>.</li>
+          <li>Deepened expertise across <strong>GDPR, DPDP, DPIA</strong>, and data consent frameworks to drive compliance programs.</li>
+          <li>Worked closely with cross-functional teams to implement privacy measures effectively across the product lifecycle.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-left">
+        <div class="tl-period">Aug 2021 – May 2024</div>
+        <div class="tl-org">Tata Consultancy Services</div>
+        <div><span class="tl-role-badge badge-android">📱 Android</span></div>
+        <div style="margin-top:4px"><span class="tl-role-badge badge-developer">🔐 Security</span></div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">Android Developer</div>
+        <div class="tl-sub">Tata Consultancy Services · Full Time</div>
+        <ul class="tl-bullets">
+          <li>Contributed to development of an Android authenticator application (Java) used by <strong>500,000+ TCS employees</strong> — similar in scope to Google/Microsoft Authenticator.</li>
+          <li>Implemented multiple login mechanisms for enhanced security and improved user experience.</li>
+          <li>Provided technical support and troubleshooting during live incident calls, ensuring resolution within SLA.</li>
+          <li>Automated functional test cases using <strong>Katalon</strong>, achieving an <strong>80% reduction in manual testing effort</strong>.</li>
+          <li>Tested the application in backup environments to ensure disaster recovery readiness.</li>
+          <li>Collaborated seamlessly with cross-functional teams to resolve technical challenges and deliver quality outcomes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-left">
+        <div class="tl-period">Jun 2019 – Jul 2019</div>
+        <div class="tl-org">Obdurate Technologies</div>
+        <div><span class="tl-role-badge badge-web">🌐 Web Dev</span></div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">Intern — Web Developer</div>
+        <div class="tl-sub">Obdurate Technologies · Internship</div>
+        <ul class="tl-bullets">
+          <li>Designed and developed static and dynamic responsive websites using <strong>HTML, CSS, JavaScript and Bootstrap</strong>.</li>
+          <li>Ensured user-friendly interfaces with full cross-browser compatibility in frontend development.</li>
+          <li>Expanded knowledge of backend technologies during the internship, laying the foundation for full-stack awareness.</li>
+        </ul>
       </div>
     </div>
 
   </div>
-</section>
+</div>
 
-<!-- ══════ CONTACT ══════ -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-inner reveal">
-      <div class="section-eyebrow">Let's Connect</div>
-      <h2 class="section-title">Ready to Build <em>Something Great?</em></h2>
-      <p class="contact-sub">
-        Open to roles in Android Development, Application Security, DevSecOps and Privacy Engineering.
-        Let's create something impactful together.
-      </p>
+<!-- ══ SHARED: EDUCATION ══ -->
+<div class="shared-divider"></div>
+<div class="shared-section" id="education">
+  <div class="section-label">Academic Record</div>
+  <h2 class="section-title">Education & <em>Achievements</em></h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <span class="edu-icon">🎓</span>
+      <div class="edu-period">2017 – 2021</div>
+      <div class="edu-name">B.E. Computer Science & Engineering</div>
+      <div class="edu-inst">Sipna College of Engineering & Technology</div>
+      <div class="edu-grade">9.59 / 10</div>
+      <div class="edu-period" style="margin-top:4px">CGPA · 84.89%</div>
+    </div>
+    <div class="edu-card">
+      <span class="edu-icon">📗</span>
+      <div class="edu-period">2015 – 2017</div>
+      <div class="edu-name">Higher Secondary Certificate (HSC)</div>
+      <div class="edu-inst">Brijlal Biyani Science College</div>
+      <div class="edu-grade">88.77%</div>
+    </div>
+    <div class="edu-card">
+      <span class="edu-icon">📘</span>
+      <div class="edu-period">Passed 2015</div>
+      <div class="edu-name">Secondary School Certificate (SSC)</div>
+      <div class="edu-inst">Takhatmal English High School</div>
+      <div class="edu-grade">94.20%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SHARED: CONTACT ══ -->
+<div class="shared-divider"></div>
+<div class="shared-section" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Ready to Build <em>Something Great?</em></h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-heading">Get In <em>Touch</em></div>
+      <p class="contact-text">Open to roles in Android Development, Application Security, DevSecOps and Privacy Engineering. Let's create something impactful together.</p>
       <div class="contact-links">
-        <a class="clink" href="mailto:dhanashree.ambadkar.5@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          Email Me
+        <a href="mailto:dhanashree.ambadkar.5@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉️</span>
+          dhanashree.ambadkar.5@gmail.com
         </a>
-        <a class="clink" href="https://dhanashreeam.github.io/dhanaA/" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-          My Portfolio
+        <a href="https://dhanashreeam.github.io/dhanaA/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">🌐</span>
+          My Portfolio ↗
         </a>
-        <a class="clink" href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Download CV
+        <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" class="contact-link">
+          <span class="contact-link-icon">📄</span>
+          Download CV ↗
         </a>
       </div>
     </div>
+    <div class="open-roles">
+      <div class="or-title">Open to Opportunities In</div>
+      <div class="role-chips">
+        <span class="role-chip chip-android">📱 Android Development</span>
+        <span class="role-chip chip-security">🔐 Application Security</span>
+        <span class="role-chip chip-security">⚙️ DevSecOps</span>
+        <span class="role-chip chip-privacy">🛡️ Privacy Engineering</span>
+        <span class="role-chip chip-creative">🌐 Web Development</span>
+        <span class="role-chip chip-creative">🎨 Creative Direction</span>
+      </div>
+      <div style="margin-top:24px">
+        <div class="or-title">Languages</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">English</span>
+          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">Hindi</span>
+          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">Marathi</span>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div class="or-title">Interests</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <span class="skill-tag">🎨 Art</span>
+          <span class="skill-tag">🤖 IoT</span>
+          <span class="skill-tag">✍️ Writing</span>
+          <span class="skill-tag">🏛️ Ancient Cosmetics</span>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- ══════ FOOTER ══════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    © 2025 Dhanashree Ambadkar &nbsp;·&nbsp; Android Developer &amp; Security Enthusiast &nbsp;·&nbsp; Built with ♥
-  </div>
+  © 2025 Dhanashree Ambadkar · Android Developer & Security Enthusiast · Built with ♥
 </footer>
 
-<!-- ══════ SCRIPTS ══════ -->
 <script>
-/* NAV SCROLL */
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
+const tabMeta = {
+  android:  { label: '📱 Android Engineer',     color: '#3DDC84', emText: 'Ambadkar' },
+  security: { label: '🔐 Security Analyst',      color: '#FF5757', emText: 'Ambadkar' },
+  privacy:  { label: '🛡️ Privacy Manager',       color: '#9B7FFF', emText: 'Ambadkar' },
+  creative: { label: '🎨 Creative & Web Dev',    color: '#FFAB40', emText: 'Ambadkar' },
+};
 
-/* HAMBURGER */
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.toggle('open');
-});
-function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+function switchTab(tab) {
+  // Update buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
 
-/* SCROLL REVEAL */
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  // Update panels
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`panel-${tab}`).classList.add('active');
 
-/* EXPERIENCE TABS */
-function showExp(id, navEl) {
-  document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.exp-nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  navEl.classList.add('active');
+  // Update body class for CSS variable overrides
+  document.body.className = `tab-${tab}`;
+
+  // Update header badge
+  const meta = tabMeta[tab];
+  document.getElementById('status-badge').textContent = meta.label;
+  document.getElementById('name-em').style.color = meta.color;
 }
-
-/* STAGGERED REVEAL DELAYS */
-document.querySelectorAll('.skills-grid .skill-card').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.08}s`;
-});
-document.querySelectorAll('.projects-masonry .proj-card').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.07}s`;
-});
-
-/* SUBTLE PARALLAX ON HERO */
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  const heroName = document.querySelector('.hero-name');
-  if (heroName) heroName.style.transform = `translateY(${y * 0.06}px)`;
-});
 </script>
 </body>
 </html>
