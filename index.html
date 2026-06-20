@@ -1,1504 +1,682 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>Dhanashree Ambadkar | Multi-Role Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta name="description" content="Dhanashree Ambadkar — Android Developer, Security Analyst, Privacy Manager & Creative, 4+ years at TCS." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #07080D;
-    --surface: #0F1018;
-    --surface2: #161820;
-    --text: #E4E6F0;
-    --muted: #7A7D90;
-    --border: #1E2030;
+  :root{
+    --bg:#F7F7F3;
+    --surface:#FFFFFF;
+    --surface-alt:#EFF0EA;
+    --ink:#181B23;
+    --ink-soft:#5B6172;
+    --line:#E2E3DC;
+    --accent:#1F6F5C;
+    --accent-soft:#E4F2EE;
+    --gold:#C2872B;
+    --gold-soft:#FBF1DE;
+    --android:#2E7D5B;
+    --security:#B23A2E;
+    --privacy:#2056A8;
+    --creative:#8B4FA3;
+    --code-bg:#0D1117;
+    --code-bar:#161B22;
+    --code-border:#30363D;
+    --code-fg:#C9D1D9;
+    --code-dim:#8B949E;
+    --code-str:#7EE3C0;
+    --radius:14px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; letter-spacing:-0.01em;}
+  em{font-style:italic; color:var(--accent);}
+  a{color:var(--accent);}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
 
-    --android: #3DDC84;
-    --android-dim: rgba(61,220,132,0.12);
-    --android-glow: rgba(61,220,132,0.25);
+  /* Ticker */
+  .ticker-outer{
+    background:var(--ink); color:var(--gold-soft); overflow:hidden;
+    border-bottom:1px solid var(--code-border); white-space:nowrap;
+  }
+  .ticker-inner{
+    display:inline-block; padding:9px 0; font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; letter-spacing:0.02em; animation:scroll-left 38s linear infinite;
+  }
+  .ticker-inner span{ padding:0 14px; color:#E9E6DA; opacity:0.85;}
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-    --security: #FF5757;
-    --security-dim: rgba(255,87,87,0.12);
-    --security-glow: rgba(255,87,87,0.25);
+  /* Hero */
+  header.hero{ padding:64px 0 36px; text-align:center; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase;
+    letter-spacing:0.14em; color:var(--accent); margin-bottom:18px;
+  }
+  header.hero h1{ font-size:clamp(40px,7vw,68px); font-weight:600; line-height:1.02; }
+  .lede{ max-width:640px; margin:18px auto 22px; color:var(--ink-soft); font-size:16.5px; line-height:1.6; }
+  .meta-row{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink-soft);
+    display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:center; margin-bottom:34px;
+  }
+  .meta-row a{ font-weight:600; }
 
-    --privacy: #9B7FFF;
-    --privacy-dim: rgba(155,127,255,0.12);
-    --privacy-glow: rgba(155,127,255,0.25);
+  .role-tabs{
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:6px;
+  }
+  .role-tab{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14.5px;
+    background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
+    padding:11px 20px; border-radius:999px; cursor:pointer; transition:all .18s ease;
+  }
+  .role-tab:hover{ border-color:var(--accent); color:var(--ink); }
+  .role-tab.active{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
 
-    --creative: #FFAB40;
-    --creative-dim: rgba(255,171,64,0.12);
-    --creative-glow: rgba(255,171,64,0.25);
+  /* Role panels */
+  .role-panel{ display:none; padding:46px 0 70px; border-top:1px solid var(--line); }
+  .role-panel.active{ display:block; }
+  .role-kicker{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px;}
+  .role-panel h2{ font-size:clamp(28px,4vw,38px); font-weight:600; margin-bottom:16px; }
+  .role-summary{ max-width:760px; color:var(--ink-soft); font-size:16px; line-height:1.65; margin-bottom:30px; }
 
-    --active-color: var(--android);
-    --active-dim: var(--android-dim);
-    --active-glow: var(--android-glow);
-    --radius: 14px;
-    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
-  html { scroll-behavior: smooth; }
+  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:36px; }
+  .stat-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 16px; text-align:center; }
+  .stat-num{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:var(--accent); }
+  .stat-label{ font-size:12px; color:var(--ink-soft); margin-top:4px; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── MARQUEE ── */
-  .marquee-strip {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .marquee-inner {
-    display: inline-block;
-    animation: marqueeScroll 28s linear infinite;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-  }
-  .marquee-inner span { color: var(--android); margin: 0 18px; }
-  @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-  /* ── HEADER ── */
-  header {
-    padding: 60px 5vw 40px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .header-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--android);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .header-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    color: #fff;
-  }
-  .header-name em {
-    font-style: italic;
-    color: var(--android);
-    transition: color var(--transition);
-  }
-  .header-sub {
-    margin-top: 14px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 400;
-    max-width: 520px;
-    line-height: 1.7;
-  }
-  .header-badges {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: right;
-  }
-  .badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    padding: 5px 12px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--surface);
-  }
-  .badge.active-badge {
-    background: var(--active-dim);
-    border-color: var(--active-color);
-    color: var(--active-color);
+  .panel-title{ font-family:'JetBrains Mono',monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft); margin:34px 0 14px; }
+  ul.highlight-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  ul.highlight-list li{
+    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:10px; padding:13px 16px; font-size:14.5px; line-height:1.55; color:var(--ink);
   }
 
-  /* ── TAB NAVIGATION ── */
-  .tab-nav-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5vw;
-  }
-  .tab-nav {
-    display: flex;
-    gap: 4px;
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 6px;
-    border: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .tab-btn {
-    flex: 1;
-    min-width: 140px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 18px;
-    border-radius: 10px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-family: 'Syne', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    transition: all var(--transition);
-    white-space: nowrap;
-  }
-  .tab-btn:hover { color: var(--text); background: var(--surface2); }
-  .tab-btn .tab-icon { font-size: 1rem; }
-  .tab-btn.active { color: #fff; }
+  .project-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+  .project-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  .project-card img{ width:100%; height:140px; object-fit:cover; display:block; background:var(--surface-alt); }
+  .project-body{ padding:16px; }
+  .project-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; }
+  .project-card h4{ font-family:'Inter',sans-serif; font-size:16px; font-weight:700; margin:6px 0 8px; }
+  .project-card p{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0 0 10px; }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .pill{ font-size:11px; font-family:'JetBrains Mono',monospace; background:var(--accent-soft); color:var(--accent); padding:3px 9px; border-radius:999px; }
 
-  .tab-btn[data-tab="android"].active  { background: var(--android-dim);  color: var(--android);  }
-  .tab-btn[data-tab="security"].active { background: var(--security-dim); color: var(--security); }
-  .tab-btn[data-tab="privacy"].active  { background: var(--privacy-dim);  color: var(--privacy);  }
-  .tab-btn[data-tab="creative"].active { background: var(--creative-dim); color: var(--creative); }
+  /* Skills code-editor section */
+  .skills-section{ padding:70px 0; border-top:1px solid var(--line); }
+  .skills-section .section-head{ text-align:center; margin-bottom:32px; }
+  .section-head .panel-title{ margin-bottom:8px; }
+  .skills-section h2{ font-size:clamp(28px,4vw,38px); font-weight:600; }
+  .skills-section .sub{ color:var(--ink-soft); font-size:15px; margin-top:10px; }
 
-  /* ── TAB PANELS ── */
-  .tab-panels {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 32px 5vw 0;
+  .code-window{
+    background:var(--code-bg); border:1px solid var(--code-border); border-radius:12px;
+    overflow:hidden; box-shadow:0 18px 50px -22px rgba(0,0,0,0.45);
   }
-  .tab-panel {
-    display: none;
-    animation: fadeSlide 0.4s ease both;
-  }
-  .tab-panel.active { display: block; }
-  @keyframes fadeSlide {
-    from { opacity:0; transform: translateY(16px); }
-    to   { opacity:1; transform: translateY(0); }
-  }
+  .code-titlebar{ background:var(--code-bar); padding:11px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--code-border); }
+  .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot.red{ background:#FF5F57; } .dot.yellow{ background:#FEBC2E; } .dot.green{ background:#28C840; }
+  .code-filename{ margin-left:10px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--code-dim); }
 
-  /* ── ROLE HERO ── */
-  .role-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
+  .code-tabs{ display:flex; flex-wrap:wrap; background:var(--code-bar); border-bottom:1px solid var(--code-border); }
+  .code-tab{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--code-dim);
+    background:transparent; border:none; border-right:1px solid var(--code-border);
+    padding:11px 16px; cursor:pointer; display:flex; align-items:center; gap:2px;
   }
-  .role-card {
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-  .role-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--active-color);
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .role-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--active-color);
-    margin-bottom: 10px;
-    display: block;
-  }
-  .role-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.1;
-    color: #fff;
-    margin-bottom: 14px;
-  }
-  .role-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-  .role-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .stat-item {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-  }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--active-color);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.68rem;
-    color: var(--muted);
-    margin-top: 4px;
-    font-family: 'DM Mono', monospace;
-  }
-  .highlights-card {
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .highlight-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .highlight-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--active-color);
-    flex-shrink: 0;
-    margin-top: 7px;
-  }
+  .code-tab .ext{ color:#56636E; }
+  .code-tab:hover{ color:var(--code-fg); }
+  .code-tab.active{ color:#fff; background:var(--code-bg); border-bottom:2px solid var(--gold); }
 
-  /* ── SKILLS SECTION ── */
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .code-body{ padding:24px 26px 28px; }
+  .code-panel{ display:none; }
+  .code-panel.active{ display:block; }
+  .code-decl{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--code-dim); margin-bottom:14px; }
+  .code-decl .kw{ color:#FF7B72; }
+  .code-decl .var{ color:#D2A8FF; }
+  .code-decl .br{ color:var(--code-fg); }
+  .chip-flow{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:6px; }
+  .tok{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--code-str);
+    background:rgba(126,227,192,0.08); border:1px solid rgba(126,227,192,0.3);
+    padding:6px 11px; border-radius:7px; transition:all .15s ease; cursor:default;
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 24px;
-  }
-  .section-title em { font-style: italic; color: var(--active-color); }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 40px;
-  }
-  .skill-group {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    transition: border-color var(--transition), box-shadow var(--transition);
-  }
-  .skill-group:hover {
-    border-color: var(--active-color);
-    box-shadow: 0 0 0 1px var(--active-color), 0 8px 32px var(--active-glow);
-  }
-  .skill-group-icon { font-size: 1.4rem; margin-bottom: 10px; display: block; }
-  .skill-group-name {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .skill-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    padding: 3px 9px;
-    border-radius: 100px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-  .skill-tag.primary {
-    background: var(--active-dim);
-    border-color: var(--active-color);
-    color: var(--active-color);
-  }
-
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    cursor: default;
-  }
-  .project-card:hover {
-    border-color: var(--active-color);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px var(--active-glow);
-  }
-  .project-img {
-    width: 100%; height: 160px;
-    object-fit: cover;
-    background: var(--surface2);
-    display: block;
-  }
-  .project-img-placeholder {
-    width: 100%; height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    background: var(--surface2);
-  }
-  .project-body { padding: 20px; }
-  .project-cat {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--active-color);
-    margin-bottom: 6px;
-  }
-  .project-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .project-desc {
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 5px; }
-  .stack-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    padding: 3px 9px;
-    border-radius: 100px;
-    background: var(--active-dim);
-    border: 1px solid transparent;
-    color: var(--active-color);
-  }
-
-  /* ── SHARED SECTIONS ── */
-  .shared-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 5vw;
-  }
-  .shared-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
-    margin: 0 5vw;
-  }
+  .tok:hover{ background:rgba(126,227,192,0.18); border-color:rgba(126,227,192,0.6); transform:translateY(-1px); }
+  .code-close{ font-family:'JetBrains Mono',monospace; color:var(--code-fg); font-size:13px; margin-top:8px; }
 
   /* Experience */
-  .timeline { display: flex; flex-direction: column; gap: 0; }
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 32px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-  .timeline-item:last-child { border-bottom: none; }
-  .tl-left { text-align: right; padding-top: 4px; }
-  .tl-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .tl-org {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 4px;
-  }
-  .tl-role-badge {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    padding: 3px 8px;
-    border-radius: 100px;
-    margin-top: 6px;
-    letter-spacing: 0.05em;
-  }
-  .badge-android  { background: var(--android-dim);  color: var(--android);  border:1px solid var(--android); }
-  .badge-privacy  { background: var(--privacy-dim);  color: var(--privacy);  border:1px solid var(--privacy); }
-  .badge-developer { background: var(--security-dim); color: var(--security); border:1px solid var(--security); }
-  .badge-web      { background: var(--creative-dim); color: var(--creative); border:1px solid var(--creative); }
-
-  .tl-right {}
-  .tl-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-  .tl-sub {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-bottom: 14px;
-    font-family: 'DM Mono', monospace;
-  }
-  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .tl-bullets li {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.7;
-    padding-left: 16px;
-    position: relative;
-  }
-  .tl-bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--muted);
-    font-size: 0.65rem;
-    top: 4px;
-  }
-  .tl-bullets li strong { color: var(--text); }
-
-  /* Contact */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 32px;
-  }
-  .contact-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-  }
-  .contact-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .contact-heading em { font-style: italic; color: var(--android); }
-  .contact-text {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 24px;
-  }
-  .contact-links { display: flex; flex-direction: column; gap: 10px; }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.82rem;
-    font-weight: 600;
-    transition: all var(--transition);
-  }
-  .contact-link:hover {
-    border-color: var(--android);
-    background: var(--android-dim);
-    color: var(--android);
-    transform: translateX(4px);
-  }
-  .contact-link-icon { font-size: 1rem; }
-  .open-roles {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-  }
-  .or-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 16px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .role-chip {
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    border: 1px solid;
-  }
-  .chip-android  { background: var(--android-dim);  color: var(--android);  border-color: var(--android); }
-  .chip-security { background: var(--security-dim); color: var(--security); border-color: var(--security); }
-  .chip-privacy  { background: var(--privacy-dim);  color: var(--privacy);  border-color: var(--privacy); }
-  .chip-creative { background: var(--creative-dim); color: var(--creative); border-color: var(--creative); }
+  .experience{ padding:70px 0; border-top:1px solid var(--line); }
+  .timeline{ display:grid; gap:18px; margin-top:30px; }
+  .job-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; }
+  .job-head{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline; margin-bottom:6px; }
+  .job-date{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--gold); }
+  .job-title{ font-size:18px; font-weight:700; }
+  .job-org{ color:var(--ink-soft); font-size:13.5px; margin-bottom:12px; }
+  .job-card ul{ margin:0; padding-left:18px; color:var(--ink); font-size:14px; line-height:1.65; }
+  .job-card ul li{ margin-bottom:6px; }
+  .job-card b{ color:var(--accent); }
 
   /* Education */
-  .edu-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .edu-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-  }
-  .edu-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
-  .edu-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .edu-name {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-  .edu-inst { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
-  .edu-grade {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--android);
-  }
+  .education{ padding:70px 0; border-top:1px solid var(--line); }
+  .edu-grid{ display:grid; gap:14px; margin-top:28px; }
+  .edu-card{ display:flex; justify-content:space-between; gap:16px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 22px; }
+  .edu-card h4{ margin:0 0 4px; font-size:15.5px; }
+  .edu-card .org{ color:var(--ink-soft); font-size:13px; }
+  .edu-score{ font-family:'JetBrains Mono',monospace; color:var(--accent); font-weight:700; font-size:16px; white-space:nowrap; }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 32px 5vw;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
+  /* Footer / contact */
+  footer{ padding:70px 0 50px; border-top:1px solid var(--line); text-align:center; background:var(--surface-alt); }
+  footer h2{ font-size:clamp(26px,4vw,36px); margin-bottom:14px; }
+  footer p{ color:var(--ink-soft); max-width:560px; margin:0 auto 26px; line-height:1.6; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:30px; }
+  .contact-links a{
+    font-weight:600; font-size:14px; text-decoration:none; background:var(--ink); color:var(--bg);
+    padding:12px 20px; border-radius:999px; transition:opacity .15s;
   }
+  .contact-links a:hover{ opacity:.85; }
+  .open-to{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft); margin-bottom:20px; }
+  .footer-bottom{ font-size:12px; color:var(--ink-soft); margin-top:30px; }
 
-  /* Color overrides per active tab */
-  body.tab-android  { --active-color: var(--android);  --active-dim: var(--android-dim);  --active-glow: var(--android-glow);  }
-  body.tab-security { --active-color: var(--security); --active-dim: var(--security-dim); --active-glow: var(--security-glow); }
-  body.tab-privacy  { --active-color: var(--privacy);  --active-dim: var(--privacy-dim);  --active-glow: var(--privacy-glow);  }
-  body.tab-creative { --active-color: var(--creative); --active-dim: var(--creative-dim); --active-glow: var(--creative-glow); }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    header { grid-template-columns: 1fr; }
-    .header-badges { text-align: left; flex-direction: row; flex-wrap: wrap; }
-    .role-hero { grid-template-columns: 1fr; }
-    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
-    .tl-left { text-align: left; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .tab-btn { min-width: unset; }
+  @media (max-width:760px){
+    .stat-row{ grid-template-columns:repeat(2,1fr); }
+    .job-head{ flex-direction:column; }
+    .edu-card{ flex-direction:column; align-items:flex-start; }
   }
 </style>
 </head>
-<body class="tab-android">
+<body>
 
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-inner">
-    Android Developer✦ Security Analyst✦ Privacy Manager✦ Creative✦ Kotlin✦ Java✦ OWASP✦ GDPR✦ DPDP✦ Jetpack Compose✦ Firebase✦ SAST✦ DAST✦ DevSecOps✦ TCS 2021–2025✦ 500K+ Users Served✦ CGPA 9.59✦
-    Android Developer✦ Security Analyst✦ Privacy Manager✦ Creative✦ Kotlin✦ Java✦ OWASP✦ GDPR✦ DPDP✦ Jetpack Compose✦ Firebase✦ SAST✦ DAST✦ DevSecOps✦ TCS 2021–2025✦ 500K+ Users Served✦ CGPA 9.59✦
-  </div>
+<div class="ticker-outer">
+  <div class="ticker-inner" id="ticker"></div>
 </div>
 
-<!-- HEADER -->
-<header>
-  <div>
-    <div class="header-eyebrow">Portfolio · Open to Opportunities</div>
-    <h1 class="header-name">Dhanashree <em id="name-em">Ambadkar</em></h1>
-    <p class="header-sub">4+ years at Tata Consultancy Services · Android Development · Application Security · Privacy Compliance · Creative Direction</p>
-  </div>
-  <div class="header-badges">
-    <span class="badge active-badge" id="status-badge">📱 Android Engineer</span>
-    <span class="badge">🏢 TCS 2021–2025</span>
-    <span class="badge">🎓 CGPA 9.59 / 10</span>
-    <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" class="badge" style="text-decoration:none;cursor:pointer;">↗ Résumé</a>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Portfolio · Open to Opportunities</div>
+    <h1>Dhanashree <em>Ambadkar</em></h1>
+    <p class="lede">4+ years at Tata Consultancy Services · Android Development · Application Security · Privacy Compliance · Creative Direction</p>
+    <div class="meta-row">
+      <span>📱 Android Engineer</span><span>🏢 TCS 2021–2025</span><span>🎓 CGPA 9.8 / 10</span>
+      <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" rel="noopener">↗ Résumé</a>
+    </div>
+    <nav class="role-tabs" role="tablist">
+      <button class="role-tab active" data-role="android">📱 Android Developer</button>
+      <button class="role-tab" data-role="security">🔐 Security Analyst</button>
+      <button class="role-tab" data-role="privacy">🛡️ Privacy Manager</button>
+      <button class="role-tab" data-role="creative">🎨 Creative & Web</button>
+      <button class="role-tab" data-role="ai">🤖 AI & Prompt Engineering</button>
+    </nav>
   </div>
 </header>
 
-<!-- TAB NAVIGATION -->
-<div class="tab-nav-wrapper">
-  <div class="tab-nav">
-    <button class="tab-btn active" data-tab="android" onclick="switchTab('android')">
-      <span class="tab-icon">📱</span> Android Developer
-    </button>
-    <button class="tab-btn" data-tab="security" onclick="switchTab('security')">
-      <span class="tab-icon">🔐</span> Security Analyst
-    </button>
-    <button class="tab-btn" data-tab="privacy" onclick="switchTab('privacy')">
-      <span class="tab-icon">🛡️</span> Privacy Manager
-    </button>
-    <button class="tab-btn" data-tab="creative" onclick="switchTab('creative')">
-      <span class="tab-icon">🎨</span> Creative & Web
-    </button>
+<main>
+  <!-- ANDROID -->
+  <section class="role-panel active" id="role-android">
+    <div class="wrap">
+      <div class="role-kicker">Primary Role · TCS 2021–2025</div>
+      <h2>Android <em>Developer</em></h2>
+      <p class="role-summary">Specialising in end-to-end mobile application development using Java and Kotlin. Delivered secure, high-performance apps for 500,000+ enterprise users, leveraging modern Android architecture and automated testing pipelines.</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">500K+</div><div class="stat-label">Users Served</div></div>
+        <div class="stat-card"><div class="stat-num">80%</div><div class="stat-label">Test Reduction</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Years Exp</div></div>
+        <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Apps Shipped</div></div>
+      </div>
+
+      <div class="panel-title">Key Highlights</div>
+      <ul class="highlight-list">
+        <li>Built TCS Authenticator App (Java) used by 500K+ employees — on par with Google/Microsoft Authenticator in scope</li>
+        <li>Automated 80% of manual functional testing using Katalon Studio</li>
+        <li>Maintained full product lifecycle from design to production, including Android version upgrades</li>
+        <li>Implemented multiple secure login mechanisms for enterprise authentication</li>
+        <li>Resolved SAST/DAST/SonarQube security issues in production applications</li>
+        <li>Familiarity with iOS development for cross-platform ecosystem awareness</li>
+      </ul>
+
+      <div class="panel-title">Projects</div>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="https://dhanashreeam.github.io/dhanaA/quiz.png"  style="margin:20px;height:100px;width:100px;justify-content:center"  alt="Quiz App" />
+          <div class="project-body">
+            <div class="project-tag">🧠 Android Development</div>
+            <h4>Quiz App</h4>
+            <p>Dynamic Android quiz application with multiple answer options, real-time feedback and score summary.</p>
+            <div class="pill-row"><span class="pill">Kotlin</span><span class="pill">Java</span><span class="pill">Android SDK</span><span class="pill">Mobile UX</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://dhanashreeam.github.io/dhanaA/unitConverterIcon.png" style="margin:20px;height:100px;width:100px" alt="Unit Converter" />
+          <div class="project-body">
+            <div class="project-tag">📐 Android Development</div>
+            <h4>Unit Converter App</h4>
+            <p>Converts values across multiple units with robust null-input error handling for a seamless experience.</p>
+            <div class="pill-row"><span class="pill">Android</span><span class="pill">Kotlin</span><span class="pill">Error Handling</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-body" style="padding-top:18px;">
+            <div class="project-tag">🔐 Enterprise · TCS</div>
+            <h4>TCS Authenticator App</h4>
+            <p>Enterprise authenticator application (Java) for 500,000+ TCS employees, with multiple secure login mechanisms.</p>
+            <div class="pill-row"><span class="pill">Java</span><span class="pill">Android SDK</span><span class="pill">Security</span><span class="pill">Katalon</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="role-panel" id="role-security">
+    <div class="wrap">
+      <div class="role-kicker">Concurrent Role · TCS 2021–2025</div>
+      <h2>Security <em>Analyst</em></h2>
+      <p class="role-summary">Focused on mobile and web application security, conducting SAST/DAST scans, resolving vulnerabilities, and embedding DevSecOps practices into the development lifecycle. Hands-on expertise with OWASP Top 10 and SonarQube remediation.</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">OWASP</div><div class="stat-label">Top 10 Expertise</div></div>
+        <div class="stat-card"><div class="stat-num">SAST+DAST</div><div class="stat-label">Scan Ownership</div></div>
+        <div class="stat-card"><div class="stat-num">DevSec</div><div class="stat-label">Ops Embedded</div></div>
+        <div class="stat-card"><div class="stat-num">Sonar</div><div class="stat-label">Qube Remediation</div></div>
+      </div>
+
+      <div class="panel-title">Security Highlights</div>
+      <ul class="highlight-list">
+        <li>Managed full product lifecycle security — resolved issues identified in Sonar, SAST and DAST scans</li>
+        <li>Applied OWASP Top 10 standards to mobile and web application security assessments</li>
+        <li>Implemented multiple secure login mechanisms to harden enterprise authentication app</li>
+        <li>Conducted disaster recovery testing by validating app functionality in backup environments</li>
+        <li>Embedded DevSecOps practices into development workflows to shift security left</li>
+        <li>Provided live incident support during production security events, resolving within SLA</li>
+      </ul>
+
+      <div class="panel-title">Security Work</div>
+      <div class="project-grid">
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🔐 Enterprise Security · TCS</div>
+          <h4>Authenticator App Security</h4>
+          <p>Hardened authentication mechanisms for a 500K-user app. Conducted SAST/DAST scans and resolved critical vulnerabilities using SonarQube.</p>
+          <div class="pill-row"><span class="pill">SAST</span><span class="pill">DAST</span><span class="pill">SonarQube</span><span class="pill">Auth</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🎯 DevSecOps · TCS</div>
+          <h4>Security Pipeline Integration</h4>
+          <p>Embedded SAST/DAST/SonarQube scanning into the development pipeline, shifting security left across the product lifecycle.</p>
+          <div class="pill-row"><span class="pill">DevSecOps</span><span class="pill">OWASP</span><span class="pill">CI/CD</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🛡️ Disaster Recovery</div>
+          <h4>Backup Environment Validation</h4>
+          <p>Validated application security and functionality in backup/DR environments, ensuring continuity during recovery scenarios.</p>
+          <div class="pill-row"><span class="pill">DR Testing</span><span class="pill">Security Validation</span><span class="pill">SLA</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="role-panel" id="role-privacy">
+    <div class="wrap">
+      <div class="role-kicker">Concurrent Role · TCS 2023–2025</div>
+      <h2>Functional <em>Privacy Manager</em></h2>
+      <p class="role-summary">Drove privacy compliance programs at Tower level for TCS. Collaborated with Privacy experts and cross-functional teams to embed GDPR, DPDP and DPIA frameworks across the complete product lifecycle.</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">GDPR</div><div class="stat-label">Compliance</div></div>
+        <div class="stat-card"><div class="stat-num">DPDP</div><div class="stat-label">India Privacy Law</div></div>
+        <div class="stat-card"><div class="stat-num">DPIA</div><div class="stat-label">Assessments</div></div>
+        <div class="stat-card"><div class="stat-num">Tower</div><div class="stat-label">Level Ownership</div></div>
+      </div>
+
+      <div class="panel-title">Privacy Highlights</div>
+      <ul class="highlight-list">
+        <li>Ensured full Tower-level privacy compliance, collaborating directly with Privacy experts at TCS</li>
+        <li>Deep expertise in GDPR, DPDP (India), DPIA frameworks and data consent management</li>
+        <li>Worked with cross-functional teams to implement privacy measures across the product lifecycle</li>
+        <li>Managed PI (Personal Information) and SPI (Sensitive Personal Information) data handling practices</li>
+        <li>Applied Privacy by Design principles to mobile application architecture</li>
+        <li>Stayed current with evolving global privacy laws and regulatory requirements</li>
+      </ul>
+
+      <div class="panel-title">Privacy Initiatives</div>
+      <div class="project-grid">
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">📋 Compliance · TCS Tower</div>
+          <h4>Tower Privacy Programme</h4>
+          <p>Led privacy compliance at Tower level, working with Privacy experts to ensure GDPR and DPDP requirements across applications.</p>
+          <div class="pill-row"><span class="pill">GDPR</span><span class="pill">DPDP</span><span class="pill">Tower Level</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🔍 Assessment · TCS</div>
+          <h4>DPIA Execution</h4>
+          <p>Conducted Data Protection Impact Assessments for high-risk data processing, identifying and mitigating privacy risks pre-launch.</p>
+          <div class="pill-row"><span class="pill">DPIA</span><span class="pill">Risk Assessment</span><span class="pill">Privacy</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">✅ Governance · TCS</div>
+          <h4>Consent & Data Lifecycle</h4>
+          <p>Implemented data consent frameworks and PI/SPI handling protocols ensuring lawful processing and data minimisation.</p>
+          <div class="pill-row"><span class="pill">PI / SPI</span><span class="pill">Consent</span><span class="pill">Data Lifecycle</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIVE -->
+  <section class="role-panel" id="role-creative">
+    <div class="wrap">
+      <div class="role-kicker">Creative Direction · Internship · Side Projects</div>
+      <h2>Creative & <em>Web Developer</em></h2>
+      <p class="role-summary">A multi-disciplinary creative combining web development, IoT/AI engineering, traditional art, and innovative science. From building responsive websites to crafting ancient cosmetics for science exhibitions — curiosity is the constant.</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">IoT</div><div class="stat-label">Smart Mirror · AI/ML</div></div>
+        <div class="stat-card"><div class="stat-num">Web</div><div class="stat-label">HTML · CSS · JS · PHP</div></div>
+        <div class="stat-card"><div class="stat-num">Art</div><div class="stat-label">Design & Illustration</div></div>
+        <div class="stat-card"><div class="stat-num">✦</div><div class="stat-label">Heritage Science</div></div>
+      </div>
+
+      <div class="panel-title">Creative Highlights</div>
+      <ul class="highlight-list">
+        <li>Built Smart Mirror — an IoT device with voice commands, real-time weather, Python and ML modules</li>
+        <li>Developed full-stack Travel & Booking Website with PHP, HTML, CSS, JS and responsive design</li>
+        <li>Created ancient cosmetics (face powder & lip color) using traditional techniques for Yuvanand event, Sipna COET</li>
+        <li>Designed YouTube gaming channel art, posters, video cover art and competition entries</li>
+        <li>Internship as Web Developer at Obdurate Technologies — frontend and backend foundations</li>
+        <li>Interests span art, IoT, writing, and ancient cosmetics — bridging heritage with modern tech</li>
+      </ul>
+
+      <div class="panel-title">Projects</div>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="https://dhanashreeam.github.io/dhanaA/mirror.jpg" alt="Smart Mirror" />
+          <div class="project-body">
+            <div class="project-tag">🪞 AI · IoT</div>
+            <h4>Smart Mirror</h4>
+            <p>Interactive IoT display showing weather, time and info with voice commands, powered by Python and ML modules.</p>
+            <div class="pill-row"><span class="pill">Python</span><span class="pill">AI / ML</span><span class="pill">IoT</span><span class="pill">Voice</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://dhanashreeam.github.io/dhanaA/passport.png" alt="Travel Website" />
+          <div class="project-body">
+            <div class="project-tag">✈️ Web Development</div>
+            <h4>Travel & Booking Website</h4>
+            <p>Platform for searching destinations, booking journeys and accessing personalized tourist guides.</p>
+            <div class="pill-row"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">PHP</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://dhanashreeam.github.io/dhanaA/make-up-bag.png" alt="Cosmetics" />
+          <div class="project-body">
+            <div class="project-tag">💄 Science · Heritage · Yuvanand</div>
+            <h4>Cosmetics with Ancient Technique</h4>
+            <p>Face powder and lip color using traditional techniques for a science exhibition at Sipna COET.</p>
+            <div class="pill-row"><span class="pill">Ancient History</span><span class="pill">Research</span><span class="pill">Science Exhibition</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-body" style="padding-top:18px;">
+            <div class="project-tag">🎮 Design · Creative</div>
+            <h4>Gaming Channel Creative Suite</h4>
+            <p>A full suite of gaming creative assets — channel poster, video cover art, banner, and competition posters.</p>
+            <div class="pill-row"><span class="pill">Digital Design</span><span class="pill">Cover Art</span><span class="pill">Poster Design</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section class="role-panel" id="role-ai">
+    <div class="wrap">
+      <div class="role-kicker">Emerging Practice · AI-Augmented Development</div>
+      <h2>AI <em>Generalist</em></h2>
+      <p class="role-summary">Applying AI tools across the development lifecycle — from prompt-driven (vibe) coding and rapid prototyping to AI-assisted code review, content generation and voice/agent workflows. Comfortable evaluating and combining tools across coding, design, research and audio/video generation.</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">24+</div><div class="stat-label">AI Tools Used</div></div>
+        <div class="stat-card"><div class="stat-num">Vibe</div><div class="stat-label">Coding Practice</div></div>
+        <div class="stat-card"><div class="stat-num">Prompt</div><div class="stat-label">Engineering</div></div>
+        <div class="stat-card"><div class="stat-num">Context</div><div class="stat-label">Engineering</div></div>
+      </div>
+
+      <div class="panel-title">AI Highlights</div>
+      <ul class="highlight-list">
+        <li>Use prompt engineering and context engineering to get reliable, structured output from LLMs across coding, writing and research tasks</li>
+        <li>Practice vibe coding — rapidly prototyping and shipping functional apps with tools like Bolt, Lovable and GitHub Copilot</li>
+        <li>Use Claude, ChatGPT, Gemini, Grok, DeepSeek and Google AI Studio for code generation, debugging and technical writing</li>
+        <li>Build voice and conversational agent flows with Voiceflow, Vapi and ElevenLabs</li>
+        <li>Generate and edit images/video with Nano Banana, Google Flow, Veo and Canva AI; generate audio/music with Suno AI</li>
+        <li>Use NotebookLM and Perplexity for research synthesis, and Multi/Cowork for AI-assisted collaborative workflows</li>
+      </ul>
+
+      <div class="panel-title">AI Projects <span style="font-weight:400; text-transform:none; letter-spacing:0; color:var(--ink-soft);">— add your project details here</span></div>
+      <div class="project-grid">
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">⚡ Vibe Coding</div>
+          <h4>Electric & Stationary store Website</h4>
+          <p>Electric & Stationery Store Website – Developed a responsive e-commerce platform for electrical and stationery products using AI-assisted Vibe Coding. Features include product catalog, search and filtering, shopping cart, user authentication, order management, and admin inventory control, delivering a seamless shopping experience across devices.</p>
+          <div class="pill-row"><span class="pill">Bolt</span><span class="pill">Lovable</span><span class="pill">Vibe Coding</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🗣️ Conversational AI</div>
+          <h4>Personalized chatbot</h4>
+          <p>Personalized AI Chatbot – Designed and developed a customized AI chatbot using Voiceflow to provide automated customer support and user assistance. Integrated conversational flows, intent handling, knowledge base responses, and personalized interactions to enhance user engagement, reduce response time, and deliver a seamless conversational experience across web and messaging platforms.</p>
+          <div class="pill-row"><span class="pill">Voiceflow</span><span class="pill">Vapi</span><span class="pill">ElevenLabs</span></div>
+        </div></div>
+        <div class="project-card"><div class="project-body" style="padding-top:18px;">
+          <div class="project-tag">🧠 Prompt & Context Engineering</div>
+          <h4>Apk Parser</h4>
+          <p>APK Parser & Analysis Tool – Developed an automated APK parsing solution using Python libraries and the Grok LLM to extract, analyze, and summarize Android application metadata. The tool processes APK files to identify permissions - generating human-readable insights and reports to support application review, security assessment, and development workflows.</p>
+          <div class="pill-row"><span class="pill">Claude</span><span class="pill">Prompt Engineering</span><span class="pill">Context Engineering</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+  <section class="skills-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="panel-title">Full Stack of Expertise</div>
+        <h2>Technical <em>Skills</em></h2>
+        <p class="sub">A complete inventory across languages, tools, frameworks, Android, security, Firebase and soft skills.</p>
+      </div>
+
+      <div class="code-window">
+        <div class="code-titlebar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="code-filename">~/dhanashree/skills</span>
+        </div>
+        <div class="code-tabs" id="skillTabs">
+          <button class="code-tab active" data-skill="languages">Languages<span class="ext">.lang</span></button>
+          <button class="code-tab" data-skill="tools">Tools<span class="ext">.yml</span></button>
+          <button class="code-tab" data-skill="frameworks">Frameworks<span class="ext">.ts</span></button>
+          <button class="code-tab" data-skill="android-skills">Android<span class="ext">.kt</span></button>
+          <button class="code-tab" data-skill="security-skills">Security<span class="ext">.sec</span></button>
+          <button class="code-tab" data-skill="firebase">Firebase<span class="ext">.fb</span></button>
+          <button class="code-tab" data-skill="ai-tools">AITools<span class="ext">.ai</span></button>
+          <button class="code-tab" data-skill="soft">SoftSkills<span class="ext">.md</span></button>
+        </div>
+        <div class="code-body" id="skillBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience">
+    <div class="wrap">
+      <div class="panel-title">Work History · Shared Across All Roles</div>
+      <h2>Work <em>Experience</em></h2>
+      <div class="timeline">
+        <div class="job-card">
+          <div class="job-head"><span class="job-title">Application Security Engineer</span><span class="job-date">Jun 2024 – Sept 2025</span></div>
+          <div class="job-org">Tata Consultancy Services · Full Time · 📱 Android · Web · API ·🔐 Security</div>
+          <ul>
+            <li>Implemented new functionality for Android mobile application using <b>Kotlin</b>, delivering features on time and within scope.</li>
+            <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per business requirements.</li>
+            <li>Managed full product lifecycle and resolved security issues identified in <b>Sonar, SAST and DAST</b> scans.</li>
+            <li>Upgraded the application to the latest Android versions, ensuring compatibility with the newest platform features.</li>
+            <li>Facilitated knowledge transfer to new joiners for smooth transition and continuity of team expertise.</li>
+            <li>Troubleshot multiple production issues to identify root causes and deliver timely resolutions.</li>
+          </ul>
+        </div>
+        <div class="job-card">
+          <div class="job-head"><span class="job-title">Functional Privacy Manager</span><span class="job-date">Apr 2023 – Jun 2025</span></div>
+          <div class="job-org">Tata Consultancy Services · Concurrent Role · 🛡️ Privacy</div>
+          <ul>
+            <li>Collaborated with Privacy experts to ensure applications are fully <b>privacy-compliant at Tower level</b>.</li>
+            <li>Deepened expertise across <b>GDPR, DPDP, DPIA</b>, and data consent frameworks to drive compliance programs.</li>
+            <li>Worked closely with cross-functional teams to implement privacy measures effectively across the product lifecycle.</li>
+          </ul>
+        </div>
+        <div class="job-card">
+          <div class="job-head"><span class="job-title">Android Security Developer</span><span class="job-date">Aug 2021 – May 2024</span></div>
+          <div class="job-org">Tata Consultancy Services · Full Time · 📱 Android · 🔐 Security</div>
+          <ul>
+            <li>Contributed to development of an Android authenticator application (Java) used by <b>500,000+ TCS employees</b> — similar in scope to Google/Microsoft Authenticator.</li>
+            <li>Implemented multiple login mechanisms for enhanced security and improved user experience.</li>
+            <li>Provided technical support and troubleshooting during live incident calls, ensuring resolution within SLA.</li>
+            <li>Automated functional test cases using <b>Katalon</b>, achieving an <b>80% reduction in manual testing effort</b>.</li>
+            <li>Tested the application in backup environments to ensure disaster recovery readiness.</li>
+            <li>Collaborated seamlessly with cross-functional teams to resolve technical challenges and deliver quality outcomes.</li>
+          </ul>
+        </div>
+        <div class="job-card">
+          <div class="job-head"><span class="job-title">Intern — Web Developer</span><span class="job-date">Jun 2019 – Jul 2019</span></div>
+          <div class="job-org">Obdurate Technologies · Internship · 🌐 Web Dev</div>
+          <ul>
+            <li>Designed and developed static and dynamic responsive websites using <b>HTML, CSS, JavaScript and Bootstrap</b>.</li>
+            <li>Ensured user-friendly interfaces with full cross-browser compatibility in frontend development.</li>
+            <li>Expanded knowledge of backend technologies during the internship, laying the foundation for full-stack awareness.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="education">
+    <div class="wrap">
+      <div class="panel-title">Academic Record</div>
+      <h2>Education & <em>Achievements</em></h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div><h4>🎓 B.E. Computer Science & Engineering</h4><div class="org">Sipna College of Engineering & Technology · 2017 – 2021</div></div>
+          <div class="edu-score">9.59 / 10<br><span style="font-size:11px;font-weight:400;color:var(--ink-soft)">CGPA · 84.89%</span></div>
+        </div>
+        <div class="edu-card">
+          <div><h4>📗 Higher Secondary Certificate (HSC)</h4><div class="org">Brijlal Biyani Science College · 2015 – 2017</div></div>
+          <div class="edu-score">88.77%</div>
+        </div>
+        <div class="edu-card">
+          <div><h4>📘 Secondary School Certificate (SSC)</h4><div class="org">Takhatmal English High School · Passed 2015</div></div>
+          <div class="edu-score">94.20%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="panel-title">Let's Connect</div>
+    <h2>Ready to Build <em>Something Great?</em></h2>
+    <p>Open to roles in Android Development, Application Security, DevSecOps and Privacy Engineering. Let's create something impactful together.</p>
+    <div class="contact-links">
+      <a href="mailto:dhanashree.ambadkar.5@gmail.com">✉️ Email Me</a>
+      <a href="https://dhanashreeam.github.io/dhanaA/" target="_blank" rel="noopener">🌐 My Portfolio ↗</a>
+      <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" rel="noopener">📄 Download CV ↗</a>
+    </div>
+    <div class="open-to">📱 Android Development &nbsp;·&nbsp; 🔐 Application Security &nbsp;·&nbsp; ⚙️ DevSecOps &nbsp;·&nbsp; 🛡️ Privacy Engineering &nbsp;·&nbsp; 🌐 Web Development &nbsp;·&nbsp; 🎨 Creative Direction</div>
+    <div class="open-to">Languages: English · Hindi · Marathi &nbsp;|&nbsp; Interests: 🎨 Art · 🤖 IoT · ✍️ Writing · 🏛️ Ancient Cosmetics</div>
+    <div class="footer-bottom">© 2025 Dhanashree Ambadkar · Android Developer & Security Enthusiast · Built with ♥</div>
   </div>
-</div>
-
-<!-- TAB PANELS -->
-<div class="tab-panels">
-
-  <!-- ══ ANDROID DEVELOPER ══ -->
-  <div class="tab-panel active" id="panel-android">
-    <div class="role-hero">
-      <div class="role-card">
-        <span class="role-tag">Primary Role · TCS 2021–2025</span>
-        <h2 class="role-title">Android<br/>Developer</h2>
-        <p class="role-desc">Specialising in end-to-end mobile application development using Java and Kotlin. Delivered secure, high-performance apps for 500,000+ enterprise users, leveraging modern Android architecture and automated testing pipelines.</p>
-        <div class="role-stats">
-          <div class="stat-item"><div class="stat-num">500K+</div><div class="stat-label">Users Served</div></div>
-          <div class="stat-item"><div class="stat-num">80%</div><div class="stat-label">Test Reduction</div></div>
-          <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Years Exp</div></div>
-          <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Apps Shipped</div></div>
-        </div>
-      </div>
-      <div class="highlights-card">
-        <div class="section-label">Key Highlights</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Built TCS Authenticator App (Java) used by 500K+ employees — on par with Google/Microsoft Authenticator in scope</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Automated 80% of manual functional testing using Katalon Studio</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Maintained full product lifecycle from design to production, including Android version upgrades</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Implemented multiple secure login mechanisms for enterprise authentication</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Resolved SAST/DAST/SonarQube security issues in production applications</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Familiarity with iOS development for cross-platform ecosystem awareness</div>
-      </div>
-    </div>
-
-    <div class="section-label">Technical Skills</div>
-    <h2 class="section-title">Android <em>Toolkit</em></h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <span class="skill-group-icon">☕</span>
-        <div class="skill-group-name">Core Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Java</span>
-          <span class="skill-tag primary">Kotlin</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🏗️</span>
-        <div class="skill-group-name">Architecture</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">MVVM</span>
-          <span class="skill-tag">MVC</span>
-          <span class="skill-tag">Clean Architecture</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🧩</span>
-        <div class="skill-group-name">Jetpack</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Jetpack Compose</span>
-          <span class="skill-tag">ViewModel</span>
-          <span class="skill-tag">LiveData</span>
-          <span class="skill-tag">Navigation</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🔥</span>
-        <div class="skill-group-name">Backend & DB</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Firebase</span>
-          <span class="skill-tag">Room</span>
-          <span class="skill-tag">SQLite</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🧪</span>
-        <div class="skill-group-name">Testing</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Katalon Automation</span>
-          <span class="skill-tag">Unit Testing</span>
-          <span class="skill-tag">JUnit</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">📦</span>
-        <div class="skill-group-name">SDK & Platform</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Android SDK</span>
-          <span class="skill-tag">Material Design</span>
-          <span class="skill-tag">iOS Familiarity</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🔧</span>
-        <div class="skill-group-name">Version Control</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Git</span>
-          <span class="skill-tag">GitHub</span>
-          <span class="skill-tag">Branching</span>
-          <span class="skill-tag">Code Reviews</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🚀</span>
-        <div class="skill-group-name">DevOps</div>
-        <div class="skill-tags">
-          <span class="skill-tag">SonarQube</span>
-          <span class="skill-tag">SAST</span>
-          <span class="skill-tag">CI/CD</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label">Projects</div>
-    <h2 class="section-title">Android <em>Projects</em></h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <img src="https://dhanashreeam.github.io/dhanaA/quiz.png" class="project-img" alt="Quiz App" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"style="object-fit:contain;padding:20px;background:#0f1018"/>
-        <div class="project-img-placeholder" style="display:none">🧠</div>
-        <div class="project-body">
-          <div class="project-cat">Android Development</div>
-          <div class="project-name">Quiz App</div>
-          <div class="project-desc">Dynamic Android quiz application with multiple answer options, real-time feedback and score summary. Clean native Android UI designed for intuitive, engaging interaction.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Kotlin</span>
-            <span class="stack-tag">Java</span>
-            <span class="stack-tag">Android SDK</span>
-            <span class="stack-tag">Mobile UX</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="https://dhanashreeam.github.io/dhanaA/unitConverterIcon.png" class="project-img" alt="Unit Converter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
-        <div class="project-img-placeholder" style="display:none">📐</div>
-        <div class="project-body">
-          <div class="project-cat">Android Development</div>
-          <div class="project-name">Unit Converter App</div>
-          <div class="project-desc">Android-based Unit Converter efficiently converting values across multiple units with robust null-input error handling for a seamless, frustration-free user experience.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Android</span>
-            <span class="stack-tag">Kotlin</span>
-            <span class="stack-tag">Error Handling</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">🔐</div>
-        <div class="project-body">
-          <div class="project-cat">Enterprise · TCS</div>
-          <div class="project-name">TCS Authenticator App</div>
-          <div class="project-desc">Enterprise authenticator application (Java) for 500,000+ TCS employees — comparable in scope to Google/Microsoft Authenticator, with multiple secure login mechanisms.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Java</span>
-            <span class="stack-tag">Android SDK</span>
-            <span class="stack-tag">Security</span>
-            <span class="stack-tag">Katalon</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ SECURITY ANALYST ══ -->
-  <div class="tab-panel" id="panel-security">
-    <div class="role-hero">
-      <div class="role-card">
-        <span class="role-tag">Concurrent Role · TCS 2021–2025</span>
-        <h2 class="role-title">Security<br/>Analyst</h2>
-        <p class="role-desc">Focused on mobile and web application security, conducting SAST/DAST scans, resolving vulnerabilities, and embedding DevSecOps practices into the development lifecycle. Hands-on expertise with OWASP Top 10 and SonarQube remediation.</p>
-        <div class="role-stats">
-          <div class="stat-item"><div class="stat-num">OWASP</div><div class="stat-label">Top 10 Expertise</div></div>
-          <div class="stat-item"><div class="stat-num">SAST+DAST</div><div class="stat-label">Scan Ownership</div></div>
-          <div class="stat-item"><div class="stat-num">DevSec</div><div class="stat-label">Ops Embedded</div></div>
-          <div class="stat-item"><div class="stat-num">Sonar</div><div class="stat-label">Qube Remediation</div></div>
-        </div>
-      </div>
-      <div class="highlights-card">
-        <div class="section-label">Security Highlights</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Managed full product lifecycle security — resolved issues identified in Sonar, SAST and DAST scans</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Applied OWASP Top 10 standards to mobile and web application security assessments</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Implemented multiple secure login mechanisms to harden enterprise authentication app</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Conducted disaster recovery testing by validating app functionality in backup environments</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Embedded DevSecOps practices into development workflows to shift security left</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Provided live incident support during production security events, resolving within SLA</div>
-      </div>
-    </div>
-
-    <div class="section-label">Technical Skills</div>
-    <h2 class="section-title">Security <em>Toolkit</em></h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <span class="skill-group-icon">📱</span>
-        <div class="skill-group-name">Mobile App Security</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Android Security</span>
-          <span class="skill-tag">Secure Coding</span>
-          <span class="skill-tag">Auth Mechanisms</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🌐</span>
-        <div class="skill-group-name">Web App Security</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Web App Security</span>
-          <span class="skill-tag">Threat Modelling</span>
-          <span class="skill-tag">Vulnerability Assessment</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🎯</span>
-        <div class="skill-group-name">Standards</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">OWASP Top 10</span>
-          <span class="skill-tag">CWE</span>
-          <span class="skill-tag">CVE Analysis</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🔍</span>
-        <div class="skill-group-name">Static Analysis</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">SAST</span>
-          <span class="skill-tag primary">SonarQube</span>
-          <span class="skill-tag">Code Review</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">⚡</span>
-        <div class="skill-group-name">Dynamic Analysis</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">DAST</span>
-          <span class="skill-tag">Runtime Testing</span>
-          <span class="skill-tag">Pen Testing Fundamentals</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">⚙️</span>
-        <div class="skill-group-name">DevSecOps</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">DevSecOps</span>
-          <span class="skill-tag">Shift-Left Security</span>
-          <span class="skill-tag">CI/CD Security</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🛡️</span>
-        <div class="skill-group-name">Compliance Overlap</div>
-        <div class="skill-tags">
-          <span class="skill-tag">GDPR</span>
-          <span class="skill-tag">DPDP</span>
-          <span class="skill-tag">Privacy by Design</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🔄</span>
-        <div class="skill-group-name">Incident Response</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Live Incident Support</span>
-          <span class="skill-tag">SLA Management</span>
-          <span class="skill-tag">DR Testing</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label">Security-Focused Projects</div>
-    <h2 class="section-title">Security <em>Work</em></h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-img-placeholder">🔐</div>
-        <div class="project-body">
-          <div class="project-cat">Enterprise Security · TCS</div>
-          <div class="project-name">Authenticator App Security</div>
-          <div class="project-desc">Implemented and hardened multiple authentication mechanisms for a 500K-user enterprise app. Conducted SAST/DAST scans and resolved all critical vulnerabilities using SonarQube.</div>
-          <div class="project-stack">
-            <span class="stack-tag">SAST</span>
-            <span class="stack-tag">DAST</span>
-            <span class="stack-tag">SonarQube</span>
-            <span class="stack-tag">Auth</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">🎯</div>
-        <div class="project-body">
-          <div class="project-cat">DevSecOps · TCS</div>
-          <div class="project-name">Security Pipeline Integration</div>
-          <div class="project-desc">Embedded security scanning (SAST/DAST/SonarQube) into the development pipeline, shifting security left and ensuring continuous compliance across the product lifecycle.</div>
-          <div class="project-stack">
-            <span class="stack-tag">DevSecOps</span>
-            <span class="stack-tag">OWASP</span>
-            <span class="stack-tag">CI/CD</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">🛡️</div>
-        <div class="project-body">
-          <div class="project-cat">Disaster Recovery</div>
-          <div class="project-name">Backup Environment Validation</div>
-          <div class="project-desc">Validated application security and functionality in backup/DR environments, ensuring resilience and continuity during disaster recovery scenarios.</div>
-          <div class="project-stack">
-            <span class="stack-tag">DR Testing</span>
-            <span class="stack-tag">Security Validation</span>
-            <span class="stack-tag">SLA</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ PRIVACY MANAGER ══ -->
-  <div class="tab-panel" id="panel-privacy">
-    <div class="role-hero">
-      <div class="role-card">
-        <span class="role-tag">Concurrent Role · TCS 2023–2025</span>
-        <h2 class="role-title">Functional<br/>Privacy Manager</h2>
-        <p class="role-desc">Drove privacy compliance programs at Tower level for TCS. Collaborated with Privacy experts and cross-functional teams to embed GDPR, DPDP and DPIA frameworks across the complete product lifecycle.</p>
-        <div class="role-stats">
-          <div class="stat-item"><div class="stat-num">GDPR</div><div class="stat-label">Compliance</div></div>
-          <div class="stat-item"><div class="stat-num">DPDP</div><div class="stat-label">India Privacy Law</div></div>
-          <div class="stat-item"><div class="stat-num">DPIA</div><div class="stat-label">Assessments</div></div>
-          <div class="stat-item"><div class="stat-num">Tower</div><div class="stat-label">Level Ownership</div></div>
-        </div>
-      </div>
-      <div class="highlights-card">
-        <div class="section-label">Privacy Highlights</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Ensured full Tower-level privacy compliance, collaborating directly with Privacy experts at TCS</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Deep expertise in GDPR, DPDP (India), DPIA frameworks and data consent management</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Worked with cross-functional teams to implement privacy measures across the product lifecycle</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Managed PI (Personal Information) and SPI (Sensitive Personal Information) data handling practices</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Applied Privacy by Design principles to mobile application architecture</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Stayed current with evolving global privacy laws and regulatory requirements</div>
-      </div>
-    </div>
-
-    <div class="section-label">Technical Skills</div>
-    <h2 class="section-title">Privacy <em>Toolkit</em></h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <span class="skill-group-icon">🇪🇺</span>
-        <div class="skill-group-name">GDPR</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">GDPR</span>
-          <span class="skill-tag">Data Subject Rights</span>
-          <span class="skill-tag">Consent Management</span>
-          <span class="skill-tag">Right to Erasure</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🇮🇳</span>
-        <div class="skill-group-name">India Privacy Law</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">DPDP Act 2023</span>
-          <span class="skill-tag">Data Fiduciary</span>
-          <span class="skill-tag">Consent Artifacts</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">📋</span>
-        <div class="skill-group-name">Assessments</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">DPIA</span>
-          <span class="skill-tag">Privacy Risk Assessment</span>
-          <span class="skill-tag">Impact Analysis</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🔒</span>
-        <div class="skill-group-name">Data Classification</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">PI Handling</span>
-          <span class="skill-tag primary">SPI Handling</span>
-          <span class="skill-tag">Data Mapping</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">✅</span>
-        <div class="skill-group-name">Consent Frameworks</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Data Consent</span>
-          <span class="skill-tag">Consent Records</span>
-          <span class="skill-tag">Opt-in / Opt-out</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🌍</span>
-        <div class="skill-group-name">Global Privacy Laws</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Privacy Laws</span>
-          <span class="skill-tag">Cross-border Transfers</span>
-          <span class="skill-tag">SCCs</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🏗️</span>
-        <div class="skill-group-name">Privacy by Design</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Privacy by Design</span>
-          <span class="skill-tag">Data Minimisation</span>
-          <span class="skill-tag">Purpose Limitation</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🤝</span>
-        <div class="skill-group-name">Collaboration</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Privacy Experts</span>
-          <span class="skill-tag">Cross-functional Teams</span>
-          <span class="skill-tag">Tower Management</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label">Compliance Work</div>
-    <h2 class="section-title">Privacy <em>Initiatives</em></h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-img-placeholder">📋</div>
-        <div class="project-body">
-          <div class="project-cat">Compliance · TCS Tower</div>
-          <div class="project-name">Tower Privacy Programme</div>
-          <div class="project-desc">Led privacy compliance at Tower level in TCS, working with Privacy experts to ensure all applications meet GDPR and DPDP requirements. Coordinated cross-functional privacy reviews.</div>
-          <div class="project-stack">
-            <span class="stack-tag">GDPR</span>
-            <span class="stack-tag">DPDP</span>
-            <span class="stack-tag">Tower Level</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">🔍</div>
-        <div class="project-body">
-          <div class="project-cat">Assessment · TCS</div>
-          <div class="project-name">DPIA Execution</div>
-          <div class="project-desc">Conducted and coordinated Data Protection Impact Assessments (DPIAs) for high-risk data processing activities, identifying and mitigating privacy risks before product launch.</div>
-          <div class="project-stack">
-            <span class="stack-tag">DPIA</span>
-            <span class="stack-tag">Risk Assessment</span>
-            <span class="stack-tag">Privacy</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">✅</div>
-        <div class="project-body">
-          <div class="project-cat">Governance · TCS</div>
-          <div class="project-name">Consent & Data Lifecycle</div>
-          <div class="project-desc">Implemented data consent frameworks and PI/SPI handling protocols to ensure lawful data processing, data minimisation, and purpose limitation across product lines.</div>
-          <div class="project-stack">
-            <span class="stack-tag">PI / SPI</span>
-            <span class="stack-tag">Consent</span>
-            <span class="stack-tag">Data Lifecycle</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ CREATIVE & WEB ══ -->
-  <div class="tab-panel" id="panel-creative">
-    <div class="role-hero">
-      <div class="role-card">
-        <span class="role-tag">Creative Direction · Internship · Side Projects</span>
-        <h2 class="role-title">Creative &<br/>Web Developer</h2>
-        <p class="role-desc">A multi-disciplinary creative combining web development, IoT/AI engineering, traditional art, and innovative science. From building responsive websites to crafting ancient cosmetics for science exhibitions — curiosity is the constant.</p>
-        <div class="role-stats">
-          <div class="stat-item"><div class="stat-num">IoT</div><div class="stat-label">Smart Mirror · AI/ML</div></div>
-          <div class="stat-item"><div class="stat-num">Web</div><div class="stat-label">HTML · CSS · JS · PHP</div></div>
-          <div class="stat-item"><div class="stat-num">Art</div><div class="stat-label">Design & Illustration</div></div>
-          <div class="stat-item"><div class="stat-num">✦</div><div class="stat-label">Heritage Science</div></div>
-        </div>
-      </div>
-      <div class="highlights-card">
-        <div class="section-label">Creative Highlights</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Built Smart Mirror — an IoT device with voice commands, real-time weather, Python and ML modules</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Developed full-stack Travel & Booking Website with PHP, HTML, CSS, JS and responsive design</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Created ancient cosmetics (face powder & lip color) using traditional techniques for Yuvanand event, Sipna COET</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Designed YouTube gaming channel art, posters, video cover art and competition entries</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Internship as Web Developer at Obdurate Technologies — frontend and backend foundations</div>
-        <div class="highlight-item"><div class="highlight-dot"></div>Interests span art, IoT, writing, and ancient cosmetics — bridging heritage with modern tech</div>
-      </div>
-    </div>
-
-    <div class="section-label">Technical Skills</div>
-    <h2 class="section-title">Creative <em>Toolkit</em></h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <span class="skill-group-icon">🌐</span>
-        <div class="skill-group-name">Frontend</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">HTML5</span>
-          <span class="skill-tag primary">CSS3</span>
-          <span class="skill-tag primary">JavaScript</span>
-          <span class="skill-tag">Bootstrap</span>
-          <span class="skill-tag">Responsive Design</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">⚙️</span>
-        <div class="skill-group-name">Backend</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">PHP</span>
-          <span class="skill-tag">Full-Stack Awareness</span>
-          <span class="skill-tag">Cross-browser Compatibility</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🤖</span>
-        <div class="skill-group-name">AI & IoT</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Python</span>
-          <span class="skill-tag primary">IoT</span>
-          <span class="skill-tag">ML Modules</span>
-          <span class="skill-tag">Voice Commands</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🎨</span>
-        <div class="skill-group-name">Design & Art</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Digital Design</span>
-          <span class="skill-tag">Poster Design</span>
-          <span class="skill-tag">Cover Art</span>
-          <span class="skill-tag">Illustration</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">✍️</span>
-        <div class="skill-group-name">Writing</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Technical Writing</span>
-          <span class="skill-tag">Creative Writing</span>
-          <span class="skill-tag">Documentation</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <span class="skill-group-icon">🏛️</span>
-        <div class="skill-group-name">Heritage Science</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Ancient Techniques</span>
-          <span class="skill-tag">Science Exhibition</span>
-          <span class="skill-tag">Research</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label">Projects</div>
-    <h2 class="section-title">Creative <em>Projects</em></h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <img src="https://dhanashreeam.github.io/dhanaA/mirror.jpg" class="project-img" alt="Smart Mirror" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="project-img-placeholder" style="display:none">🪞</div>
-        <div class="project-body">
-          <div class="project-cat">AI · IoT</div>
-          <div class="project-name">Smart Mirror</div>
-          <div class="project-desc">Innovative IoT interactive display showing real-time weather, time, and essential info with voice command support powered by Python and ML modules.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Python</span>
-            <span class="stack-tag">AI / ML</span>
-            <span class="stack-tag">IoT</span>
-            <span class="stack-tag">Voice</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="https://dhanashreeam.github.io/dhanaA/passport.png" class="project-img" alt="Travel Website" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
-        <div class="project-img-placeholder" style="display:none">✈️</div>
-        <div class="project-body">
-          <div class="project-cat">Web Development</div>
-          <div class="project-name">Travel & Booking Website</div>
-          <div class="project-desc">User-friendly platform for searching top travel destinations, booking journeys and accessing personalized tourist guides — built with responsive, dynamic frontend.</div>
-          <div class="project-stack">
-            <span class="stack-tag">HTML</span>
-            <span class="stack-tag">CSS</span>
-            <span class="stack-tag">JavaScript</span>
-            <span class="stack-tag">PHP</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="https://dhanashreeam.github.io/dhanaA/make-up-bag.png" class="project-img" alt="Cosmetics" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" style="object-fit:contain;padding:20px;background:#0f1018"/>
-        <div class="project-img-placeholder" style="display:none">💄</div>
-        <div class="project-body">
-          <div class="project-cat">Science · Heritage · Yuvanand</div>
-          <div class="project-name">Cosmetics with Ancient Technique</div>
-          <div class="project-desc">Created face powder and lip color using traditional ancient techniques for a science exhibition at Yuvanand event, Sipna COET — bridging historical methods with modern science.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Ancient History</span>
-            <span class="stack-tag">Research</span>
-            <span class="stack-tag">Science Exhibition</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img-placeholder">🎮</div>
-        <div class="project-body">
-          <div class="project-cat">Design · Creative</div>
-          <div class="project-name">Gaming Channel Creative Suite</div>
-          <div class="project-desc">Designed a full suite of gaming creative assets — YouTube channel poster, gaming video cover art, channel banner, and competition entry posters.</div>
-          <div class="project-stack">
-            <span class="stack-tag">Digital Design</span>
-            <span class="stack-tag">Cover Art</span>
-            <span class="stack-tag">Poster Design</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /tab-panels -->
-
-<!-- ══ SHARED: EXPERIENCE ══ -->
-<div class="shared-divider" style="margin-top:40px"></div>
-<div class="shared-section" id="experience">
-  <div class="section-label">Work History · Shared Across All Roles</div>
-  <h2 class="section-title">Work <em>Experience</em></h2>
-  <div class="timeline">
-
-    <div class="timeline-item">
-      <div class="tl-left">
-        <div class="tl-period">Jun 2024 – Sept 2025</div>
-        <div class="tl-org">Tata Consultancy Services</div>
-        <div><span class="tl-role-badge badge-android">📱 Android</span></div>
-        <div style="margin-top:4px"><span class="tl-role-badge badge-developer">🔐 Security</span></div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">Android Security Engineer</div>
-        <div class="tl-sub">Tata Consultancy Services · Full Time</div>
-        <ul class="tl-bullets">
-          <li>Implemented new functionality for Android mobile application using <strong>Kotlin</strong>, delivering features on time and within scope.</li>
-          <li>Collaborated with cross-functional teams to design and develop the Android mobile application as per business requirements.</li>
-          <li>Managed full product lifecycle and resolved security issues identified in <strong>Sonar, SAST and DAST</strong> scans.</li>
-          <li>Upgraded the application to the latest Android versions, ensuring compatibility with the newest platform features.</li>
-          <li>Facilitated knowledge transfer to new joiners for smooth transition and continuity of team expertise.</li>
-          <li>Troubleshot multiple production issues to identify root causes and deliver timely resolutions.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="tl-left">
-        <div class="tl-period">Apr 2023 – Jun 2025</div>
-        <div class="tl-org">Tata Consultancy Services</div>
-        <div><span class="tl-role-badge badge-privacy">🛡️ Privacy</span></div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">Functional Privacy Manager</div>
-        <div class="tl-sub">Tata Consultancy Services · Concurrent Role</div>
-        <ul class="tl-bullets">
-          <li>Collaborated with Privacy experts to ensure applications are fully <strong>privacy-compliant at Tower level</strong>.</li>
-          <li>Deepened expertise across <strong>GDPR, DPDP, DPIA</strong>, and data consent frameworks to drive compliance programs.</li>
-          <li>Worked closely with cross-functional teams to implement privacy measures effectively across the product lifecycle.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="tl-left">
-        <div class="tl-period">Aug 2021 – May 2024</div>
-        <div class="tl-org">Tata Consultancy Services</div>
-        <div><span class="tl-role-badge badge-android">📱 Android</span></div>
-        <div style="margin-top:4px"><span class="tl-role-badge badge-developer">🔐 Security</span></div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">Android Developer</div>
-        <div class="tl-sub">Tata Consultancy Services · Full Time</div>
-        <ul class="tl-bullets">
-          <li>Contributed to development of an Android authenticator application (Java) used by <strong>500,000+ TCS employees</strong> — similar in scope to Google/Microsoft Authenticator.</li>
-          <li>Implemented multiple login mechanisms for enhanced security and improved user experience.</li>
-          <li>Provided technical support and troubleshooting during live incident calls, ensuring resolution within SLA.</li>
-          <li>Automated functional test cases using <strong>Katalon</strong>, achieving an <strong>80% reduction in manual testing effort</strong>.</li>
-          <li>Tested the application in backup environments to ensure disaster recovery readiness.</li>
-          <li>Collaborated seamlessly with cross-functional teams to resolve technical challenges and deliver quality outcomes.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="tl-left">
-        <div class="tl-period">Jun 2019 – Jul 2019</div>
-        <div class="tl-org">Obdurate Technologies</div>
-        <div><span class="tl-role-badge badge-web">🌐 Web Dev</span></div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">Intern — Web Developer</div>
-        <div class="tl-sub">Obdurate Technologies · Internship</div>
-        <ul class="tl-bullets">
-          <li>Designed and developed static and dynamic responsive websites using <strong>HTML, CSS, JavaScript and Bootstrap</strong>.</li>
-          <li>Ensured user-friendly interfaces with full cross-browser compatibility in frontend development.</li>
-          <li>Expanded knowledge of backend technologies during the internship, laying the foundation for full-stack awareness.</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══ SHARED: EDUCATION ══ -->
-<div class="shared-divider"></div>
-<div class="shared-section" id="education">
-  <div class="section-label">Academic Record</div>
-  <h2 class="section-title">Education & <em>Achievements</em></h2>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <span class="edu-icon">🎓</span>
-      <div class="edu-period">2017 – 2021</div>
-      <div class="edu-name">B.E. Computer Science & Engineering</div>
-      <div class="edu-inst">Sipna College of Engineering & Technology</div>
-      <div class="edu-grade">9.59 / 10</div>
-      <div class="edu-period" style="margin-top:4px">CGPA · 84.89%</div>
-    </div>
-    <div class="edu-card">
-      <span class="edu-icon">📗</span>
-      <div class="edu-period">2015 – 2017</div>
-      <div class="edu-name">Higher Secondary Certificate (HSC)</div>
-      <div class="edu-inst">Brijlal Biyani Science College</div>
-      <div class="edu-grade">88.77%</div>
-    </div>
-    <div class="edu-card">
-      <span class="edu-icon">📘</span>
-      <div class="edu-period">Passed 2015</div>
-      <div class="edu-name">Secondary School Certificate (SSC)</div>
-      <div class="edu-inst">Takhatmal English High School</div>
-      <div class="edu-grade">94.20%</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SHARED: CONTACT ══ -->
-<div class="shared-divider"></div>
-<div class="shared-section" id="contact">
-  <div class="section-label">Let's Connect</div>
-  <h2 class="section-title">Ready to Build <em>Something Great?</em></h2>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <div class="contact-heading">Get In <em>Touch</em></div>
-      <p class="contact-text">Open to roles in Android Development, Application Security, DevSecOps and Privacy Engineering. Let's create something impactful together.</p>
-      <div class="contact-links">
-        <a href="mailto:dhanashree.ambadkar.5@gmail.com" class="contact-link">
-          <span class="contact-link-icon">✉️</span>
-          dhanashree.ambadkar.5@gmail.com
-        </a>
-        <a href="https://dhanashreeam.github.io/dhanaA/" target="_blank" class="contact-link">
-          <span class="contact-link-icon">🌐</span>
-          My Portfolio ↗
-        </a>
-        <a href="https://dhanashreeam.github.io/dhanaA/resume.pdf" target="_blank" class="contact-link">
-          <span class="contact-link-icon">📄</span>
-          Download CV ↗
-        </a>
-      </div>
-    </div>
-    <div class="open-roles">
-      <div class="or-title">Open to Opportunities In</div>
-      <div class="role-chips">
-        <span class="role-chip chip-android">📱 Android Development</span>
-        <span class="role-chip chip-security">🔐 Application Security</span>
-        <span class="role-chip chip-security">⚙️ DevSecOps</span>
-        <span class="role-chip chip-privacy">🛡️ Privacy Engineering</span>
-        <span class="role-chip chip-creative">🌐 Web Development</span>
-        <span class="role-chip chip-creative">🎨 Creative Direction</span>
-      </div>
-      <div style="margin-top:24px">
-        <div class="or-title">Languages</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">English</span>
-          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">Hindi</span>
-          <span class="skill-tag primary" style="--active-color:#3DDC84;--active-dim:rgba(61,220,132,0.12)">Marathi</span>
-        </div>
-      </div>
-      <div style="margin-top:20px">
-        <div class="or-title">Interests</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <span class="skill-tag">🎨 Art</span>
-          <span class="skill-tag">🤖 IoT</span>
-          <span class="skill-tag">✍️ Writing</span>
-          <span class="skill-tag">🏛️ Ancient Cosmetics</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  © 2025 Dhanashree Ambadkar · Android Developer & Security Enthusiast · Built with ♥
 </footer>
 
 <script>
-const tabMeta = {
-  android:  { label: '📱 Android Engineer',     color: '#3DDC84', emText: 'Ambadkar' },
-  security: { label: '🔐 Security Analyst',      color: '#FF5757', emText: 'Ambadkar' },
-  privacy:  { label: '🛡️ Privacy Manager',       color: '#9B7FFF', emText: 'Ambadkar' },
-  creative: { label: '🎨 Creative & Web Dev',    color: '#FFAB40', emText: 'Ambadkar' },
-};
+  // Ticker content
+  const tickerText = "Android Developer ✦ Security Analyst ✦ Privacy Manager ✦ Creative ✦ Kotlin ✦ Java ✦ OWASP ✦ GDPR ✦ DPDP ✦ Jetpack Compose ✦ Firebase ✦ SAST ✦ DAST ✦ DevSecOps ✦ TCS 2021–2025 ✦ 500K+ Users Served ✦ CGPA 9.59 ✦ ";
+  document.getElementById('ticker').innerHTML = `<span>${tickerText}</span><span>${tickerText}</span>`;
 
-function switchTab(tab) {
-  // Update buttons
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+  // Role tab switching
+  document.querySelectorAll('.role-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.role-tab').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.role-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('role-'+btn.dataset.role).classList.add('active');
+    });
+  });
 
-  // Update panels
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(`panel-${tab}`).classList.add('active');
+  // Skills data
+  const skills = {
+    languages: {
+      decl: "const languages = [",
+      items: ["C","C++","Java","Kotlin","HTML","CSS","XML","Python","JavaScript","Swift","PHP","SQL"]
+    },
+    tools: {
+      decl: "const tools = [",
+      items: ["ADB","Android Studio","Xcode","Git","GitHub","Jenkins","Katalon Studio","Jira","Jile","Postman","Wireshark","Burp Suite","OWASP ZAP","Nmap","Zenmap","SonarQube","Fortify","Fortify WebScan","OWASP SCA","IntelliJ IDEA","PyCharm","MobSF","Talend","Frida","CI/CD"]
+    },
+    frameworks: {
+      decl: "const frameworks = [",
+      items: ["Jetpack Compose","React Native","Express.js","Node.js","MVVM","MVC","Clean Architecture","Flutter"]
+    },
+    "android-skills": {
+      decl: "const androidSDK = [",
+      items: ["LiveData","Room DB","SQLite","WorkManager","Retrofit","OkHttp","Navigation Component","ViewModel","Material Design","Android SDK"]
+    },
+    "security-skills": {
+      decl: "const security = [",
+      items: ["Encryption","Cryptography","Certificate Pinning","OWASP Top 10 — Web","OWASP Top 10 — Mobile","Biometric Authentication","ProGuard / R8","SAST","DAST","Secure Coding","Threat Modelling"]
+    },
+    firebase: {
+      decl: "const firebase = [",
+      items: ["Firebase Auth","Crashlytics","Analytics","Cloud Messaging (FCM)","Firestore","Realtime Database","Remote Config"]
+    },
+    "ai-tools": {
+      decl: "const aiTools = [",
+      items: ["ChatGPT","Claude","Microsoft Copilot","GitHub Copilot","Gemini","Grok","Perplexity","Nano Banana","Google Flow","Bolt","Lovable","Voiceflow","Stitch","Vapi","ElevenLabs","NotebookLM","DeepSeek","Google AI Studio","Canva AI","Multi","Veo","Suno AI","Codex","Cowork"]
+    },
+    soft: {
+      decl: "const softSkills = [",
+      items: ["Problem Solving","Agile / Scrum","Code Review","Cross-functional Collaboration","Communication","Mentoring & Knowledge Transfer","Incident Response","Stakeholder Management","Prompt Engineering","Vibe Coding","Context Engineering"]
+    }
+  };
 
-  // Update body class for CSS variable overrides
-  document.body.className = `tab-${tab}`;
+  const body = document.getElementById('skillBody');
+  function renderSkill(key){
+    const data = skills[key];
+    const decl = data.decl.split(' ');
+    const declHtml = `<span class="kw">${decl[0]}</span> <span class="var">${decl[1]}</span> <span class="br">${decl.slice(2).join(' ')}</span>`;
+    body.innerHTML = `
+      <div class="code-decl">${declHtml}</div>
+      <div class="chip-flow">${data.items.map(i=>`<span class="tok">"${i}"</span>`).join('')}</div>
+      <div class="code-close">];</div>
+    `;
+  }
+  renderSkill('languages');
 
-  // Update header badge
-  const meta = tabMeta[tab];
-  document.getElementById('status-badge').textContent = meta.label;
-  document.getElementById('name-em').style.color = meta.color;
-}
+  document.querySelectorAll('.code-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.code-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderSkill(btn.dataset.skill);
+    });
+  });
 </script>
 
-  <script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '6a2ac6069b37654b98324a3c' },
-          url: 'https://general-runtime.voiceflow.com',
-          voice: {
-            url: "https://runtime-api.voiceflow.com"
-          }
-        });
-      }
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
 </body>
 </html>
